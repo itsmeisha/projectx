@@ -12,6 +12,7 @@ const HomeScreen = () => {
 
       <View style={home.box}></View>
       <UpperNav />
+      <Greeting/>
     </View>
   );
 };
