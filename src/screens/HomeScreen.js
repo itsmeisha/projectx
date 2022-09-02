@@ -2,7 +2,6 @@ import { View, Text, Image } from "react-native";
 import React from "react";
 import UpperNav from "../components/home/UpperNav";
 import home from "../styles/home";
-import Greeting from "../components/home/Greeting";
 const HomeScreen = () => {
   return (
     <View style={home.container}>
@@ -13,7 +12,6 @@ const HomeScreen = () => {
 
       <View style={home.box}></View>
       <UpperNav />
-      <Greeting/>
     </View>
   );
 };
