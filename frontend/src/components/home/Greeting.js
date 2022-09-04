@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import greet from "../../styles/greet.js";
+import greet from "../../styles/home/greet";
 
 const Greeting = () => {
   const username = "New User";

@@ -1,7 +1,7 @@
 import { View, Text, TextInput } from "react-native";
 import React from "react";
 import Search from "../../../assets/svg/search.svg";
-import styles from "./../../styles/search.js";
+import styles from "./../../styles/home/search.js";
 
 const Searchbox = () => {
   return (
