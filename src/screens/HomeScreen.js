@@ -1,9 +1,10 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
 import UpperNav from "../components/home/UpperNav";
-import home from "../styles/home";
- import Searchbox from "../components/home/Searchbox";
+import home from "../styles/home/home";
+import Searchbox from "../components/home/Searchbox";
 import Map from "../components/home/maps/Map";
+import Greeting from "../components/home/Greeting.js";
 const HomeScreen = () => {
   return (
     <View style={home.container}>

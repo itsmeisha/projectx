@@ -1,14 +1,15 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text } from "react-native";
+import React from "react";
+import greet from "../../styles/greet.js";
 
 const Greeting = () => {
-  const username="New User";
-    return (
+  const username = "New User";
+  return (
     <View>
-      <Text>Welcome</Text>
-      <Text >{username}</Text>
+      <Text style={greet.FirstText}>Welcome</Text>
+      <Text style={greet.username}>{username}</Text>
     </View>
-  )
-}
+  );
+};
 
-export default Greeting
+export default Greeting;

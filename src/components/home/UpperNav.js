@@ -1,6 +1,6 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
-import home from "../../styles/home";
+import home from "../../styles/home/home";
 
 import Menu from "./../../../assets/svg/menu.svg";
 import Notif from "./../../../assets/svg/notification.svg";
@@ -28,6 +28,7 @@ const UpperNav = () => {
               home.profileItem,
             ]}
           />
+
           <View style={home.profileItem}>
             <Golo />
           </View>
