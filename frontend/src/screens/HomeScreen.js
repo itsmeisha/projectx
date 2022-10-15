@@ -22,8 +22,10 @@ const HomeScreen = () => {
 
       {/* search bar */}
       <Searchbox />
+      
       {/* the map container */}
       <Map />
+
 
       {/* bottom navigation main navigation bar */}
     </View>
