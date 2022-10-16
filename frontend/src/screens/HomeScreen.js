@@ -1,11 +1,18 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import UpperNav from "../components/home/UpperNav";
 import home from "../styles/home/home";
 import Searchbox from "../components/home/Searchbox";
 import Map from "../components/home/maps/Map";
 import Greeting from "../components/home/Greeting.js";
+import { contextProvider } from "../../Context";
+
 const HomeScreen = () => {
+  const data = useContext(contextProvider);
+
+  useEffect(() => {
+    console.log(data);
+  }, []);
   return (
     <View style={home.container}>
       <Image
@@ -22,10 +29,9 @@ const HomeScreen = () => {
 
       {/* search bar */}
       <Searchbox />
-      
+
       {/* the map container */}
       <Map />
-
 
       {/* bottom navigation main navigation bar */}
     </View>

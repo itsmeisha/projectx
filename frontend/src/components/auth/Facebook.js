@@ -1,5 +1,8 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import React from "react";
+
+// styles
+import styles from "../../styles/auth/socialBtns.js";
 
 const Facebook = ({ popupMode }) => {
   const facebookAuth = () => {
@@ -15,8 +18,14 @@ const Facebook = ({ popupMode }) => {
 
   return (
     <Pressable onPress={facebookAuth}>
-      {/* Facebook svg */}
-      <Text>Continue with Facebook</Text>
+      <View style={[styles.btn, { marginTop: 20 }]}>
+        {/* Facebook icon */}
+        <Image
+          source={require("../../../assets/imgs/auth/facebookIcon.png")}
+          style={styles.logo}
+        />
+        <Text style={styles.text}>Continue with Facebook</Text>
+      </View>
     </Pressable>
   );
 };

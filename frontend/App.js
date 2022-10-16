@@ -1,11 +1,17 @@
 import { StyleSheet, View, SafeAreaView, Platform } from "react-native";
-import HomeScreen from "./src/screens/HomeScreen";
+import Context from "./Context";
+import HomeScreen from "./src/screens/HomeScreen.js";
+
+import AuthScreen from "./src/screens/auth/AuthScreen.js";
 
 export default function App() {
   return (
     <View>
       <SafeAreaView style={styles.safe}>
-        <HomeScreen />
+        <Context>
+          <AuthScreen />
+          {/* <HomeScreen /> */}
+        </Context>
       </SafeAreaView>
     </View>
   );

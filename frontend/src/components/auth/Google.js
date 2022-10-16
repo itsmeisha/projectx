@@ -1,5 +1,8 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import React from "react";
+
+// styles
+import styles from "../../styles/auth/socialBtns.js";
 
 const Google = ({ popupMode }) => {
   const googleAuth = () => {
@@ -15,8 +18,14 @@ const Google = ({ popupMode }) => {
 
   return (
     <Pressable onPress={googleAuth}>
-      {/* google svg */}
-      <Text>Continue with google</Text>
+      <View style={styles.btn}>
+        {/* google icon */}
+        <Image
+          source={require("../../../assets/imgs/auth/googleIcon.png")}
+          style={styles.logo}
+        />
+        <Text style={styles.text}>Continue with Google</Text>
+      </View>
     </Pressable>
   );
 };
