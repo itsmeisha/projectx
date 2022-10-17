@@ -1,12 +1,11 @@
 import { StyleSheet } from "react-native";
 import { Platform } from "react-native";
 // this is the default padding of the screen
-const defaultPaddingHorzontal = 42;
+const defaultPaddingHorzontal = 28;
 export default StyleSheet.create({
   navCon: {
     flexDirection: "row",
     justifyContent: "space-between",
-
     height: 80,
     alignItems: "center",
   },
@@ -16,6 +15,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   container: {
+    height: "100%",
     paddingHorizontal: defaultPaddingHorzontal,
   },
   navItem: {
@@ -38,13 +38,11 @@ export default StyleSheet.create({
   profile: {
     position: "relative",
     marginLeft: 15,
-    height: "100%",
+    height: 60,
     width: 60,
   },
 
   profileItem: {
     position: "absolute",
-    top: 10,
-    left: 5,
   },
 });

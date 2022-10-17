@@ -1,18 +1,15 @@
-import { View, Text, Image } from "react-native";
-import React, { useContext, useEffect } from "react";
+import { View, Image } from "react-native";
+import React from "react";
+
+// components
 import UpperNav from "../components/home/UpperNav";
 import home from "../styles/home/home";
 import Searchbox from "../components/home/Searchbox";
 import Map from "../components/home/maps/Map";
 import Greeting from "../components/home/Greeting.js";
-import { contextProvider } from "../../Context";
+import Nav from "../components/global/Nav";
 
-const HomeScreen = () => {
-  const data = useContext(contextProvider);
-
-  useEffect(() => {
-    console.log(data);
-  }, []);
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={home.container}>
       <Image
@@ -20,7 +17,6 @@ const HomeScreen = () => {
         style={home.backImg}
       />
 
-      <View style={home.box}></View>
       {/* the upper navigation that contains the notification and the user and the menu */}
       <UpperNav />
 
@@ -34,6 +30,7 @@ const HomeScreen = () => {
       <Map />
 
       {/* bottom navigation main navigation bar */}
+      <Nav active={"HomeScreen"} />
     </View>
   );
 };

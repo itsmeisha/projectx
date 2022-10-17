@@ -10,6 +10,10 @@ import AuthScreen from "./src/screens/auth/AuthScreen.js";
 // fonts
 import { useFonts } from "expo-font";
 
+// react navigation
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+
 export default function App() {
   // -----------------------------------------------------------------------------------
   // -----------------------------------------------------------------------------------
@@ -27,12 +31,14 @@ export default function App() {
   });
   if (!loaded) return;
 
+  // navigation stack
+  const Stack = createNativeStackNavigator();
+
   return (
     <View>
       <SafeAreaView style={styles.safe}>
         <Context>
-          <AuthScreen />
-          {/* <HomeScreen /> */}
+          <HomeScreen />
         </Context>
       </SafeAreaView>
     </View>
@@ -40,7 +46,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  // safe area view for the android
+
   safe: {
-    paddingTop: Platform.OS === "android" ? 25 : 0,
+    paddingTop: Platform.OS === "android" ? 30 : 0,
   },
 });

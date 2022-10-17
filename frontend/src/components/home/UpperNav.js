@@ -17,21 +17,18 @@ const UpperNav = () => {
           <Notif />
         </View>
         <View style={home.profile}>
+          <Golo style={home.profileItem} />
           <Image
             source={require("../../../assets/imgs/profile.png")}
             style={[
               {
-                width: 50,
-                height: 50,
-                borderRadius: 25,
+                width: 55,
+                height: 55,
+                borderRadius: 55 / 2,
               },
               home.profileItem,
             ]}
           />
-
-          <View style={home.profileItem}>
-            <Golo />
-          </View>
         </View>
       </View>
     </View>
