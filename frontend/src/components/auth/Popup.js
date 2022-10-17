@@ -1,5 +1,5 @@
 import { View, Text, Pressable, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 // styling
 import styles from "../../styles/auth/Popup.js";
@@ -7,10 +7,14 @@ import styles from "../../styles/auth/Popup.js";
 // social auth provider
 import Facebook from "./Facebook.js";
 import Google from "./Google.js";
-const Popup = ({ popupMode }) => {
-  // the value of the popupMode prop can be either registeration or login
-
-  const [status, setStatus] = useState(true);
+import { contextProvider } from "../../../Context.js";
+const Popup = () => {
+  // importing the global context that indicates the popup status
+  const {
+    auth: {
+      popup: [status, setStatus],
+    },
+  } = useContext(contextProvider);
 
   return (
     <>
@@ -20,7 +24,7 @@ const Popup = ({ popupMode }) => {
           <View style={styles.titleCon}>
             {/* conditionally rendered title */}
             <Text style={styles.title}>
-              {popupMode === "registeration"
+              {status === "registeration"
                 ? "Register account using,"
                 : "Continue login with,"}
             </Text>
@@ -41,10 +45,10 @@ const Popup = ({ popupMode }) => {
           {/* this is the continue with socials container */}
           <View style={styles.btnContainer}>
             {/* this contains signin with google and signup with google */}
-            <Google popupMode />
+            <Google />
 
             {/* this contains signin with facebook and signup with facebook */}
-            <Facebook popupMode />
+            <Facebook />
           </View>
         </View>
       ) : null}

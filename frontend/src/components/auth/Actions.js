@@ -1,15 +1,24 @@
 import { View, Text, Pressable } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 
 // styles
 import styles from "../../styles/auth/Actions.js";
+import { contextProvider } from "../../../Context.js";
 
 const Actions = () => {
+  // auth popup status
+
+  const {
+    auth: {
+      popup: [, setStatus],
+    },
+  } = useContext(contextProvider);
+
   const login = () => {
-    console.log("already have an account");
+    setStatus("login");
   };
   const register = () => {
-    console.log("new user");
+    setStatus("registeration");
   };
 
   return (
