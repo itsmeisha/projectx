@@ -15,6 +15,7 @@ export default StyleSheet.create({
     lineHeight: 51,
     color: "#fff",
     borderRadius: 15,
+    fontFamily: "poppins-m",
   },
   reg: {
     backgroundColor: "#e9e9e9",

@@ -6,7 +6,7 @@ export default StyleSheet.create({
     bottom: -60,
     left: 0,
     width: "100%",
-    height: 400,
+    height: 450,
     backgroundColor: "#E9F3FF",
     paddingHorizontal: 50,
     paddingVertical: 50,
@@ -19,8 +19,6 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontWeight: "500",
+    fontFamily: "poppins-m",
   },
-  closeBtn: {},
-  btnContainer: {},
 });

@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable, Image, Animated } from "react-native";
 import React, { useContext, useState } from "react";
 
 // styling
@@ -7,19 +7,26 @@ import styles from "../../styles/auth/Popup.js";
 // social auth provider
 import Facebook from "./Facebook.js";
 import Google from "./Google.js";
+
+// context
 import { contextProvider } from "../../../Context.js";
+
+// animation
+import { animation } from "../../animations/auth.js";
+
 const Popup = () => {
   // importing the global context that indicates the popup status
   const {
     auth: {
       popup: [status, setStatus],
+      animation: [logoAnim, popupAnim],
     },
   } = useContext(contextProvider);
 
   return (
     <>
       {status ? (
-        <View style={styles.container}>
+        <Animated.View style={[styles.container, { bottom: popupAnim }]}>
           {/* this contains the title and the close btn */}
           <View style={styles.titleCon}>
             {/* conditionally rendered title */}
@@ -31,7 +38,13 @@ const Popup = () => {
 
             <Pressable
               onPress={() => {
-                setStatus(false);
+                let animationTime = 500;
+                animation(-1000, popupAnim, animationTime);
+                animation(0, logoAnim, animationTime);
+
+                setTimeout(() => {
+                  setStatus(false);
+                }, animationTime);
               }}
             >
               {/* Btn logo */}
@@ -50,7 +63,7 @@ const Popup = () => {
             {/* this contains signin with facebook and signup with facebook */}
             <Facebook />
           </View>
-        </View>
+        </Animated.View>
       ) : null}
     </>
   );

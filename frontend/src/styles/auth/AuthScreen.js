@@ -6,7 +6,8 @@ export default StyleSheet.create({
     width: 274,
     borderRadius: 137,
     backgroundColor: "#d9d9d9",
-    marginTop: 150,
+    marginTop: 50,
+    marginLeft: -1000,
   },
   container: {
     // borderWidth: 2,

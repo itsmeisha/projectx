@@ -14,5 +14,6 @@ export default StyleSheet.create({
   },
   text: {
     marginLeft: 10,
+    fontFamily: "poppins-m",
   },
 });

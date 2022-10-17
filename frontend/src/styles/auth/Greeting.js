@@ -8,7 +8,8 @@ export default StyleSheet.create({
     width: 343,
     textAlign: "center",
     color: "#609FE7",
-    fontWeight: "700",
+    // fontWeight: "100",
+    fontFamily: "poppins-eb",
     fontSize: 20,
   },
   description: {
@@ -16,6 +17,8 @@ export default StyleSheet.create({
     width: 343,
     textAlign: "center",
     color: "#484848",
+    // fontWeight: "500",
+    fontFamily: "poppins-m",
     // fontSize: 12,
   },
 });
