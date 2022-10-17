@@ -1,4 +1,4 @@
-import { View, Image } from "react-native";
+import { View, Image, SafeAreaView, Platform } from "react-native";
 import React from "react";
 
 // components
@@ -11,27 +11,29 @@ import Nav from "../components/global/Nav";
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <View style={home.container}>
-      <Image
-        source={require("../../assets/imgs/background.png")}
-        style={home.backImg}
-      />
+    <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? 30 : 0 }}>
+      <View style={home.container}>
+        <Image
+          source={require("../../assets/imgs/background.png")}
+          style={home.backImg}
+        />
 
-      {/* the upper navigation that contains the notification and the user and the menu */}
-      <UpperNav />
+        {/* the upper navigation that contains the notification and the user and the menu */}
+        <UpperNav navigator={navigation} />
 
-      {/* containes the user name and a welcome message */}
-      <Greeting />
+        {/* containes the user name and a welcome message */}
+        <Greeting />
 
-      {/* search bar */}
-      <Searchbox />
+        {/* search bar */}
+        <Searchbox />
 
-      {/* the map container */}
-      <Map />
+        {/* the map container */}
+        <Map />
 
-      {/* bottom navigation main navigation bar */}
-      <Nav active={"HomeScreen"} />
-    </View>
+        {/* bottom navigation main navigation bar */}
+        <Nav navigator={navigation} active={"HomeScreen"} />
+      </View>
+    </SafeAreaView>
   );
 };
 

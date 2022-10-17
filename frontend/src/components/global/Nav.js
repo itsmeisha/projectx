@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import React from "react";
 
 // styles
@@ -12,47 +12,64 @@ import HomeIconBlue from "../../../assets/svg/nav/homeb.svg";
 import HistoryIconBlue from "../../../assets/svg/nav/historyb.svg";
 import UserIconBlue from "../../../assets/svg/nav/userb.svg";
 
-const Nav = ({ active }) => {
+const Nav = ({ navigator, active }) => {
   return (
     <View style={styles.container}>
       {/* home */}
-      <View style={styles.navItem}>
-        {active === "HomeScreen" ? (
-          <HomeIconBlue style={styles.activeIcon} />
-        ) : (
-          <HomeIcon />
-        )}
-        {active === "HomeScreen" ? (
-          <Text style={styles.activeText}>Home</Text>
-        ) : null}
-        {/* name  if active*/}
-      </View>
+      <Pressable
+        onPress={() => {
+          navigator.navigate("HomeScreen");
+        }}
+      >
+        <View style={styles.navItem}>
+          {active === "HomeScreen" ? (
+            <HomeIconBlue style={styles.activeIcon} />
+          ) : (
+            <HomeIcon />
+          )}
+          {active === "HomeScreen" ? (
+            <Text style={styles.activeText}>Home</Text>
+          ) : null}
+          {/* name  if active*/}
+        </View>
+      </Pressable>
 
       {/* Profile */}
-      <View style={styles.navItem}>
-        {active === "ProfileScreen" ? (
-          <UserIconBlue style={styles.activeIcon} />
-        ) : (
-          <UserIcon />
-        )}
-        {active === "ProfileScreen" ? (
-          <Text style={styles.activeText}>Profile</Text>
-        ) : null}
-        {/* name  if active*/}
-      </View>
-
+      <Pressable
+        onPress={() => {
+          navigator.navigate("ProfileScreen");
+        }}
+      >
+        <View style={styles.navItem}>
+          {active === "ProfileScreen" ? (
+            <UserIconBlue style={styles.activeIcon} />
+          ) : (
+            <UserIcon />
+          )}
+          {active === "ProfileScreen" ? (
+            <Text style={styles.activeText}>Profile</Text>
+          ) : null}
+          {/* name  if active*/}
+        </View>
+      </Pressable>
       {/* log */}
-      <View style={styles.navItem}>
-        {active === "LogScreen" ? (
-          <HistoryIconBlue style={styles.activeIcon} />
-        ) : (
-          <HistoryIcon />
-        )}
-        {active === "LogScreen" ? (
-          <Text style={styles.activeText}>Log</Text>
-        ) : null}
-        {/* name  if active*/}
-      </View>
+      <Pressable
+        onPress={() => {
+          navigator.navigate("LogScreen");
+        }}
+      >
+        <View style={styles.navItem}>
+          {active === "LogScreen" ? (
+            <HistoryIconBlue style={styles.activeIcon} />
+          ) : (
+            <HistoryIcon />
+          )}
+          {active === "LogScreen" ? (
+            <Text style={styles.activeText}>Log</Text>
+          ) : null}
+          {/* name  if active*/}
+        </View>
+      </Pressable>
     </View>
   );
 };

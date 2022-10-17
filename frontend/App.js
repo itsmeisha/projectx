@@ -6,6 +6,9 @@ import Context from "./Context";
 // screens
 import HomeScreen from "./src/screens/HomeScreen.js";
 import AuthScreen from "./src/screens/auth/AuthScreen.js";
+import LogScreen from "./src/screens/LogScreen.js";
+import ProfileScreen from "./src/screens/ProfileScreen.js";
+import NotificationScreen from "./src/screens/NotificationScreen";
 
 // fonts
 import { useFonts } from "expo-font";
@@ -35,20 +38,51 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <View>
-      <SafeAreaView style={styles.safe}>
-        <Context>
-          <HomeScreen />
-        </Context>
-      </SafeAreaView>
-    </View>
+    <Context>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{
+              animation: "none",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="ProfileScreen"
+            component={ProfileScreen}
+            options={{
+              animation: "none",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="LogScreen"
+            component={LogScreen}
+            options={{
+              animation: "none",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="NotificationScreen"
+            component={NotificationScreen}
+            options={{
+              animation: "none",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="AuthScreen"
+            component={AuthScreen}
+            options={{
+              animation: "none",
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Context>
   );
 }
-
-const styles = StyleSheet.create({
-  // safe area view for the android
-
-  safe: {
-    paddingTop: Platform.OS === "android" ? 30 : 0,
-  },
-});

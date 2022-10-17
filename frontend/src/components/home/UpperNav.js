@@ -1,21 +1,30 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import React from "react";
+
+// styles
 import home from "../../styles/home/home";
 
+// icons
 import Menu from "./../../../assets/svg/menu.svg";
 import Notif from "./../../../assets/svg/notification.svg";
 import Golo from "./../../../assets/svg/golo.svg";
 
-const UpperNav = () => {
+const UpperNav = ({ navigator }) => {
   return (
     <View style={home.navCon}>
       <View style={home.navItem}>
         <Menu />
       </View>
       <View style={home.rightNavItems}>
-        <View style={home.navItem}>
-          <Notif />
-        </View>
+        <Pressable
+          onPress={() => {
+            navigator.navigate("NotificationScreen");
+          }}
+        >
+          <View style={home.navItem}>
+            <Notif />
+          </View>
+        </Pressable>
         <View style={home.profile}>
           <Golo style={home.profileItem} />
           <Image

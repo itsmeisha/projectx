@@ -18,6 +18,7 @@ export default StyleSheet.create({
 
   navItem: {
     alignItems: "center",
+    width: 50,
   },
   activeText: {
     marginTop: 10,
