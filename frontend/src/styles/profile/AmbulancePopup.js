@@ -9,16 +9,18 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   closer: {
-    height: "100%",
+    height: Dimensions.get("screen").height,
     width: "100%",
-    position: "absolute",
     backgroundColor: "#333",
     opacity: 0.4,
+    zIndex: 20,
+    position: "absolute",
   },
   container: {
     backgroundColor: "white",
     padding: 35,
     borderRadius: 20,
+    zIndex: 20,
   },
   btns: {
     flexDirection: "row",

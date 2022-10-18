@@ -10,7 +10,12 @@ import BackArrow from "../../../assets/svg/backArrow.svg";
 const Header = ({ navigator, heading }) => {
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => navigator.goBack()}>
+      <Pressable
+        onPress={() => {
+          console.log("poxi jadai xu");
+          navigator.goBack();
+        }}
+      >
         <BackArrow />
       </Pressable>
       <Text style={styles.text}>{heading}</Text>

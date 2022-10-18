@@ -12,6 +12,7 @@ export default StyleSheet.create({
     alignItems: "center",
     height: 96,
     paddingHorizontal: 50,
+    zIndex: 10,
   },
   text: {
     fontFamily: "poppins-r",
