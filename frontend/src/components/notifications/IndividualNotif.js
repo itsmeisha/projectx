@@ -6,7 +6,6 @@ import NotificationLogo from "./NotificationLogo.js";
 // styles
 import styles from "../../styles/notification/IndividualNotif.js";
 const IndividualNotif = ({ data }) => {
-  console.log(data);
   return (
     <View style={styles.container}>
       {/* gets the logo according to the notification type */}

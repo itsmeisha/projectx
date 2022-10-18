@@ -54,11 +54,39 @@ const Context = ({ children }) => {
     },
   ]);
 
+  const [user, setUser] = useState({
+    name: "kapil Tripathi",
+    doj: "sep 23rd",
+    contact: "person@gmail.com",
+    achievements: ["New", "Helper", "Tracker"],
+    ambulance: {
+      name: "Lumbini ambulance",
+      vehicleNumber: "L142134/23412",
+      phoneNumber: "+977 9867100588",
+      trackable: true,
+    },
+  });
+
+  //
+  //
+  // *****************Add ambulance popup *****************
+  //
+  //
+  // its value can be false , edit mode , add mode
+  const [ambPopup, setAmbPopup] = useState(true);
+  //ambulance data
+  const [ambulData, SetAmbData] = useState({});
+
   return (
     <contextProvider.Provider
       value={{
         auth: { popup: [status, setStatus], animation: [logoAnim, popupAnim] },
         notif: [notification, setNotification],
+        usr: [user, setUser],
+        profile: {
+          popup: [ambPopup, setAmbPopup],
+          ambul: [ambulData, SetAmbData],
+        },
       }}
     >
       {children}

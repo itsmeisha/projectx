@@ -1,5 +1,12 @@
-import { View, Text, SafeAreaView, Platform, Pressable } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Platform,
+  Pressable,
+  ScrollView,
+} from "react-native";
+import React, { useContext } from "react";
 
 // components
 import Nav from "../components/global/Nav";
@@ -10,19 +17,15 @@ import AmbulanceCard from "../components/profile/AmbulanceCard.js";
 // styles
 import styles from "../styles/profile/ProfileScreen.js";
 
+// Context
+import { contextProvider } from "../../Context";
+import AmbulancePopup from "../components/profile/AmbulancePopup";
+
 const ProfileScreen = ({ navigation }) => {
-  const user = {
-    name: "kapil Tripathi",
-    doj: "sep 23rd",
-    contact: "person@gmail.com",
-    achievements: ["New", "Helper", "Tracker"],
-    Ambulance: {
-      name: "Lumbini ambulance",
-      vehicleNumber: "L142134/23412",
-      phoneNumber: "+977 9867100588",
-      state: true,
-    },
-  };
+  const {
+    usr: [user, setUser],
+  } = useContext(contextProvider);
+
   return (
     <>
       <SafeAreaView
@@ -32,19 +35,22 @@ const ProfileScreen = ({ navigation }) => {
         }}
       >
         <Header navigator={navigation} heading={user.name} />
-        <View style={styles.container}>
-          <ProfileCard data={user} />
-          {user?.Ambulance ? (
-            <>
-              <Text style={styles.ownedAmb}>Ambulances owned</Text>
-              <AmbulanceCard data={user?.Ambulance} />
-            </>
-          ) : (
-            <Pressable>
-              <Text style={styles.addAmbulance}>Add Ambulance</Text>
-            </Pressable>
-          )}
-        </View>
+        <ScrollView>
+          <View style={styles.container}>
+            <ProfileCard data={user} />
+            {user?.ambulance ? (
+              <>
+                <Text style={styles.ownedAmb}>Ambulances owned</Text>
+                <AmbulanceCard data={user?.ambulance} />
+              </>
+            ) : (
+              <Pressable>
+                <Text style={styles.addAmbulance}>Add Ambulance</Text>
+              </Pressable>
+            )}
+          </View>
+        </ScrollView>
+        <AmbulancePopup />
         <Nav active={"ProfileScreen"} navigator={navigation} />
       </SafeAreaView>
     </>

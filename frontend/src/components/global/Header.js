@@ -8,7 +8,6 @@ import styles from "../../styles/global/Header.js";
 import BackArrow from "../../../assets/svg/backArrow.svg";
 
 const Header = ({ navigator, heading }) => {
-  console.log(navigator);
   return (
     <View style={styles.container}>
       <Pressable onPress={() => navigator.goBack()}>

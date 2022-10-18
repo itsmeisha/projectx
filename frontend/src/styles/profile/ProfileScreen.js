@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     alignItems: "center",
+    paddingBottom: 106,
   },
   addAmbulance: {
     marginTop: 50,
@@ -15,5 +16,10 @@ export default StyleSheet.create({
     lineHeight: 40,
     borderRadius: 15,
     elevation: 5,
+  },
+  ownedAmb: {
+    marginTop: 50,
+    fontFamily: "poppins-m",
+    fontSize: 20,
   },
 });
