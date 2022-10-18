@@ -21,6 +21,18 @@ const Inputer = ({ name, placeholder, title }) => {
     });
   };
 
+  // to sync the ambulance data that is available in the context to the ambulance data state
+  // useEffect(() => {
+  //   SetAmbData(() => {
+  //     if (user?.ambulance[name]) return { ...ambulData };
+  //     return { ...ambulData, [name]: user?.ambulance[name] };
+  //   });
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log(ambulData);
+  // }, [ambulData]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>

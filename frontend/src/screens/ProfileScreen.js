@@ -24,6 +24,9 @@ import AmbulancePopup from "../components/profile/AmbulancePopup";
 const ProfileScreen = ({ navigation }) => {
   const {
     usr: [user, setUser],
+    profile: {
+      popup: [, setAmbPopup],
+    },
   } = useContext(contextProvider);
 
   return (
@@ -38,13 +41,13 @@ const ProfileScreen = ({ navigation }) => {
         <ScrollView>
           <View style={styles.container}>
             <ProfileCard data={user} />
-            {user?.ambulance ? (
+            {Object.keys(user?.ambulance)?.length > 0 ? (
               <>
                 <Text style={styles.ownedAmb}>Ambulances owned</Text>
                 <AmbulanceCard data={user?.ambulance} />
               </>
             ) : (
-              <Pressable>
+              <Pressable onPress={() => setAmbPopup("add")}>
                 <Text style={styles.addAmbulance}>Add Ambulance</Text>
               </Pressable>
             )}

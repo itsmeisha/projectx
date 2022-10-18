@@ -14,6 +14,7 @@ import { contextProvider } from "../../../Context.js";
 
 const AmbulanceCard = ({ data }) => {
   const {
+    usr: [user, setUser],
     profile: {
       popup: [, setAmbPopup],
     },
@@ -22,8 +23,24 @@ const AmbulanceCard = ({ data }) => {
   return (
     <View style={styles.container}>
       {/* toggle btn for toggling the ambulance location  */}
-      <TglBtnOn style={styles.tglBtn} />
 
+      <Pressable
+        onPress={() => {
+          setUser({
+            ...user,
+            ambulance: {
+              ...user?.ambulance,
+              trackable: !user?.ambulance?.trackable,
+            },
+          });
+        }}
+      >
+        {user?.ambulance?.trackable ? (
+          <TglBtnOn style={styles.tglBtn} />
+        ) : (
+          <TglBtnOff style={styles.tglBtn} />
+        )}
+      </Pressable>
       {/* contents */}
       <View style={styles.contents}>
         {/* logo */}
@@ -31,12 +48,12 @@ const AmbulanceCard = ({ data }) => {
 
         {/* another column of data */}
         <View style={styles.textCont}>
-          <Text style={styles.name}>{data.name}</Text>
+          <Text style={styles.name}>{data?.name}</Text>
           <Text style={[styles.vehicleNumber, styles.secondaryText]}>
-            {data.vehicleNumber}
+            {data?.vNumber}
           </Text>
           <Text style={[styles.phoneNumber, styles.secondaryText]}>
-            {data.phoneNumber}
+            {data?.pNumber}
           </Text>
         </View>
       </View>
@@ -45,10 +62,22 @@ const AmbulanceCard = ({ data }) => {
 
       <Pressable
         onPress={() => {
+          if (!user?.ambulance?.trackable) return;
           setAmbPopup("edit");
         }}
       >
-        <Text style={styles.editBtn}>Edit Ambulance</Text>
+        <Text
+          style={[
+            styles.editBtn,
+            user?.ambulance?.trackable
+              ? null
+              : {
+                  backgroundColor: "#98B9FF",
+                },
+          ]}
+        >
+          Edit Ambulance
+        </Text>
       </Pressable>
     </View>
   );

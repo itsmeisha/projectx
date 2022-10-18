@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // context
 import { contextProvider } from "../../../Context";
@@ -19,10 +19,21 @@ const AmbulancePopup = () => {
     },
   } = useContext(contextProvider);
 
+  // for the save btn
+  const [canSave, setCanSave] = useState(false);
+
   const saveAmbulance = () => {
+    if (!canSave) return;
     // updating the profile
     setUser(() => {
-      return { ...user, ambulance: { ...ambulData } };
+      return {
+        ...user,
+        ambulance: {
+          ...user.ambulance,
+          ...ambulData,
+          trackable: true,
+        },
+      };
     });
     // closing the popup
     setAmbPopup(false);
@@ -37,6 +48,24 @@ const AmbulancePopup = () => {
     // reseting the data
     SetAmbData({});
   };
+
+  useEffect(() => {
+    setCanSave(() => {
+      if (ambPopup === "edit") {
+        return Object.values(ambulData).length > 0
+          ? !Object.values(ambulData).includes("")
+          : false;
+      }
+      console.log("checking in add mode", {
+        lengthCheck: Object.values(ambulData).length === 4,
+      });
+      return Object.values(ambulData).length === 4
+        ? !Object.values(ambulData).includes("")
+        : false;
+    });
+  }, [ambulData]);
+
+  console.log(ambulData);
   return (
     <>
       {ambPopup ? (
@@ -45,6 +74,8 @@ const AmbulancePopup = () => {
           <Pressable
             onPress={() => {
               setAmbPopup(false);
+              // resetting the data
+              SetAmbData({});
             }}
             style={styles.closer}
           ></Pressable>
@@ -75,7 +106,21 @@ const AmbulancePopup = () => {
 
               <View style={styles.btns}>
                 <Pressable onPress={saveAmbulance}>
-                  <Text style={[styles.save, styles.btn]}>Save</Text>
+                  <Text
+                    style={[
+                      styles.save,
+                      styles.btn,
+                      !canSave
+                        ? {
+                            opacity: 0.7,
+                          }
+                        : {
+                            opacity: 1,
+                          },
+                    ]}
+                  >
+                    {ambPopup === "edit" ? "Save" : "Add"}
+                  </Text>
                 </Pressable>
 
                 <Pressable onPress={cancelAmbulance}>

@@ -9,11 +9,11 @@ const IndividualNotif = ({ data }) => {
   return (
     <View style={styles.container}>
       {/* gets the logo according to the notification type */}
-      <NotificationLogo type={data.type} />
+      <NotificationLogo type={data?.type} />
 
       <View style={styles.textCon}>
-        <Text style={styles.title}>{data.title}</Text>
-        <Text style={styles.description}>{data.message}</Text>
+        <Text style={styles.title}>{data?.title}</Text>
+        <Text style={styles.description}>{data?.message}</Text>
       </View>
     </View>
   );

@@ -59,12 +59,7 @@ const Context = ({ children }) => {
     doj: "sep 23rd",
     contact: "person@gmail.com",
     achievements: ["New", "Helper", "Tracker"],
-    ambulance: {
-      name: "Lumbini ambulance",
-      vehicleNumber: "L142134/23412",
-      phoneNumber: "+977 9867100588",
-      trackable: true,
-    },
+    ambulance: {},
   });
 
   //
@@ -73,7 +68,7 @@ const Context = ({ children }) => {
   //
   //
   // its value can be false , edit mode , add mode
-  const [ambPopup, setAmbPopup] = useState(true);
+  const [ambPopup, setAmbPopup] = useState(false);
   //ambulance data
   const [ambulData, SetAmbData] = useState({});
 

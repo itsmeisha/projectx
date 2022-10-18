@@ -11,17 +11,17 @@ const ProfileCard = ({ data }) => {
         style={styles.logo}
       />
       <View style={styles.contents}>
-        <Text style={styles.name}>{data.name}</Text>
+        <Text style={styles.name}>{data?.name}</Text>
         <Text style={[styles.joined, styles.secondaryText]}>
           <Text>Joined : </Text>
-          {data.doj}
+          {data?.doj}
         </Text>
         <Text style={[styles.contact, styles.secondaryText]}>
           <Text>contact : </Text>
-          {data.contact}
+          {data?.contact}
         </Text>
         <View style={styles.achievements}>
-          {data?.achievements.map((achievement, index) => {
+          {data?.achievements?.map((achievement, index) => {
             return (
               <Text style={styles.achievement} key={index}>
                 {achievement}
