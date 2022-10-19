@@ -4,6 +4,7 @@ export default StyleSheet.create({
   container: {
     alignItems: "center",
     paddingBottom: 106,
+    paddingHorizontal: 15,
   },
   addAmbulance: {
     marginTop: 50,

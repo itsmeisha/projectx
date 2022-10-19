@@ -1,40 +1,47 @@
-import { View, Text, SafeAreaView, Platform, Pressable } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Platform,
+  Pressable,
+  ScrollView,
+} from "react-native";
+import React, { useContext } from "react";
 
 // components
 import Nav from "../components/global/Nav";
-import Back from "./../../assets/svg/backArrow.svg";
-import Go from "./../../assets/svg/golo.svg";
+import Header from "../components/global/Header";
+import IndivLog from "../components/log/IndivLog";
 
-import Topnav from "../styles/Log/Topnav";
-import Logdetail from "../styles/Log/Logdetail";
+// styles
+import styles from "../styles/Log/LogScreen.js";
+
+//context
+import { contextProvider } from "../../Context";
+
 const LogScreen = ({ navigation }) => {
+  const {
+    history: [logs],
+  } = useContext(contextProvider);
   return (
     <SafeAreaView
       style={{ paddingTop: Platform.OS === "android" ? 30 : 0, height: "100%" }}
     >
-      <View style={{ flex: 1, backgroundColor: "#C7CAE9" }}>
-        <View style={Topnav.NavContainer}>
-          <Pressable onPress={() => {}}>
-            <Back />
-          </Pressable>
-          <Text style={Topnav.Text}>Tracking Logs </Text>
-        </View>
-        <View style={Logdetail.Con}>
-          <View style={Logdetail.LeftItem}>
-            <Go />
-            <View>
-              <Text style={Logdetail.Maintxt}>Lumbini Ambulance</Text>
-              <Text style={Logdetail.txt}>Tracked 20 km for 5min</Text>
-            </View>
-          </View>
-          <View style={Logdetail.RightItem}>
-            <Text style={Logdetail.righttxt}>8 jun</Text>
-          </View>
-        </View>
+      <Header navigator={navigation} heading={"Tracking logs"} />
 
-        <Nav active={"LogScreen"} navigator={navigation} />
-      </View>
+      <ScrollView style={styles.container}>
+        {logs.map((data, index) => {
+          return <IndivLog data={data} key={index} />;
+        })}
+        <View
+          style={{
+            height: 110,
+            width: "100%",
+          }}
+        ></View>
+      </ScrollView>
+
+      <Nav active={"LogScreen"} navigator={navigation} />
     </SafeAreaView>
   );
 };

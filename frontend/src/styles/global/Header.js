@@ -13,6 +13,7 @@ export default StyleSheet.create({
     height: 96,
     paddingHorizontal: 50,
     zIndex: 10,
+    elevation: 5,
   },
   text: {
     fontFamily: "poppins-r",

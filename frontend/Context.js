@@ -62,6 +62,27 @@ const Context = ({ children }) => {
     ambulance: {},
   });
 
+  const [logs, setLogs] = useState([
+    {
+      name: "Lumbini Ambulance",
+      duration: "5 min",
+      distance: "20 km",
+      date: "8 jun",
+    },
+    {
+      name: "Mutu Ambulance",
+      duration: "2 min",
+      distance: "2 km",
+      date: "5 jun",
+    },
+    {
+      name: "GBC Ambulance",
+      duration: "50 min",
+      distance: "200 km",
+      date: "18 jun",
+    },
+  ]);
+
   //
   //
   // *****************Add ambulance popup *****************
@@ -82,6 +103,7 @@ const Context = ({ children }) => {
           popup: [ambPopup, setAmbPopup],
           ambul: [ambulData, SetAmbData],
         },
+        history: [logs, setLogs],
       }}
     >
       {children}

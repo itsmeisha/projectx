@@ -1,27 +1,30 @@
 import { StyleSheet } from "react-native";
 export default StyleSheet.create({
-  Con: {
+  con: {
     width: "100%",
     backgroundColor: "#fff",
-    height: 80,
-    padding: 5,
+    height: 96,
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 15,
-    maarginTop: 4,
+    marginTop: 4,
+    paddingHorizontal: 25,
   },
-  LeftItem: {},
-  RightItem: { marginLeft: 20 },
-  Maintxt: {
-    fontFamily: "poppins-m",
-    lineHeight: 21,
+  mainTxt: {
+    fontFamily: "poppins-r",
+    fontSize: 16,
   },
   txt: {
-    fontFamily: "poppins-l",
+    fontFamily: "poppins-r",
+    fontSize: 12,
     color: "#919191",
   },
-  righttxt: {
+  rightTxt: {
+    marginLeft: "auto",
     fontFamily: "poppins-r",
     color: "#686868",
+  },
+  leftItem: {
+    marginLeft: 18,
   },
 });
