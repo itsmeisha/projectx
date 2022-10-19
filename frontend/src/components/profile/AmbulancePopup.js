@@ -56,16 +56,13 @@ const AmbulancePopup = () => {
           ? !Object.values(ambulData).includes("")
           : false;
       }
-      console.log("checking in add mode", {
-        lengthCheck: Object.values(ambulData).length === 4,
-      });
+
       return Object.values(ambulData).length === 4
         ? !Object.values(ambulData).includes("")
         : false;
     });
   }, [ambulData]);
 
-  console.log(ambulData);
   return (
     <>
       {ambPopup ? (

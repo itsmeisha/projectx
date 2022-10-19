@@ -12,7 +12,6 @@ const Header = ({ navigator, heading }) => {
     <View style={styles.container}>
       <Pressable
         onPress={() => {
-          console.log("poxi jadai xu");
           navigator.goBack();
         }}
       >
