@@ -93,6 +93,24 @@ const Context = ({ children }) => {
   //ambulance data
   const [ambulData, SetAmbData] = useState({});
 
+  //
+  //
+  // *****************Contact popup *****************
+  //
+  //
+
+  const [conPopup, setConPopup] = useState(false);
+
+  //
+  //
+  // *****************selected ambulance *****************
+  //
+  //
+
+  const [selectedAmbul, setSelectedAmbul] = useState({
+    name: "Lumbini Ambulance",
+    number: "+977 9867100588",
+  });
   return (
     <contextProvider.Provider
       value={{
@@ -104,6 +122,10 @@ const Context = ({ children }) => {
           ambul: [ambulData, SetAmbData],
         },
         history: [logs, setLogs],
+        contact: [conPopup, setConPopup],
+        map: {
+          ambulance: [selectedAmbul, setSelectedAmbul],
+        },
       }}
     >
       {children}

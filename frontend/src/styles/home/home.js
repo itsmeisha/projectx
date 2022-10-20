@@ -33,7 +33,8 @@ export default StyleSheet.create({
   },
   backImg: {
     position: "absolute",
-    marginTop: Platform.OS === "android" ? -25 : 0,
+    top: 0,
+    // marginTop: Platform.OS === "android" ? -25 : 0,
   },
   profile: {
     position: "relative",

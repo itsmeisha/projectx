@@ -1,4 +1,4 @@
-import { View, Image, SafeAreaView, Platform } from "react-native";
+import { View, Image, SafeAreaView, Platform, ScrollView } from "react-native";
 import React from "react";
 
 // components
@@ -8,31 +8,46 @@ import Searchbox from "../components/home/Searchbox";
 import Map from "../components/home/maps/Map";
 import Greeting from "../components/home/Greeting.js";
 import Nav from "../components/global/Nav";
+import ContactPopup from "../components/home/ContactPopup.js";
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? 30 : 0 }}>
-      <View style={home.container}>
-        <Image
-          source={require("../../assets/imgs/background.png")}
-          style={home.backImg}
-        />
+    <SafeAreaView
+      style={{
+        paddingTop: Platform.OS === "android" ? 30 : 0,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Image
+        source={require("../../assets/imgs/background.png")}
+        style={[home.backImg, {}]}
+      />
+      <ScrollView>
+        <View style={home.container}>
+          {/* the upper navigation that contains the notification and the user and the menu */}
+          <UpperNav navigator={navigation} />
 
-        {/* the upper navigation that contains the notification and the user and the menu */}
-        <UpperNav navigator={navigation} />
+          {/* containes the user name and a welcome message */}
+          <Greeting />
 
-        {/* containes the user name and a welcome message */}
-        <Greeting />
+          {/* search bar */}
+          <Searchbox />
 
-        {/* search bar */}
-        <Searchbox />
+          {/* the map container */}
+          <Map />
+        </View>
+        {/* this is to provide extra scroll space */}
+        <View
+          style={{
+            height: 110,
+            width: "100%",
+          }}
+        ></View>
+      </ScrollView>
 
-        {/* the map container */}
-        <Map />
-
-        {/* bottom navigation main navigation bar */}
-        <Nav navigator={navigation} active={"HomeScreen"} />
-      </View>
+      <ContactPopup />
+      <Nav navigator={navigation} active={"HomeScreen"} />
     </SafeAreaView>
   );
 };

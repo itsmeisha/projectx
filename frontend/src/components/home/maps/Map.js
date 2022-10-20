@@ -1,14 +1,20 @@
 import { View, Text } from "react-native";
 import React from "react";
+
+//components
 import Actualmap from "./Actualmap";
 import Mapdesc from "./Mapdesc";
+
+// styles
+import styles from "../../../styles/home/map/Map.js";
+
 const Map = () => {
   return (
-    <View>
-      <Text>Available Ambulance</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Available Ambulance</Text>
 
       {/* the container that holds the actual map and the map description  */}
-      <View>
+      <View style={styles.mapContainer}>
         {/* actual map  */}
         <Actualmap />
         {/* the container that contains the map desc including distance and the action buttons */}
