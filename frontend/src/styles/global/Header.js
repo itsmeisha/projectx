@@ -6,10 +6,11 @@ export default StyleSheet.create({
     alignItems: "center",
     width: "100%",
     position: "absolute",
+    paddingTop: 30,
     top: 30,
     left: 0,
     backgroundColor: "white",
-    alignItems: "center",
+
     height: 96,
     paddingHorizontal: 50,
     zIndex: 10,

@@ -111,6 +111,15 @@ const Context = ({ children }) => {
     name: "Lumbini Ambulance",
     number: "+977 9867100588",
   });
+
+  // Map data
+
+  const [data, setData] = useState({
+    lat: "13.45",
+    lon: "-24.43522",
+    distance: "20km",
+    time: "5 Min",
+  });
   return (
     <contextProvider.Provider
       value={{
@@ -125,6 +134,7 @@ const Context = ({ children }) => {
         contact: [conPopup, setConPopup],
         map: {
           ambulance: [selectedAmbul, setSelectedAmbul],
+          tracking: [data, setData],
         },
       }}
     >

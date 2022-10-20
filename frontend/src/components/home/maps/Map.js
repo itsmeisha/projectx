@@ -8,7 +8,7 @@ import Mapdesc from "./Mapdesc";
 // styles
 import styles from "../../../styles/home/map/Map.js";
 
-const Map = () => {
+const Map = ({ navigator }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Available Ambulance</Text>
@@ -16,9 +16,9 @@ const Map = () => {
       {/* the container that holds the actual map and the map description  */}
       <View style={styles.mapContainer}>
         {/* actual map  */}
-        <Actualmap />
+        <Actualmap navigator={navigator} />
         {/* the container that contains the map desc including distance and the action buttons */}
-        <Mapdesc />
+        <Mapdesc navigator={navigator} />
       </View>
     </View>
   );

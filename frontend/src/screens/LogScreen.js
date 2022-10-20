@@ -29,7 +29,7 @@ const LogScreen = ({ navigation }) => {
     >
       <Header navigator={navigation} heading={"Tracking logs"} />
 
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         {logs.map((data, index) => {
           return <IndivLog data={data} key={index} />;
         })}

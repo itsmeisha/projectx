@@ -23,7 +23,7 @@ const HomeScreen = ({ navigation }) => {
         source={require("../../assets/imgs/background.png")}
         style={[home.backImg, {}]}
       />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={home.container}>
           {/* the upper navigation that contains the notification and the user and the menu */}
           <UpperNav navigator={navigation} />
@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
           <Searchbox />
 
           {/* the map container */}
-          <Map />
+          <Map navigator={navigation} />
         </View>
         {/* this is to provide extra scroll space */}
         <View

@@ -38,7 +38,7 @@ const ProfileScreen = ({ navigation }) => {
         }}
       >
         <Header navigator={navigation} heading={user.name} />
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             <ProfileCard data={user} />
             {Object.keys(user?.ambulance)?.length > 0 ? (

@@ -16,6 +16,7 @@ import { useFonts } from "expo-font";
 // react navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import TrackingScreen from "./src/screens/TrackingScreen";
 
 export default function App() {
   // -----------------------------------------------------------------------------------
@@ -76,6 +77,14 @@ export default function App() {
           <Stack.Screen
             name="AuthScreen"
             component={AuthScreen}
+            options={{
+              animation: "none",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="TrackingScreen"
+            component={TrackingScreen}
             options={{
               animation: "none",
               headerShown: false,

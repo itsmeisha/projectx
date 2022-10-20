@@ -1,28 +1,31 @@
 import { View, Text, Pressable } from "react-native";
 import React, { useContext } from "react";
 
-//styles
-import styles from "../../../styles/home/map/Mapdesc.js";
+// styles
+import styles from "../../styles/home/map/Mapdesc";
 
 // context
-import { contextProvider } from "../../../../Context.js";
+import { contextProvider } from "../../../Context";
 
-const Mapdesc = ({ navigator }) => {
+const MapFinder = () => {
   const {
     contact: [, setConPopup],
   } = useContext(contextProvider);
   const distance = "20 km";
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          width: "90%",
+          position: "absolute",
+          bottom: 30,
+        },
+      ]}
+    >
       <Text style={styles.distance}>Distance : {distance}</Text>
       <View style={styles.btns}>
-        <Pressable
-          onPress={() => {
-            navigator.navigate("TrackingScreen", {
-              mode: "tracking",
-            });
-          }}
-        >
+        <Pressable>
           <Text style={[styles.track, styles.btn]}>Track</Text>
         </Pressable>
         <Pressable
@@ -37,4 +40,4 @@ const Mapdesc = ({ navigator }) => {
   );
 };
 
-export default Mapdesc;
+export default MapFinder;
