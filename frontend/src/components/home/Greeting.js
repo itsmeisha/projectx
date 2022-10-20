@@ -1,13 +1,20 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
+
+//styles
 import greet from "../../styles/home/greet";
 
+// context
+import { contextProvider } from "../../../Context";
+
 const Greeting = () => {
-  const username = "New User";
+  const {
+    usr: [user],
+  } = useContext(contextProvider);
   return (
     <View>
       <Text style={greet.FirstText}>Welcome</Text>
-      <Text style={greet.username}>{username}</Text>
+      <Text style={greet.username}>{user?.name}</Text>
     </View>
   );
 };

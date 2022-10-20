@@ -29,6 +29,10 @@ const ProfileScreen = ({ navigation }) => {
     },
   } = useContext(contextProvider);
 
+  console.log(user);
+  if (!user) {
+    navigation.navigate("AuthScreen");
+  }
   return (
     <>
       <SafeAreaView
@@ -37,11 +41,11 @@ const ProfileScreen = ({ navigation }) => {
           height: "100%",
         }}
       >
-        <Header navigator={navigation} heading={user.name} />
+        <Header navigator={navigation} heading={user?.name} />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             <ProfileCard data={user} />
-            {Object.keys(user?.ambulance)?.length > 0 ? (
+            {user?.ambulance && Object.keys(user?.ambulance)?.length > 0 ? (
               <>
                 <Text style={styles.ownedAmb}>Ambulances owned</Text>
                 <AmbulanceCard data={user?.ambulance} />

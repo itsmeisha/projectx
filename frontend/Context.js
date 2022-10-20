@@ -55,11 +55,11 @@ const Context = ({ children }) => {
   ]);
 
   const [user, setUser] = useState({
-    name: "kapil Tripathi",
-    doj: "sep 23rd",
-    contact: "person@gmail.com",
-    achievements: ["New", "Helper", "Tracker"],
-    ambulance: {},
+    // name: "kapil Tripathi",
+    // doj: "sep 23rd",
+    // contact: "person@gmail.com",
+    // achievements: ["New", "Helper", "Tracker"],
+    // ambulance: {},
   });
 
   const [logs, setLogs] = useState([

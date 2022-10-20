@@ -29,7 +29,7 @@ const AmbulancePopup = () => {
       return {
         ...user,
         ambulance: {
-          ...user.ambulance,
+          ...user?.ambulance,
           ...ambulData,
           trackable: true,
         },
@@ -52,12 +52,12 @@ const AmbulancePopup = () => {
   useEffect(() => {
     setCanSave(() => {
       if (ambPopup === "edit") {
-        return Object.values(ambulData).length > 0
+        return ambulData && Object.values(ambulData).length > 0
           ? !Object.values(ambulData).includes("")
           : false;
       }
 
-      return Object.values(ambulData).length === 4
+      return ambulData && Object.values(ambulData).length === 4
         ? !Object.values(ambulData).includes("")
         : false;
     });

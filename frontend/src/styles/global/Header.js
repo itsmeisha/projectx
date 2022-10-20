@@ -10,7 +10,6 @@ export default StyleSheet.create({
     top: 30,
     left: 0,
     backgroundColor: "white",
-
     height: 96,
     paddingHorizontal: 50,
     zIndex: 10,

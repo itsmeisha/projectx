@@ -28,9 +28,9 @@ const Inputer = ({ name, placeholder, title }) => {
         placeholder={placeholder}
         onChangeText={handleChange}
         value={
-          Object.keys(ambulData).includes(name)
+          ambulData && Object.keys(ambulData).includes(name)
             ? ambulData[name]
-            : user.ambulance[name]
+            : user?.ambulance[name]
         }
         style={styles.input}
       />
