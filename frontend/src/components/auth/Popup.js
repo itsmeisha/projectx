@@ -14,7 +14,7 @@ import { contextProvider } from "../../../Context.js";
 // animation
 import { animation } from "../../animations/auth.js";
 
-const Popup = () => {
+const Popup = ({ navigator }) => {
   // importing the global context that indicates the popup status
   const {
     auth: {
@@ -58,10 +58,10 @@ const Popup = () => {
           {/* this is the continue with socials container */}
           <View style={styles.btnContainer}>
             {/* this contains signin with google and signup with google */}
-            <Google />
+            <Google navigator={navigator} />
 
             {/* this contains signin with facebook and signup with facebook */}
-            <Facebook />
+            <Facebook navigator={navigator} />
           </View>
         </Animated.View>
       ) : null}

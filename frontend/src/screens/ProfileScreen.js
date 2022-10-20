@@ -29,8 +29,7 @@ const ProfileScreen = ({ navigation }) => {
     },
   } = useContext(contextProvider);
 
-  console.log(user);
-  if (!user) {
+  if (!user || Object.keys(user).length === 0) {
     navigation.navigate("AuthScreen");
   }
   return (

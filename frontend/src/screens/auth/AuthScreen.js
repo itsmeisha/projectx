@@ -13,7 +13,7 @@ import Popup from "../../components/auth/Popup";
 import { animation } from "../../animations/auth.js";
 import { contextProvider } from "../../../Context.js";
 
-const AuthScreen = () => {
+const AuthScreen = ({ navigation }) => {
   // setting the animation value for the logo
   const {
     auth: {
@@ -34,7 +34,7 @@ const AuthScreen = () => {
       ></Animated.View>
       <Greeting />
       <Actions />
-      <Popup />
+      <Popup navigator={navigation} />
     </View>
   );
 };

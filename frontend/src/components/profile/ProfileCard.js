@@ -6,10 +6,7 @@ import styles from "../../styles/profile/ProfileCard.js";
 const ProfileCard = ({ data }) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../../../assets/imgs/profile/demo.jpg")}
-        style={styles.logo}
-      />
+      <Image source={{ uri: data?.photo }} style={styles.logo} />
       <View style={styles.contents}>
         <Text style={styles.name}>{data?.name}</Text>
         <Text style={[styles.joined, styles.secondaryText]}>

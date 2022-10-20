@@ -1,23 +1,78 @@
 import { View, Text, Pressable, Image } from "react-native";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 // styles
 import styles from "../../styles/auth/socialBtns.js";
 
-const Google = ({ popupMode }) => {
-  const googleAuth = () => {
-    if (popupMode === "registeration") {
-      registerWithGoogle();
-      return;
-    }
-    loginWithGoogle();
+// packages for google auth
+import * as WebBrowser from "expo-web-browser";
+import * as GoogleSingIn from "expo-auth-session/providers/google";
+
+// for sending requests
+import axios from "axios";
+
+//context
+import { contextProvider } from "../../../Context.js";
+
+// for getting the current time
+// doj date of joining
+import moment from "moment";
+
+// secrets for google auth
+const webClientId =
+  "290547480158-ivogsqrhvc5jm4l1snste4votggvoh97.apps.googleusercontent.com";
+
+// initializes the browser
+WebBrowser.maybeCompleteAuthSession();
+
+const Google = ({ navigator }) => {
+  // setUser to set the user in the context after successfull auth
+  const {
+    usr: [user, setUser],
+  } = useContext(contextProvider);
+
+  const googleAuth = async () => {
+    // triggers google login
+    await promptAsync({});
   };
 
-  function registerWithGoogle() {}
-  function loginWithGoogle() {}
+  // states
+  const [request, response, promptAsync] = GoogleSingIn.useAuthRequest({
+    expoClientId: webClientId,
+  });
 
+  useEffect(() => {
+    if (!response) return;
+    const { authentication } = response;
+    const accessToken = authentication.accessToken;
+
+    // sending request to google.
+    axios
+      .get(
+        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`
+      )
+      .then((res) => {
+        setUser({
+          name: res?.data?.name,
+          doj: moment().format("MMM Do YY"),
+          contact: res?.data?.email,
+          photo: res?.data?.picture,
+          achievements: [],
+          ambulance: {},
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, [response]);
+
+  useEffect(() => {
+    if (Object.keys(user).length === 0) return;
+    console.log(user);
+    navigator.goBack();
+  }, [user]);
   return (
-    <Pressable onPress={googleAuth}>
+    <Pressable onPress={googleAuth} disabled={!request}>
       <View style={styles.btn}>
         {/* google icon */}
         <Image

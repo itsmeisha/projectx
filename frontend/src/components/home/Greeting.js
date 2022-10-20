@@ -14,7 +14,7 @@ const Greeting = () => {
   return (
     <View>
       <Text style={greet.FirstText}>Welcome</Text>
-      <Text style={greet.username}>{user?.name}</Text>
+      <Text style={greet.username}>{user?.name || "New User"}</Text>
     </View>
   );
 };
