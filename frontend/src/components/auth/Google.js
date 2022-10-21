@@ -44,7 +44,7 @@ const Google = ({ navigator }) => {
   useEffect(() => {
     if (!response) return;
     const { authentication } = response;
-    const accessToken = authentication.accessToken;
+    const accessToken = authentication?.accessToken;
 
     // sending request to google.
     axios
