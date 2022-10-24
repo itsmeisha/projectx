@@ -1,3 +1,8 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
-export default StyleSheet.create({});
+export default StyleSheet.create({
+  map: {
+    height: Dimensions.get("screen").height,
+    width: Dimensions.get("window").width,
+  },
+});

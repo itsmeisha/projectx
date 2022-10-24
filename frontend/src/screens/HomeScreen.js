@@ -1,5 +1,12 @@
-import { View, Image, SafeAreaView, Platform, ScrollView } from "react-native";
-import React from "react";
+import {
+  View,
+  Image,
+  SafeAreaView,
+  Platform,
+  ScrollView,
+  Dimensions,
+} from "react-native";
+import React, { useRef } from "react";
 
 // components
 import UpperNav from "../components/home/UpperNav";
@@ -11,29 +18,54 @@ import Nav from "../components/global/Nav";
 import ContactPopup from "../components/home/ContactPopup.js";
 
 const HomeScreen = ({ navigation }) => {
+  const tracker = useRef(null);
+
+  let previousPosition = 0;
+
+  const handleScrollChange = (e) => {
+    // console.log("scrolling");
+    if (!tracker || !tracker?.current) return;
+    const newPosition = e.nativeEvent.contentOffset.y;
+
+    tracker.current.setNativeProps({
+      style: {
+        top: 260 - newPosition,
+      },
+    });
+  };
   return (
     <SafeAreaView
       style={{
         paddingTop: Platform.OS === "android" ? 30 : 0,
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
       <Image
         source={require("../../assets/imgs/background.png")}
         style={[home.backImg, {}]}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+
+      <View
+        style={{
+          position: "absolute",
+          paddingHorizontal: 28,
+          width: Dimensions.get("window").width,
+          top: 260,
+          left: 0,
+        }}
+        ref={tracker}
+      >
+        {/* search bar */}
+        <Searchbox />
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        onScroll={handleScrollChange}
+      >
         <View style={home.container}>
           {/* the upper navigation that contains the notification and the user and the menu */}
           <UpperNav navigator={navigation} />
-
           {/* containes the user name and a welcome message */}
           <Greeting />
-
-          {/* search bar */}
-          <Searchbox />
-
           {/* the map container */}
           <Map navigator={navigation} />
         </View>

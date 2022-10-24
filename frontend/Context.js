@@ -120,6 +120,15 @@ const Context = ({ children }) => {
     distance: "20km",
     time: "5 Min",
   });
+
+  // selected location || current location
+
+  const [mapLoadLoc, setMapLoadLoc] = useState({
+    latitude: 27.68580685873614,
+    longitude: 83.45480711124497,
+    latitudeDelta: 0.0021,
+    longitudeDelta: 0.0021,
+  });
   return (
     <contextProvider.Provider
       value={{
@@ -135,6 +144,7 @@ const Context = ({ children }) => {
         map: {
           ambulance: [selectedAmbul, setSelectedAmbul],
           tracking: [data, setData],
+          location: [mapLoadLoc, setMapLoadLoc],
         },
       }}
     >

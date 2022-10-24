@@ -7,8 +7,6 @@ import styles from "../../styles/auth/socialBtns.js";
 // packages for facebook auth
 import * as WebBrowser from "expo-web-browser";
 import * as FacebookAuthProvider from "expo-auth-session/providers/facebook";
-import * as fb from "expo-facebook";
-import { ResponseType } from "expo-auth-session";
 import * as AuthSession from "expo-auth-session";
 
 // for sending requests
@@ -22,7 +20,7 @@ import { contextProvider } from "../../../Context.js";
 import moment from "moment";
 
 // secrets for facebook auth
-const webClientId = "861341321526935";
+import { FACEBOOK_CLIENT_ID } from "@env";
 
 // initializes the browser
 WebBrowser.maybeCompleteAuthSession();
@@ -62,7 +60,7 @@ const Facebook = ({ navigator }) => {
   // states
   const [request, response, promptAsync] = FacebookAuthProvider.useAuthRequest(
     {
-      clientId: webClientId,
+      clientId: FACEBOOK_CLIENT_ID,
       redirectUri: AuthSession.makeRedirectUri({ useProxy: true }),
       scopes: ["public_profile"],
     },

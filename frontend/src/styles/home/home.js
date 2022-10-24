@@ -15,6 +15,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   container: {
+    width: "100%",
     height: "100%",
     paddingHorizontal: defaultPaddingHorzontal,
   },

@@ -19,8 +19,7 @@ import { contextProvider } from "../../../Context.js";
 import moment from "moment";
 
 // secrets for google auth
-const webClientId =
-  "290547480158-ivogsqrhvc5jm4l1snste4votggvoh97.apps.googleusercontent.com";
+import { GOOGLE_CLIENT_ID } from "@env";
 
 // initializes the browser
 WebBrowser.maybeCompleteAuthSession();
@@ -38,7 +37,7 @@ const Google = ({ navigator }) => {
 
   // states
   const [request, response, promptAsync] = GoogleSingIn.useAuthRequest({
-    expoClientId: webClientId,
+    expoClientId: GOOGLE_CLIENT_ID,
   });
 
   useEffect(() => {
