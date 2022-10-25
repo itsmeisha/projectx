@@ -1,6 +1,5 @@
 import React, { createContext, useState } from "react";
 import { Animated } from "react-native";
-import { useFonts } from "expo-font";
 export const contextProvider = createContext();
 
 const Context = ({ children }) => {
@@ -152,5 +151,5 @@ const Context = ({ children }) => {
     </contextProvider.Provider>
   );
 };
-
+ 
 export default Context;

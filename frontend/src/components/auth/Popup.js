@@ -36,6 +36,7 @@ const Popup = ({ navigator }) => {
                 : "Continue login with,"}
             </Text>
 
+            {/* this is the cross btn to close the popup */}
             <Pressable
               onPress={() => {
                 let animationTime = 500;
