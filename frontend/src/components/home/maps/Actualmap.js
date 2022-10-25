@@ -3,6 +3,7 @@ import React from "react";
 
 // styles
 import styles from "../../../styles/home/map/Actualmap.js";
+import GoogleMap from "../../global/GoogleMap.js";
 
 const Actualmap = ({ navigator }) => {
   return (
@@ -15,10 +16,7 @@ const Actualmap = ({ navigator }) => {
           });
         }}
       >
-        <Image
-          style={styles.map}
-          source={require("../../../../assets/imgs/temp/mapMini.png")}
-        />
+        <GoogleMap customStyles={{ height: 200, width: 300 }} />
       </Pressable>
     </View>
   );

@@ -20,8 +20,6 @@ import ContactPopup from "../components/home/ContactPopup.js";
 const HomeScreen = ({ navigation }) => {
   const tracker = useRef(null);
 
-  let previousPosition = 0;
-
   const handleScrollChange = (e) => {
     // console.log("scrolling");
     if (!tracker || !tracker?.current) return;
@@ -46,7 +44,7 @@ const HomeScreen = ({ navigation }) => {
 
       <View
         style={{
-          position: "absolute",
+          position: "relative",
           paddingHorizontal: 28,
           width: Dimensions.get("window").width,
           top: 260,
@@ -56,6 +54,7 @@ const HomeScreen = ({ navigation }) => {
       >
         {/* search bar */}
         <Searchbox />
+        <View style={home.clearBtn}></View>
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}

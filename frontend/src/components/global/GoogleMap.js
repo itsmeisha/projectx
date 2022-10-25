@@ -9,36 +9,29 @@ import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { contextProvider } from "../../../Context.js";
 
 // utilities
-// import Geolocation from "@react-native-community/geolocation";
 
-const GoogleMap = () => {
+const GoogleMap = ({ customStyles }) => {
   const {
     map: {
-      location: [mapLoadLoc, setMapLoadLoc],
+      location: [mapLoadLoc],
     },
   } = useContext(contextProvider);
 
-  console.log(mapLoadLoc);
-  useEffect(() => {
-    // granted &&
-    //   Geolocation?.getCurrentPosition((pos) => {
-    //     console.log(pos);
-    //     // setInitialLocation({
-    //     //   latitude: crd?.latitude,
-    //     //   longitude: crd?.longitude,
-    //     //   latitudeDelta: 0.0421,
-    //     //   longitudeDelta: 0.0421,
-    //     // });
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   });
-  }, []);
   return (
     <MapView
       initialRegion={mapLoadLoc}
-      style={styles.map}
+      style={[
+        styles.map,
+        { height: customStyles?.height, width: customStyles?.width },
+      ]}
       customMapStyle={customMapStyles}
       provider={PROVIDER_GOOGLE}
+      showsUserLocation={true}
+      mapPadding={{
+        top: 125,
+        right: 10,
+      }}
+      showsMyLocationButton={true}
     ></MapView>
   );
 };

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   mainContainer: {
@@ -10,5 +10,7 @@ export default StyleSheet.create({
   searchCon: {
     position: "absolute",
     top: 110,
+    left: 20,
+    width: Dimensions.get("window").width - 90,
   },
 });
