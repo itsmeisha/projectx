@@ -17,8 +17,7 @@ import { GOOGLE_MAP_API_KEY } from "@env";
 //context
 import { contextProvider } from "../../../Context";
 
-// configuration for the googleplacesautcomplete to get the current location
-
+// for getting the current location
 import * as Location from "expo-location";
 
 const Searchbox = () => {
@@ -26,14 +25,17 @@ const Searchbox = () => {
     map: {
       location: [, setMapLoadLoc],
     },
+    ambulances: [ambulances, setAmbulances],
   } = useContext(contextProvider);
 
   useEffect(() => {
     (async () => {
-      // requesting for permission
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      //getting permission status
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      // console.log(status);
       if (status !== "granted") return;
 
+      // getting the current location
       let location = await Location.getCurrentPositionAsync({});
 
       // pointing the map to the current location
@@ -43,20 +45,44 @@ const Searchbox = () => {
         latitudeDelta: 0.0021,
         longitudeDelta: 0.0021,
       });
+
+      setAmbulances([
+        ...ambulances,
+        {
+          name: "Hamro ambulance",
+          dName: "Isha pun",
+          pNumber: "9860712345",
+          location: {
+            lat: location?.coords?.latitude + 0.00123,
+            lng: location?.coords?.longitude + 0.00123,
+          },
+          owner: "Mutu hospital",
+          status: true,
+          selected: false,
+        },
+      ]);
+
+      console.log({
+        // lat: location?.coords?.latitude + 0.00123,
+        // lng: location?.coords?.longitude + 0.00123,
+        lat: 27.685241790001612,
+        lng: 83.45853160119125,
+      });
     })();
   }, []);
 
   // for rendering the cross in the inputbox
-  const [renderCross, setRenderCross] = useState(true);
+  const [renderCross, setRenderCross] = useState(false);
   const inputBox = useRef(null);
-  // setInterval(() => {
-  //   console.log(inputBox.current?.isFocused());
-  //   if (inputBox.current?.isFocused()) {
-  //     setRenderCross(true);
-  //     return;
-  //   }
-  //   setRenderCross(false);
-  // }, 100);
+
+  // handling the btn press i.e actions btn [search and cross]
+
+  const handleActions = () => {
+    if (renderCross) {
+      // it means cross btn is pressed so clearing the input feild
+      inputBox.current?.clear();
+    }
+  };
 
   return (
     <GooglePlacesAutocomplete
@@ -125,6 +151,7 @@ const Searchbox = () => {
           borderBottomRightRadius: 30,
           alignItems: "center",
         }}
+        onPress={handleActions}
       >
         {renderCross ? <Cross /> : <Search />}
       </Pressable>

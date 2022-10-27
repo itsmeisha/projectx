@@ -16,7 +16,7 @@ const Actualmap = ({ navigator }) => {
           });
         }}
       >
-        <GoogleMap customStyles={{ height: 200, width: 300 }} />
+        <GoogleMap customStyles={{ height: 200, width: "100%" }} />
       </Pressable>
     </View>
   );

@@ -1,5 +1,7 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { Animated } from "react-native";
+
+// creating the context
 export const contextProvider = createContext();
 
 const Context = ({ children }) => {
@@ -128,6 +130,35 @@ const Context = ({ children }) => {
     latitudeDelta: 0.0021,
     longitudeDelta: 0.0021,
   });
+
+  // map marker animation
+  const [rippleAnimation] = useState({
+    circleOne: {
+      size: new Animated.Value(80),
+      opacity: new Animated.Value(0.75),
+    },
+    circleTwo: {
+      size: new Animated.Value(115),
+      opacity: new Animated.Value(0.3),
+    },
+  });
+
+  // loading all the ambulances
+  const [ambulances, setAmbulances] = useState([
+    // {
+    //   name: "",
+    //   dName: "",
+    //   pNumber: "",
+    //   location: {
+    //     lat: "",
+    //     lng: "",
+    //   },
+    //   owner: "",
+    //   status: "",
+    //   selected: true,
+    // },
+  ]);
+
   return (
     <contextProvider.Provider
       value={{
@@ -144,12 +175,14 @@ const Context = ({ children }) => {
           ambulance: [selectedAmbul, setSelectedAmbul],
           tracking: [data, setData],
           location: [mapLoadLoc, setMapLoadLoc],
+          animation: [rippleAnimation],
         },
+        ambulances: [ambulances, setAmbulances],
       }}
     >
       {children}
     </contextProvider.Provider>
   );
 };
- 
+
 export default Context;
