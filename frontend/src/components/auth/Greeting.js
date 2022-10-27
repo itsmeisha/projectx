@@ -1,5 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
+
+// styles
 import styles from "../../styles/auth/Greeting.js";
 
 const Greeting = () => {

@@ -1,5 +1,5 @@
 import { View, Text, Pressable, Image, Animated } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 // styling
 import styles from "../../styles/auth/Popup.js";

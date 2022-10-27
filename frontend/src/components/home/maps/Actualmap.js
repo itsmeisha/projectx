@@ -3,6 +3,8 @@ import React from "react";
 
 // styles
 import styles from "../../../styles/home/map/Actualmap.js";
+
+// components
 import GoogleMap from "../../global/GoogleMap.js";
 
 const Actualmap = ({ navigator }) => {
@@ -16,7 +18,7 @@ const Actualmap = ({ navigator }) => {
           });
         }}
       >
-        <GoogleMap customStyles={{ height: 200, width: "100%" }} />
+        <GoogleMap customStyles={{ height: 300, width: "100%" }} />
       </Pressable>
     </View>
   );

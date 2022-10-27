@@ -21,7 +21,6 @@ const HomeScreen = ({ navigation }) => {
   const tracker = useRef(null);
 
   const handleScrollChange = (e) => {
-    // console.log("scrolling");
     if (!tracker || !tracker?.current) return;
     const newPosition = e.nativeEvent.contentOffset.y;
 

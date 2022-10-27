@@ -10,7 +10,17 @@ export default StyleSheet.create({
   searchCon: {
     position: "absolute",
     top: 110,
-    left: 20,
-    width: Dimensions.get("window").width - 90,
+    left: 0,
+    width: Dimensions.get("window").width,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+  },
+
+  searchBox: {
+    flex: 1,
+  },
+  currentLocation: {
+    marginLeft: 10,
   },
 });

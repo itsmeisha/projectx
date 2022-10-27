@@ -1,9 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-// styles
-import style from "../../styles/notification/NotificationLogo.js";
-
 //icons
 import Achievement from "../../../assets/svg/notification/Achievement.svg";
 import LocationAlert from "../../../assets/svg/notification/LocationAlert.svg";

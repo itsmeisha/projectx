@@ -1,5 +1,5 @@
-import { View, Text, Image, Animated } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { View, Animated } from "react-native";
+import React, { useContext, useEffect } from "react";
 
 // stylings
 import styles from "../../styles/auth/AuthScreen.js";
@@ -25,10 +25,6 @@ const AuthScreen = ({ navigation }) => {
   }, []);
   return (
     <View style={styles.container}>
-      {/* <Image
-        source={require("../../../assets/imgs/logo.png")}
-        style={styles.logo}
-      /> */}
       <Animated.View
         style={[styles.logo, { marginLeft: logoAnim }]}
       ></Animated.View>

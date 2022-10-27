@@ -32,28 +32,6 @@ const Facebook = ({ navigator }) => {
   } = useContext(contextProvider);
 
   const facebookAuth = async () => {
-    // triggers google login
-    // try {
-    //   await fb.initializeAsync({
-    //     appId: webClientId,
-    //   });
-    //   const { type, token } = await fb.logInWithReadPermissionsAsync({
-    //     permissions: ["public_profile"],
-    //   });
-    //   if (type === "success") {
-    //     // Get the user's name using Facebook's Graph API
-    //     const response = await fetch(
-    //       `https://graph.facebook.com/me?access_token=${token}`
-    //     );
-    //     const { id } = await response.json();
-    //     console.log(id);
-    //   } else {
-    //     // type === 'cancel'
-    //   }
-    // } catch ({ message }) {
-    //   alert(`Facebook Login Error: ${message}`);
-    // }
-
     await promptAsync();
   };
 
@@ -95,7 +73,7 @@ const Facebook = ({ navigator }) => {
 
   useEffect(() => {
     if (Object.keys(user).length === 0) return;
-    console.log(user);
+
     navigator.goBack();
   }, [user]);
 

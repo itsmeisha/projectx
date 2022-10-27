@@ -3,8 +3,10 @@ import React from "react";
 
 // components
 import NotificationLogo from "./NotificationLogo.js";
+
 // styles
 import styles from "../../styles/notification/IndividualNotif.js";
+
 const IndividualNotif = ({ data }) => {
   return (
     <View style={styles.container}>

@@ -1,5 +1,5 @@
-import { View, Text, SafeAreaView } from "react-native";
-import React, { useState } from "react";
+import { View, Text, SafeAreaView, Pressable } from "react-native";
+import React, { useContext, useState } from "react";
 import Header from "../components/global/Header";
 
 //styles
@@ -12,8 +12,20 @@ import MapFinder from "../components/tracking/MapFinder.js";
 import ContactPopup from "../components/home/ContactPopup.js";
 import Searchbox from "../components/home/Searchbox";
 
+// icon
+import CurrentLocation from "../../assets/imgs/maps/currentLocation.svg";
+import { contextProvider } from "../../Context";
+
 const TrackingScreen = ({ route, navigation }) => {
-  const [mode, setmode] = useState(route?.params?.mode);
+  // mode is passed while routing and decides what the popup below the map should look like
+  const [mode] = useState(route?.params?.mode);
+
+  const {
+    map: {
+      userLoc: [currentLocation],
+      location: [, setMapLoadLoc],
+    },
+  } = useContext(contextProvider);
 
   return (
     <View style={styles.mainContainer}>
@@ -23,7 +35,19 @@ const TrackingScreen = ({ route, navigation }) => {
       />
       <GoogleMap />
       <View style={styles.searchCon}>
-        <Searchbox />
+        <View style={styles.searchBox}>
+          <Searchbox />
+        </View>
+        <Pressable
+          style={styles.currentLocation}
+          onPress={() => {
+            setMapLoadLoc((previousLocation) => {
+              return { ...previousLocation, ...currentLocation };
+            });
+          }}
+        >
+          <CurrentLocation />
+        </Pressable>
       </View>
 
       {mode === "finding" ? <MapFinder /> : <MapTracker />}

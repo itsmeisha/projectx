@@ -13,17 +13,17 @@ import Nav from "../components/global/Nav";
 import Header from "../components/global/Header";
 import ProfileCard from "../components/profile/ProfileCard.js";
 import AmbulanceCard from "../components/profile/AmbulanceCard.js";
+import AmbulancePopup from "../components/profile/AmbulancePopup";
 
 // styles
 import styles from "../styles/profile/ProfileScreen.js";
 
 // Context
 import { contextProvider } from "../../Context";
-import AmbulancePopup from "../components/profile/AmbulancePopup";
 
 const ProfileScreen = ({ navigation }) => {
   const {
-    usr: [user, setUser],
+    usr: [user],
     profile: {
       popup: [, setAmbPopup],
     },

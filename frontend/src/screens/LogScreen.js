@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Platform,
-  Pressable,
-  ScrollView,
-} from "react-native";
+import { View, SafeAreaView, Platform, ScrollView } from "react-native";
 import React, { useContext } from "react";
 
 // components

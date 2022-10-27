@@ -15,5 +15,6 @@ web-build/
 
 #others
 package-lock.json
+yarn.lock
 
 .env

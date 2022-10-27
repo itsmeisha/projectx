@@ -67,7 +67,7 @@ const Google = ({ navigator }) => {
 
   useEffect(() => {
     if (Object.keys(user).length === 0) return;
-    console.log(user);
+
     navigator.goBack();
   }, [user]);
   return (

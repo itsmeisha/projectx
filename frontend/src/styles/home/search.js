@@ -1,35 +1,40 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: 30,
-    width: 330,
-    paddingHorizontal: 15,
-    alignSelf: "center",
-    overflow: "hidden",
+  action: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    // backgroundColor: "#333",
     height: 45,
-    backgroundColor: "#fff",
-    elevation: 5,
-  },
-
-  searchIcon: {
-    // paddingHorizontal: 15,
-    width: 50,
-    height: "100%",
+    display: "flex",
     justifyContent: "center",
+    width: 60,
+    borderTopRightRadius: 30,
+    borderBottomRightRadius: 30,
     alignItems: "center",
   },
-  textInput: {
-    flex: 1,
-    fontSize: 12,
-    backfaceVisibility: "hidden",
-    // paddingVertical: ,
-    fontFamily: "poppins-m",
-    fontSize: 16,
-    height: 45,
-    lineHeight: 45,
-    paddingLeft: 10,
+  googleSearchBox: {
+    container: {
+      height: 45,
+      width: "100%",
+      maxHeight: 45,
+      zIndex: 25,
+      position: "relative",
+    },
+    textInput: {
+      elevation: 5,
+      borderRadius: 30,
+      paddingHorizontal: 20,
+      paddingRight: 60,
+      paddingTop: 8,
+      fontFamily: "poppins-r",
+      color: "#999999",
+    },
+    listView: {
+      elevation: 5,
+      position: "absolute",
+      marginTop: 55,
+    },
   },
 });

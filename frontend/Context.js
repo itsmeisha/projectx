@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { Animated } from "react-native";
 
+import * as Location from "expo-location";
 // creating the context
 export const contextProvider = createContext();
 
@@ -123,10 +124,10 @@ const Context = ({ children }) => {
   });
 
   // selected location || current location
-
   const [mapLoadLoc, setMapLoadLoc] = useState({
-    latitude: 27.68580685873614,
-    longitude: 83.45480711124497,
+    latitude: 27.685344030241538,
+    longitude: 83.45944723114371,
+
     latitudeDelta: 0.0021,
     longitudeDelta: 0.0021,
   });
@@ -157,7 +158,39 @@ const Context = ({ children }) => {
     //   status: "",
     //   selected: true,
     // },
+    {
+      name: "Hamro ambulance",
+      dName: "Isha pun",
+      pNumber: "9860712345",
+      location: {
+        latitude: 27.685344030241538,
+        longitude: 83.45944723114371,
+      },
+      owner: "Mutu hospital",
+      status: true,
+      selected: false,
+    },
   ]);
+
+  // current location
+  const [currentLocation, setCurrentLocation] = useState({});
+
+  // component did mount function
+  useEffect(() => {
+    (async () => {
+      // getting the permission
+      const { status } = await Location.requestForegroundPermissionsAsync();
+
+      if (status !== "granted") return;
+
+      // getting and setting  the current location
+      let location = await Location.getCurrentPositionAsync({});
+      setCurrentLocation({
+        latitude: location?.coords?.latitude,
+        longitude: location?.coords?.longitude,
+      });
+    })();
+  }, []);
 
   return (
     <contextProvider.Provider
@@ -176,6 +209,7 @@ const Context = ({ children }) => {
           tracking: [data, setData],
           location: [mapLoadLoc, setMapLoadLoc],
           animation: [rippleAnimation],
+          userLoc: [currentLocation, setCurrentLocation],
         },
         ambulances: [ambulances, setAmbulances],
       }}

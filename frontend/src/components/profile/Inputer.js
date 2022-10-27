@@ -1,9 +1,10 @@
 import { View, Text, TextInput } from "react-native";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 // context
 import { contextProvider } from "../../../Context";
 
+// styles
 import styles from "../../styles/profile/Inputer.js";
 
 const Inputer = ({ name, placeholder, title }) => {

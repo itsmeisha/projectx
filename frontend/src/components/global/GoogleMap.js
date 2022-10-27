@@ -1,26 +1,39 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 // styles
 import styles from "../../styles/tracking/GoogleMap.js";
 import { customMapStyles } from "../../styles/tracking/customMapStyles.js";
 
 //components
-import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+import CustomMarker from "./CustomMarker.js";
+
+// context
 import { contextProvider } from "../../../Context.js";
 
 // utilities
+import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
+import MapViewDirections from "react-native-maps-directions";
 
-// for getting the location permission
-import * as Location from "expo-location";
-import { Text } from "react-native";
+// api key
+import { GOOGLE_MAP_API_KEY } from "@env";
 
 const GoogleMap = ({ customStyles }) => {
   const {
     map: {
-      location: [mapLoadLoc],
+      location: [mapLoadLoc, setMapLoadLoc],
+      userLoc: [currentLocation],
     },
-    ambulances: [ambulances, setAmbulances],
+    ambulances: [ambulances],
   } = useContext(contextProvider);
+
+  useEffect(() => {
+    if (!currentLocation.latitude || currentLocation.longitude) return;
+    setMapLoadLoc({
+      ...currentLocation,
+      latitudeDelta: 0.0021,
+      longitudeDelta: 0.0021,
+    });
+  }, [currentLocation]);
 
   return (
     <MapView
@@ -34,28 +47,58 @@ const GoogleMap = ({ customStyles }) => {
       ]}
       customMapStyle={customMapStyles}
       provider={PROVIDER_GOOGLE}
-      showsUserLocation={true}
       mapPadding={{
         top: 125,
         right: 10,
       }}
       showsMyLocationButton={true}
       region={mapLoadLoc}
+      onRegionChangeComplete={(region) => {
+        setMapLoadLoc({ ...region });
+      }}
     >
+      {/* mapping out the ambulances */}
       {ambulances?.map((ambulance, index) => {
         return (
-          <Marker
-            title={ambulance?.name}
-            identifier={"first marker"}
-            coordinate={{
-              latitude: ambulance?.location?.lat,
-              longitude: ambulance?.location?.lng,
-            }}
-          >
-            <Text style={styles.text}>hamro marker ramro marker</Text>
-          </Marker>
+          <Callout onPress={() => {}} key={index}>
+            <Marker
+              title={ambulance?.name}
+              identifier={"first marker"}
+              coordinate={{
+                latitude: ambulance?.location?.latitude,
+                longitude: ambulance?.location?.longitude,
+              }}
+            >
+              <CustomMarker type={"ambulance"} selected={false} />
+            </Marker>
+          </Callout>
         );
       })}
+
+      {/* making the custom user marker */}
+      {currentLocation.latitude && currentLocation.longitude && (
+        <Marker
+          title={"My marker"}
+          identifier={"secondMarker"}
+          coordinate={currentLocation}
+        >
+          <CustomMarker type={"user"} selected={false} />
+        </Marker>
+      )}
+
+      {/* route from a active ambulance to the user */}
+      {currentLocation.latitude &&
+        currentLocation.longitude &&
+        ambulances[0] && (
+          <MapViewDirections
+            apikey={GOOGLE_MAP_API_KEY}
+            origin={currentLocation}
+            destination={ambulances[0]?.location}
+            strokeWidth={3}
+            strokeColor={"#333"}
+            
+          />
+        )}
     </MapView>
   );
 };
