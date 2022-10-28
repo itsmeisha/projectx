@@ -3,6 +3,11 @@ import express from "express";
 
 // importing the dotenv to read the .env files
 import dotenv from "dotenv";
+
+// utilities
+import { connectToDb } from "./config/db.js";
+
+// routes
 import mapRouter from "./routes/map.js";
 
 // configuring the dotenv file
@@ -20,3 +25,6 @@ app.listen(PORT, () => {
 });
 
 app.use("/api/v1/maps", mapRouter);
+
+// connecting to the database
+connectToDb();
