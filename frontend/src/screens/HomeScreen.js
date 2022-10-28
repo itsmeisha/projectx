@@ -6,7 +6,7 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 // components
 import UpperNav from "../components/home/UpperNav";
@@ -16,6 +16,13 @@ import Map from "../components/home/maps/Map";
 import Greeting from "../components/home/Greeting.js";
 import Nav from "../components/global/Nav";
 import ContactPopup from "../components/home/ContactPopup.js";
+// for sending the request
+import Constants from "expo-constants";
+
+const { manifest } = Constants;
+console.log(manifest.debuggerHost);
+const uri = `http://${manifest.debuggerHost.split(":").shift()}:3000`;
+import axios from "axios";
 
 const HomeScreen = ({ navigation }) => {
   const tracker = useRef(null);
@@ -30,6 +37,23 @@ const HomeScreen = ({ navigation }) => {
       },
     });
   };
+
+  // testing
+  useEffect(() => {
+    console.log("sending request");
+    axios
+      .post(`${uri}/api/v1/auth/checkexistance`, {
+        contact: "ramesh@gmail.com",
+      })
+      .then((res) => {
+        console.log("got a response");
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log("got a error");
+        console.log(e);
+      });
+  }, []);
   return (
     <SafeAreaView
       style={{

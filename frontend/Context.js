@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { Animated } from "react-native";
 
 import * as Location from "expo-location";
+import axios from "axios";
 // creating the context
 export const contextProvider = createContext();
 
