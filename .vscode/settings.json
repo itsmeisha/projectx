@@ -1,0 +1,10 @@
+{
+  "workbench.colorCustomizations": {
+    "[Andromeda]": {
+      "tab.activeBackground": "#191b21",
+      "tab.activeBorder": "#ffffff",
+      "tab.hoverBackground": "#31343e",
+      "tab.activeBorderTop": "#31343e"
+    }
+  }
+}
