@@ -9,6 +9,7 @@ import { connectToDb } from "./config/db.js";
 
 // routes
 import mapRouter from "./routes/map.js";
+import authRoutes from "./routes/auth.js";
 
 // configuring the dotenv file
 dotenv.config();
@@ -24,7 +25,10 @@ app.listen(PORT, () => {
   console.log(`The server is up and running at port ${PORT}`);
 });
 
-app.use("/api/v1/maps", mapRouter);
+// app.use("/api/v1/maps", mapRouter);
 
 // connecting to the database
 connectToDb();
+
+// auth routes
+app.use(`/api/v1/auth`, authRoutes);
