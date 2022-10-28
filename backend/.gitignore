@@ -15,3 +15,5 @@ web-build/
 
 #others
 package-lock.json
+
+.env
