@@ -28,11 +28,42 @@ const Google = ({ navigator }) => {
   // setUser to set the user in the context after successfull auth
   const {
     usr: [user, setUser],
+    config: { api },
   } = useContext(contextProvider);
 
   const googleAuth = async () => {
     // triggers google login
     await promptAsync({});
+  };
+  const registerUser = (data) => {
+    axios
+      .post(`${api}/api/v1/auth/register/`, {
+        name: data?.name,
+        doj: moment().format("MMM Do YY").toString(),
+        contact: data?.email,
+        photo: data?.picture,
+        achievements: [],
+        ambulance: {},
+      })
+      .then((res) => {
+        if (res.status === 200) setUser(res.data?.user);
+      });
+  };
+  const handleApiRequests = (contactInfo, data) => {
+    // checking the existance of the user
+    axios
+      .post(`${api}/api/v1/auth/checkexistance/`, {
+        contact: contactInfo,
+      })
+      .then((res) => {
+        res.status === 200 && setUser(res.data?.user);
+      })
+      .catch((e) => {
+        // it means the user doesnot exist so it should be a new user registeration
+        if (e.response && e.response?.status === 404) {
+          registerUser(data);
+        }
+      });
   };
 
   // states
@@ -51,14 +82,17 @@ const Google = ({ navigator }) => {
         `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`
       )
       .then((res) => {
-        setUser({
-          name: res?.data?.name,
-          doj: moment().format("MMM Do YY"),
-          contact: res?.data?.email,
-          photo: res?.data?.picture,
-          achievements: [],
-          ambulance: {},
+        const contactInfo = res?.data?.email;
+        const data = res?.data;
+
+        console.log({
+          contactInfo,
         });
+        handleApiRequests(contactInfo, data);
+
+        // setUser({
+        //
+        // });
       })
       .catch((e) => {
         console.error(e);
@@ -66,7 +100,7 @@ const Google = ({ navigator }) => {
   }, [response]);
 
   useEffect(() => {
-    if (Object.keys(user).length === 0) return;
+    if (user && Object.keys(user).length === 0) return;
 
     navigator.goBack();
   }, [user]);

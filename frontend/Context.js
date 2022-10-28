@@ -1,10 +1,21 @@
 import React, { createContext, useState, useEffect } from "react";
 import { Animated } from "react-native";
 
+// for getting the current location
 import * as Location from "expo-location";
-import axios from "axios";
+
 // creating the context
 export const contextProvider = createContext();
+
+// for getting the correct server uri in development
+import Constants from "expo-constants";
+
+// for getting the correct server uri in production
+import { SERVER_URI } from "@env";
+
+const { manifest } = Constants;
+const serverUri =
+  SERVER_URI || `http://${manifest.debuggerHost.split(":").shift()}:3000`;
 
 const Context = ({ children }) => {
   //
@@ -213,6 +224,9 @@ const Context = ({ children }) => {
           userLoc: [currentLocation, setCurrentLocation],
         },
         ambulances: [ambulances, setAmbulances],
+        config: {
+          api: serverUri,
+        },
       }}
     >
       {children}

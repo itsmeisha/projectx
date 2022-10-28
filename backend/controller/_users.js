@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { userModel } from "../config/models.js";
 
 // fetches all the users from the database
@@ -43,7 +44,7 @@ export const checkExistance = async (req, res) => {
       user: user,
     });
   } catch (e) {
-    res.status(400).json({
+    res.status(500).json({
       error: "Unknown error occured while checking the users existance",
       msg: e,
     });
@@ -52,13 +53,19 @@ export const checkExistance = async (req, res) => {
 
 // loging in the user
 export const registerUser = async (req, res) => {
-  const user = req?.body;
+  let user = req?.body;
   if (!user)
     return res.status(400).json({
       error: "User must be supplied",
     });
   try {
-    let registeredUser = new userModel(user);
+    // const docsCount = await userModel.countDocuments();
+
+    // user.ambulance.id = docsCount;
+    const registeredUser = await new userModel({
+      ...user,
+      ambulance: { id: new mongoose.Types.ObjectId() },
+    }).save();
 
     // it means the user exists with the given contact information
     res.status(200).json({
@@ -69,6 +76,21 @@ export const registerUser = async (req, res) => {
     res.status(400).json({
       error: "Unknown error occured while logging user in",
       msg: e,
+    });
+  }
+};
+
+// delets all the userdata from the database
+export const deleteAllUser = async (req, res) => {
+  try {
+    await userModel.deleteMany({});
+    res.status(200).json({
+      msg: "user deletion successful",
+    });
+  } catch (e) {
+    res.status(400).json({
+      error: "Unknow error while deleting the users",
+      error: e,
     });
   }
 };

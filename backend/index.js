@@ -28,7 +28,7 @@ app.listen(PORT, () => {
 connectToDb();
 
 // middleware for reading the incoming form data
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 //middleware for reading incoming json data in the request
 app.use(express.json());

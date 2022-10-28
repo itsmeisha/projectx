@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   doj: String,
   contact: String,
   achievements: [String],
+  photo: String,
   ambulance: {
     id: String,
     // name: String,

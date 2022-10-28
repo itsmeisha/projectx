@@ -29,10 +29,42 @@ const Facebook = ({ navigator }) => {
   // setUser to set the user in the context after successfull auth
   const {
     usr: [user, setUser],
+    config: { api },
   } = useContext(contextProvider);
 
   const facebookAuth = async () => {
     await promptAsync();
+  };
+
+  const registerUser = (data) => {
+    axios
+      .post(`${api}/api/v1/auth/register/`, {
+        name: data?.name,
+        doj: moment().format("MMM Do YY").toString(),
+        contact: data?.id,
+        photo: data?.picture?.data?.url,
+        achievements: [],
+        ambulance: {},
+      })
+      .then((res) => {
+        if (res.status === 200) setUser(res.data?.user);
+      });
+  };
+  const handleApiRequests = (contactInfo, data) => {
+    // checking the existance of the user
+    axios
+      .post(`${api}/api/v1/auth/checkexistance/`, {
+        contact: contactInfo,
+      })
+      .then((res) => {
+        res.status === 200 && setUser(res.data?.user);
+      })
+      .catch((e) => {
+        // it means the user doesnot exist so it should be a new user registeration
+        if (e.response && e.response?.status === 404) {
+          registerUser(data);
+        }
+      });
   };
 
   // states
@@ -54,17 +86,18 @@ const Facebook = ({ navigator }) => {
     // sending request to google.
     axios
       .get(
-        `https://graph.facebook.com/me?fields=name,email,picture.type(large)&access_token=${accessToken}`
+        `https://graph.facebook.com/me?fields=id,name,email,picture.type(large)&access_token=${accessToken}`
       )
       .then((res) => {
-        setUser({
-          name: res?.data?.name,
-          doj: moment().format("MMM Do YY"),
-          contact: res?.data?.email,
-          photo: res?.data?.picture?.data?.url,
-          achievements: [],
-          ambulance: {},
+        const contactInfo = res?.data?.id;
+
+        const data = res?.data;
+
+        console.log({
+          contactInfo,
+          res: res?.data,
         });
+        handleApiRequests(contactInfo, data);
       })
       .catch((e) => {
         console.error(e);
@@ -72,7 +105,7 @@ const Facebook = ({ navigator }) => {
   }, [response]);
 
   useEffect(() => {
-    if (Object.keys(user).length === 0) return;
+    if (user && Object.keys(user).length === 0) return;
 
     navigator.goBack();
   }, [user]);

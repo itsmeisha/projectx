@@ -44,7 +44,7 @@ const ProfileScreen = ({ navigation }) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             <ProfileCard data={user} />
-            {user?.ambulance && Object.keys(user?.ambulance)?.length > 0 ? (
+            {user?.ambulance && Object.keys(user?.ambulance)?.name ? (
               <>
                 <Text style={styles.ownedAmb}>Ambulances owned</Text>
                 <AmbulanceCard data={user?.ambulance} />
