@@ -38,4 +38,4 @@ app.use(express.json());
 app.use(`/api/v1/auth`, authRouter);
 
 // notificaition routes
-app.use(`api/v1/notification`, notificationRouter);
+app.use(`/api/v1/notification`, notificationRouter);

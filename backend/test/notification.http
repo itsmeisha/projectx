@@ -1,0 +1,32 @@
+###
+#create notificaiton 
+POST http://localhost:3000/api/v1/notification/create/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId":"test1",
+    "notification": []
+}
+
+
+###
+# getting all the notifications
+
+POST http://localhost:3000/api/v1/notification/all/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": "test1"
+}
+
+
+
+###
+# Deleteing all the notifications
+
+DELETE  http://localhost:3000/api/v1/notification/all/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": "test1"
+}

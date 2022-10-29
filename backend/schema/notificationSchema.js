@@ -13,6 +13,7 @@ const notificationSchema = mongoose.Schema({
       // - arrival
       // - emmergency
       message: String,
+      seen: Boolean,
     },
   ],
 });
