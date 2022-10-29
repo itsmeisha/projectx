@@ -5,12 +5,7 @@ Content-Type: application/json
 
 {
     "userId":"test1",
-    "notification": [{
-        "title": "New! Achievement",
-        "type": "achievement",
-        "message": "Congrats now you got a helper batch for adding a ambulance",
-        "seen":false
-    }]
+    "notification": [ ]
 }
 
 

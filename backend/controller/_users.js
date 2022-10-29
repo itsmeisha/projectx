@@ -61,7 +61,7 @@ export const registerUser = async (req, res) => {
     // user.ambulance.id = docsCount;
     const registeredUser = await new userModel({
       ...user,
-      ambulance: { id: new mongoose.Types.ObjectId() },
+      ambulance: { userId: req?.body?.id },
       achievements: ["new"],
     }).save();
 

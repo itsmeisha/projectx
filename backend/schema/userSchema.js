@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   achievements: [String],
   photo: String,
   ambulance: {
-    id: String,
+    userId: String,
     // name: String,
     // dName: String,
     // pNumber: Number,

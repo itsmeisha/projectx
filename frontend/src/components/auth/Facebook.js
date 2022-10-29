@@ -36,9 +36,10 @@ const Facebook = ({ navigator }) => {
     await promptAsync();
   };
 
-  const registerUser = (data) => {
+  const registerUser = (data, id) => {
     axios
       .post(`${api}/api/v1/auth/register/`, {
+        id,
         name: data?.name,
         doj: moment().format("MMM Do YY").toString(),
         contact: data?.email,
@@ -62,7 +63,7 @@ const Facebook = ({ navigator }) => {
       .catch((e) => {
         // it means the user doesnot exist so it should be a new user registeration
         if (e.response && e.response?.status === 404) {
-          registerUser(data);
+          registerUser(data, id);
         }
       });
   };
