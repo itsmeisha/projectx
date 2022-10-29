@@ -18,7 +18,7 @@ const notificationSchema = mongoose.Schema(
       },
     ],
   },
-  { typeKey: "$type" }
+  { typeKey: "$type" } // this helps to remove the error saying cannot convert to string for supplied value
 );
 
 // example data for this schema would be like

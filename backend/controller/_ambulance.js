@@ -22,6 +22,10 @@ export const getAllAmbulances = async (req, res) => {
 export const getMyAmbulance = async (req, res) => {
   const userId = req?.body.id;
 
+  if (!userId)
+    return res.status(400).json({
+      error: "Invalid userId data",
+    });
   try {
     const myAmbulance = await ambulanceModel.findOne({ userId });
 
@@ -49,6 +53,13 @@ export const createAmbulance = async (req, res) => {
       error: "Invalid ambulance data",
     });
   try {
+    const existance = await ambulanceModel.find({ userId });
+
+    if (existance && existance?.length != 0)
+      return res.status(403).json({
+        msg: "Ambulance was already created in past",
+        ambulnaces: await ambulanceModel.find(),
+      });
     await new ambulanceModel({
       userId,
       ...ambulanceData,
@@ -84,13 +95,21 @@ export const updateAmbulance = async (req, res) => {
       error: "Invalid ambulance data",
     });
   try {
-    const updateAmbulance = await ambulanceModel.findOneAndUpdate(
+    const existance = await ambulanceModel.find({ userId });
+
+    if (!existance || (existance && existance?.length == 0))
+      return res.status(403).json({
+        msg: "Ambulance not found",
+        ambulnaces: await ambulanceModel.find(),
+      });
+
+    const updatedAmbulance = await ambulanceModel.findOneAndUpdate(
       { userId },
       updateData
     );
     res.status(200).json({
       msg: "ambulance updated successfully",
-      ambulance: updateAmbulance,
+      ambulance: await ambulanceModel.findOne({ userId }),
     });
   } catch (e) {
     res.status(500).json({
@@ -103,8 +122,20 @@ export const updateAmbulanceLocation = async (req, res) => {
   const userId = req?.body.id;
   const newLocation = req?.body.location;
 
+  if (!userId || !newLocation)
+    return res.status(400).json({
+      error: "Invalid update data",
+    });
+
   try {
-    const updatedAmbulance = await ambulanceModel.findOneAndUpdate(
+    const existance = await ambulanceModel.find({ userId });
+
+    if (!existance || (existance && existance?.length == 0))
+      return res.status(403).json({
+        msg: "Ambulance not found",
+        ambulnaces: await ambulanceModel.find(),
+      });
+    await ambulanceModel.findOneAndUpdate(
       { userId },
       {
         $set: {
@@ -126,6 +157,11 @@ export const updateAmbulanceLocation = async (req, res) => {
 };
 export const trackAmbulance = async (req, res) => {
   const userId = req?.body.id;
+
+  if (!userId)
+    return res.status(400).json({
+      error: "Invalid userId ",
+    });
 
   try {
     const uptoDateAmbulance = await ambulanceModel.findOne({ userId });

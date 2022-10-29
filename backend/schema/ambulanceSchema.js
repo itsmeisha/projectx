@@ -1,20 +1,22 @@
 import mongoose from "mongoose";
 
 // creating a schema
-
-const ambulanceSchema = mongoose.Schema({
-  userId: String,
-  name: String,
-  dName: String,
-  pNumber: Number,
-  location: {
-    lat: Number,
-    lng: Number,
+const ambulanceSchema = mongoose.Schema(
+  {
+    userId: String,
+    name: String,
+    dName: String,
+    pNumber: Number,
+    location: {
+      latitude: Number,
+      longitude: Number,
+    },
+    owner: String,
+    status: Boolean,
+    selected: Boolean,
   },
-  owner: String,
-  status: Boolean,
-  selected: Boolean,
-});
+  { typeKey: "$type" }
+);
 
 // example of the data
 //  {

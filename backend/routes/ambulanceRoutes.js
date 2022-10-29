@@ -1,20 +1,24 @@
 import express from "express";
 
 // creating a route
-const ambulanceRoute = express.Router();
+const ambulanceRouter = express.Router();
 
 // importing the controller function
 import {
   createAmbulance,
   deleteAmbulance,
+  getAllAmbulances,
+  trackAmbulance,
   updateAmbulance,
   updateAmbulanceLocation,
 } from "../controller/_ambulance.js";
 
 // routes
-ambulanceRoute.post("/create", createAmbulance);
-ambulanceRoute.delete("/", deleteAmbulance);
-ambulanceRoute.patch("/", updateAmbulance);
-ambulanceRoute.patch("/location", updateAmbulanceLocation);
+ambulanceRouter.get("/", getAllAmbulances);
+ambulanceRouter.post("/create", createAmbulance);
+ambulanceRouter.delete("/", deleteAmbulance);
+ambulanceRouter.patch("/", updateAmbulance);
+ambulanceRouter.patch("/location", updateAmbulanceLocation);
+ambulanceRouter.post("/watch", trackAmbulance);
 
-export default ambulanceRoute;
+export default ambulanceRouter;
