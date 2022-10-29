@@ -41,7 +41,7 @@ const Facebook = ({ navigator }) => {
       .post(`${api}/api/v1/auth/register/`, {
         name: data?.name,
         doj: moment().format("MMM Do YY").toString(),
-        contact: data?.id,
+        contact: data?.email,
         photo: data?.picture?.data?.url,
         achievements: [],
         ambulance: {},
@@ -50,11 +50,11 @@ const Facebook = ({ navigator }) => {
         if (res.status === 200) setUser(res.data?.user);
       });
   };
-  const handleApiRequests = (contactInfo, data) => {
+  const handleApiRequests = (id, data) => {
     // checking the existance of the user
     axios
       .post(`${api}/api/v1/auth/checkexistance/`, {
-        contact: contactInfo,
+        id: id,
       })
       .then((res) => {
         res.status === 200 && setUser(res.data?.user);

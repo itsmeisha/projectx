@@ -38,6 +38,7 @@ const Google = ({ navigator }) => {
   const registerUser = (data) => {
     axios
       .post(`${api}/api/v1/auth/register/`, {
+        id: data?.sub,
         name: data?.name,
         doj: moment().format("MMM Do YY").toString(),
         contact: data?.email,
@@ -49,11 +50,11 @@ const Google = ({ navigator }) => {
         if (res.status === 200) setUser(res.data?.user);
       });
   };
-  const handleApiRequests = (contactInfo, data) => {
+  const handleApiRequests = (id, data) => {
     // checking the existance of the user
     axios
       .post(`${api}/api/v1/auth/checkexistance/`, {
-        contact: contactInfo,
+        id: id,
       })
       .then((res) => {
         res.status === 200 && setUser(res.data?.user);
@@ -82,13 +83,13 @@ const Google = ({ navigator }) => {
         `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`
       )
       .then((res) => {
-        const contactInfo = res?.data?.email;
+        const id = res?.data?.sub;
         const data = res?.data;
 
         console.log({
-          contactInfo,
+          id,
         });
-        handleApiRequests(contactInfo, data);
+        handleApiRequests(id, data);
 
         // setUser({
         //
