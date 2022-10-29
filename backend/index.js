@@ -10,6 +10,7 @@ import bodyParser from "body-parser";
 // routes
 import mapRouter from "./routes/mapRoute.js";
 import authRouter from "./routes/authRoute.js";
+import notificationRouter from "./routes/notificationRoute.js";
 
 // configuring the dotenv file
 dotenv.config();
@@ -35,3 +36,6 @@ app.use(express.json());
 
 // auth routes
 app.use(`/api/v1/auth`, authRouter);
+
+// notificaition routes
+app.use(`api/v1/notification`, notificationRouter);

@@ -39,34 +39,7 @@ const Context = ({ children }) => {
   // *****************testing data*****************
   //
   //
-  const [notification, setNotification] = useState([
-    {
-      title: "New! Achievement",
-      type: "achievement",
-      message: "Congrats now you got a helper batch for adding a ambulance",
-    },
-    {
-      title: "Alert",
-      type: "locationAlert",
-      message:
-        "Your ambulance is in active mode, and your location can be now tracked.",
-    },
-    {
-      title: "Tracking",
-      type: "trackingAlert",
-      message: "Lumbini ambulance is currently being tracked.",
-    },
-    {
-      title: "Arrival",
-      type: "arrival",
-      message: "Ambulance is about to arrive be ready.",
-    },
-    {
-      title: "Sos Signal",
-      type: "emmergency",
-      message: "SoS signal reveived click to open the live tracker.",
-    },
-  ]);
+  const [notification, setNotification] = useState([]);
 
   const [user, setUser] = useState({
     // name: "kapil Tripathi",

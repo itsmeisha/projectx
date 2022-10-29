@@ -5,13 +5,11 @@ import { userModel } from "../config/models.js";
 export const getAllUsers = async (req, res) => {
   try {
     const users = await userModel.find();
-    console.log(users);
     res.status(200).json({
       msg: "user fetch successful",
       users: users,
     });
   } catch (e) {
-    console.log(e);
     res.status(400).json({
       error: "couldnot get the users",
       msg: e,
@@ -24,15 +22,14 @@ export const getAllUsers = async (req, res) => {
 // then the user can be logged into the found user
 // means no login function 😅
 export const checkExistance = async (req, res) => {
-  // contactInfo is somewhat unique since it is provided by the social auth providers and I believe there are no two accounts with the same google id
-  const contactInfo = req?.body?.contact;
-  if (!contactInfo)
+  const id = req?.body?.id;
+  if (!id)
     return res.status(400).json({
-      error: "Contact info must be supplied",
+      error: "id  must be supplied",
     });
 
   try {
-    const user = await userModel.findOne({ contact: contactInfo });
+    const user = await userModel.findOne({ id: id });
 
     // if there is no user we get null.
     // it means the user doesnot exists with the given contact information
@@ -40,7 +37,7 @@ export const checkExistance = async (req, res) => {
 
     // it means the user exists with the given contact information
     res.status(200).json({
-      msg: "User with that contact info exists",
+      msg: "User with that id  exists",
       user: user,
     });
   } catch (e) {
@@ -65,6 +62,7 @@ export const registerUser = async (req, res) => {
     const registeredUser = await new userModel({
       ...user,
       ambulance: { id: new mongoose.Types.ObjectId() },
+      achievements: ["new"],
     }).save();
 
     // it means the user exists with the given contact information
