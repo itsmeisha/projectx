@@ -1,22 +1,25 @@
 import mongoose from "mongoose";
 
 // creating a schema
-const notificationSchema = mongoose.Schema({
-  user: String,
-  notification: [
-    {
-      title: String,
-      type: String, // decleares the type of notification there are currently only 5 types of notifications
-      // - achievement
-      // - locationAlert
-      // - trackingAlert
-      // - arrival
-      // - emmergency
-      message: String,
-      seen: Boolean,
-    },
-  ],
-});
+const notificationSchema = mongoose.Schema(
+  {
+    user: String,
+    notification: [
+      {
+        title: String,
+        type: String, // decleares the type of notification there are currently only 5 types of notifications
+        // - achievement
+        // - locationAlert
+        // - trackingAlert
+        // - arrival
+        // - emmergency
+        message: String,
+        seen: Boolean,
+      },
+    ],
+  },
+  { typeKey: "$type" }
+);
 
 // example data for this schema would be like
 // [

@@ -5,13 +5,17 @@ Content-Type: application/json
 
 {
     "userId":"test1",
-    "notification": []
+    "notification": [{
+        "title": "New! Achievement",
+        "type": "achievement",
+        "message": "Congrats now you got a helper batch for adding a ambulance",
+        "seen":false
+    }]
 }
 
 
 ###
 # getting all the notifications
-
 POST http://localhost:3000/api/v1/notification/all/ HTTP/1.1
 Content-Type: application/json
 
@@ -23,10 +27,38 @@ Content-Type: application/json
 
 ###
 # Deleteing all the notifications
-
 DELETE  http://localhost:3000/api/v1/notification/all/ HTTP/1.1
 Content-Type: application/json
 
 {
     "userId": "test1"
+}
+
+
+###
+# updates all the notifications
+PATCH  http://localhost:3000/api/v1/notification/all/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": "test1"
+}
+
+
+
+###
+# adding a notification.
+
+POST http://localhost:3000/api/v1/notification/add/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId":"test1",
+    "notification": {
+        "title": "New! Achievement",
+        "type": "achievement",
+        "message": "Congrats now you got a helper batch for adding a ambulance",
+        "seen":false
+    }
+
 }
