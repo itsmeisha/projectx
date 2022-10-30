@@ -21,6 +21,9 @@ import moment from "moment";
 // secrets for google auth
 import { GOOGLE_CLIENT_ID } from "@env";
 
+// utilities
+import Toast from "react-native-toast-message";
+
 // initializes the browser
 WebBrowser.maybeCompleteAuthSession();
 
@@ -47,7 +50,14 @@ const Google = ({ navigator }) => {
         ambulance: {},
       })
       .then((res) => {
-        if (res.status === 200) setUser(res.data?.user);
+        if (res.status === 200) {
+          setUser(res.data?.user);
+          Toast.show({
+            type: "success",
+            text1: "successful registeration",
+            text2: `You are currently logged in as ${res?.data?.user?.name}`,
+          });
+        }
       });
   };
   const handleApiRequests = (id, data) => {
@@ -57,7 +67,13 @@ const Google = ({ navigator }) => {
         id: id,
       })
       .then((res) => {
-        res.status === 200 && setUser(res.data?.user);
+        res.status === 200 &&
+          setUser(res.data?.user) &&
+          Toast.show({
+            type: "success",
+            text1: "successful login",
+            text2: `You are currently logged in as ${res?.data?.user?.name}`,
+          });
       })
       .catch((e) => {
         // it means the user doesnot exist so it should be a new user registeration

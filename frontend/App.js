@@ -1,4 +1,4 @@
-import { StyleSheet, View, SafeAreaView, Platform } from "react-native";
+import { LogBox } from "react-native";
 
 // context
 import Context from "./Context";
@@ -9,6 +9,7 @@ import AuthScreen from "./src/screens/auth/AuthScreen.js";
 import LogScreen from "./src/screens/LogScreen.js";
 import ProfileScreen from "./src/screens/ProfileScreen.js";
 import NotificationScreen from "./src/screens/NotificationScreen";
+import TrackingScreen from "./src/screens/TrackingScreen";
 
 // fonts
 import { useFonts } from "expo-font";
@@ -16,7 +17,40 @@ import { useFonts } from "expo-font";
 // react navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import TrackingScreen from "./src/screens/TrackingScreen";
+
+// toast to display msg
+import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
+// styling for the toast
+import toastStyles from "./src/styles/global/Toast.js";
+
+// customizing the toast
+const toastConfig = {
+  /*
+    Overwrite 'success' type,
+    by modifying the existing `BaseToast` component
+  */
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={toastStyles.mainContainer}
+      contentContainerStyle={toastStyles.container}
+      text1Style={toastStyles.txt1}
+      text2Style={toastStyles.txt2}
+    />
+  ),
+  /*
+    Overwrite 'error' type,
+    by modifying the existing `ErrorToast` component
+  */
+  error: (props) => (
+    <ErrorToast
+      {...props}
+      text1Style={toastStyles.errorTxt1}
+      text2Style={toastStyles.errorTxt2}
+      contentContainerStyle={toastStyles.container}
+    />
+  ),
+};
 
 export default function App() {
   // -----------------------------------------------------------------------------------
@@ -38,60 +72,66 @@ export default function App() {
   // navigation stack
   const Stack = createNativeStackNavigator();
 
+  // removing the warning msgs
+  LogBox.ignoreAllLogs();
+
   return (
-    <Context>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreen}
-            options={{
-              animation: "none",
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="ProfileScreen"
-            component={ProfileScreen}
-            options={{
-              animation: "none",
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="LogScreen"
-            component={LogScreen}
-            options={{
-              animation: "none",
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="NotificationScreen"
-            component={NotificationScreen}
-            options={{
-              animation: "none",
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="AuthScreen"
-            component={AuthScreen}
-            options={{
-              animation: "none",
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="TrackingScreen"
-            component={TrackingScreen}
-            options={{
-              animation: "none",
-              headerShown: false,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Context>
+    <>
+      <Context>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="HomeScreen"
+              component={HomeScreen}
+              options={{
+                animation: "none",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="ProfileScreen"
+              component={ProfileScreen}
+              options={{
+                animation: "none",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="LogScreen"
+              component={LogScreen}
+              options={{
+                animation: "none",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="NotificationScreen"
+              component={NotificationScreen}
+              options={{
+                animation: "none",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="AuthScreen"
+              component={AuthScreen}
+              options={{
+                animation: "none",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="TrackingScreen"
+              component={TrackingScreen}
+              options={{
+                animation: "none",
+                headerShown: false,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Context>
+      <Toast config={toastConfig} autoHide={false} />
+    </>
   );
 }

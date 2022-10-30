@@ -16,6 +16,9 @@ import Map from "../components/home/maps/Map";
 import Greeting from "../components/home/Greeting.js";
 import Nav from "../components/global/Nav";
 import ContactPopup from "../components/home/ContactPopup.js";
+// importing the toast
+
+import Toast from "react-native-toast-message";
 
 const HomeScreen = ({ navigation }) => {
   const tracker = useRef(null);
@@ -30,6 +33,14 @@ const HomeScreen = ({ navigation }) => {
       },
     });
   };
+
+  useEffect(() => {
+    Toast.show({
+      type: "success",
+      text1: "Hello",
+      text2: "This is some something 👋",
+    });
+  }, []);
 
   return (
     <SafeAreaView
