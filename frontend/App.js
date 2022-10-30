@@ -43,11 +43,21 @@ const toastConfig = {
     by modifying the existing `ErrorToast` component
   */
   error: (props) => (
-    <ErrorToast
+    <BaseToast
       {...props}
-      text1Style={toastStyles.errorTxt1}
-      text2Style={toastStyles.errorTxt2}
+      style={[toastStyles.mainContainer, toastStyles.error]}
       contentContainerStyle={toastStyles.container}
+      text1Style={toastStyles.txt1}
+      text2Style={toastStyles.txt2}
+    />
+  ),
+  info: (props) => (
+    <BaseToast
+      {...props}
+      style={[toastStyles.mainContainer, toastStyles.info]}
+      contentContainerStyle={toastStyles.container}
+      text1Style={toastStyles.txt1}
+      text2Style={toastStyles.txt2}
     />
   ),
 };
@@ -131,7 +141,7 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </Context>
-      <Toast config={toastConfig} autoHide={false} />
+      <Toast config={toastConfig} autoHide={true} />
     </>
   );
 }

@@ -7,7 +7,7 @@ export default StyleSheet.create({
     paddingHorizontal: 33,
     paddingVertical: 60,
     borderRadius: 28,
-    zIndex: 21,
+    zIndex: 51,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -16,7 +16,7 @@ export default StyleSheet.create({
     width: Dimensions.get("screen").width,
     backgroundColor: "#333",
     opacity: 0.4,
-    zIndex: 20,
+    zIndex: 50,
     position: "absolute",
   },
   number: {

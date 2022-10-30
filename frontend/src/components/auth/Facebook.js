@@ -22,6 +22,9 @@ import moment from "moment";
 // secrets for facebook auth
 import { FACEBOOK_CLIENT_ID } from "@env";
 
+// utilities
+import Toast from "react-native-toast-message";
+
 // initializes the browser
 WebBrowser.maybeCompleteAuthSession();
 
@@ -48,7 +51,15 @@ const Facebook = ({ navigator }) => {
         ambulance: {},
       })
       .then((res) => {
-        if (res.status === 200) setUser(res.data?.user);
+        if (res.status === 200) {
+          setUser(res.data?.user);
+          Toast.show({
+            type: "success",
+            text1: "successful Registeration",
+            text2: `Logged in as ${res?.data?.user?.name}`,
+          });
+          console.log("from below the toast");
+        }
       });
   };
   const handleApiRequests = (id, data) => {
@@ -58,7 +69,14 @@ const Facebook = ({ navigator }) => {
         id: id,
       })
       .then((res) => {
-        res.status === 200 && setUser(res.data?.user);
+        if (res.status === 200) {
+          setUser(res.data?.user);
+          Toast.show({
+            type: "success",
+            text1: "successful login",
+            text2: `Logged in as ${res?.data?.user?.name}`,
+          });
+        }
       })
       .catch((e) => {
         // it means the user doesnot exist so it should be a new user registeration

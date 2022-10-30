@@ -34,14 +34,6 @@ const HomeScreen = ({ navigation }) => {
     });
   };
 
-  useEffect(() => {
-    Toast.show({
-      type: "success",
-      text1: "Hello",
-      text2: "This is some something 👋",
-    });
-  }, []);
-
   return (
     <SafeAreaView
       style={{
@@ -87,8 +79,18 @@ const HomeScreen = ({ navigation }) => {
           }}
         ></View>
       </ScrollView>
+      <View
+        style={{
+          height: Dimensions.get("screen").height,
+          width: Dimensions.get("screen").width,
+          position: "absolute",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ContactPopup />
+      </View>
 
-      <ContactPopup />
       <Nav navigator={navigation} active={"HomeScreen"} />
     </SafeAreaView>
   );

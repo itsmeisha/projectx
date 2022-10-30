@@ -13,7 +13,7 @@ export default StyleSheet.create({
   mainContainer: {
     height: 80,
     borderRadius: 22,
-    backgroundColor: "#fff",
+    backgroundColor: "#BBFFDA",
     opacity: 0.9,
     borderLeftWidth: 0,
     elevation: 5,
@@ -22,5 +22,12 @@ export default StyleSheet.create({
   container: {
     height: 70,
     marginLeft: 5,
+  },
+  error: {
+    backgroundColor: "#FFD7D7",
+    // opacity: 0.85,
+  },
+  info: {
+    backgroundColor: "#fff",
   },
 });
