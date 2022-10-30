@@ -10,3 +10,5 @@ import { getAllLogs, setLog, deleteAllLogs } from "../controller/_logs.js";
 logRouter.get("/", getAllLogs);
 logRouter.post("/", setLog);
 logRouter.delete("/", deleteAllLogs);
+
+export default logRouter;

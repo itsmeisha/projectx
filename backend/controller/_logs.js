@@ -9,7 +9,7 @@ export const getAllLogs = async (req, res) => {
     });
   try {
     const logs = await logModel.find(); // fetches all the logs
-    if (!logs)
+    if (!logs || (logs && logs.length === 0))
       return res.status(404).json({
         error: "No logs found for the user",
       });
@@ -46,20 +46,20 @@ export const setLog = async (req, res) => {
 
     // if there are no logs creating one
     if (!logs) {
-      const createdLog = new logModel({
+      const createdLog = await new logModel({
         userId,
         logs: [{ ...logToSet }],
-      });
+      }).save();
 
       return res.status(201).json({
         msg: "New log created",
-        logs: createdLog,
+        logs: await logModel.findOne({ userId }),
       });
     }
 
     res.status(200).json({
       msg: "New log was added",
-      logs,
+      logs: await logModel.findOne({ userId }),
     });
   } catch (e) {
     res.status(500).json({
@@ -75,7 +75,7 @@ export const deleteAllLogs = async (req, res) => {
       error: "Invalid userId",
     });
   try {
-    await logModel.deleteMany({}); //deletes all the logs
+    await logModel.deleteOne({ userId }); //deletes all the logs
 
     res.status(200).json({
       msg: "All logs deleted successfully",
