@@ -5,13 +5,12 @@ import dotenv from "dotenv";
 
 // utilities
 import { connectToDb } from "./config/db.js";
-import bodyParser from "body-parser";
 
 // routes
-import mapRouter from "./routes/mapRoute.js";
 import authRouter from "./routes/authRoute.js";
 import notificationRouter from "./routes/notificationRoute.js";
 import ambulanceRouter from "./routes/ambulanceRoutes.js";
+import logRouter from "./routes/logRoutes.js";
 
 // configuring the dotenv file
 dotenv.config();
@@ -43,3 +42,6 @@ app.use(`/api/v1/notification`, notificationRouter);
 
 // ambulance routes
 app.use(`/api/v1/ambulance`, ambulanceRouter);
+
+// log routes
+app.use(`/api/v1/log`, logRouter);

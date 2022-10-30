@@ -103,10 +103,7 @@ export const updateAmbulance = async (req, res) => {
         ambulnaces: await ambulanceModel.find(),
       });
 
-    const updatedAmbulance = await ambulanceModel.findOneAndUpdate(
-      { userId },
-      updateData
-    );
+    await ambulanceModel.findOneAndUpdate({ userId }, updateData);
     res.status(200).json({
       msg: "ambulance updated successfully",
       ambulance: await ambulanceModel.findOne({ userId }),

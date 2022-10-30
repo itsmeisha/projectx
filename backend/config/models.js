@@ -10,6 +10,9 @@ import notificationSchema from "../schema/notificationSchema.js";
 // importing the ambulance Schema
 import ambulanceSchema from "../schema/ambulanceSchema.js";
 
+// importing the log schema
+import logSchema from "../schema/logSchema.js";
+
 // creating and exporting the user model
 // the first string of the model function indicates the collection the data is mapped to
 export const userModel = mongoose.model("user", userSchema);
@@ -22,3 +25,6 @@ export const notificationModel = mongoose.model(
 
 // creating ambulance model
 export const ambulanceModel = mongoose.model("ambulance", ambulanceSchema);
+
+// creating and exporting the log model
+export const logModel = mongoose.model("logs", logSchema);
