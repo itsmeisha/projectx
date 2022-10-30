@@ -12,30 +12,28 @@ import TglBtnOn from "../../../assets/svg/profile/tglBtnOn.svg";
 // context
 import { contextProvider } from "../../../Context.js";
 
-const AmbulanceCard = ({ data }) => {
+const AmbulanceCard = () => {
   const {
-    usr: [user, setUser],
     profile: {
       popup: [, setAmbPopup],
+      ambulance: [myAmbulance, setMyAmbulnace],
     },
   } = useContext(contextProvider);
-
   return (
     <View style={styles.container}>
       {/* toggle btn for toggling the ambulance location  */}
 
       <Pressable
         onPress={() => {
-          setUser({
-            ...user,
-            ambulance: {
-              ...user?.ambulance,
-              trackable: !user?.ambulance?.trackable,
-            },
+          setMyAmbulnace((previous) => {
+            return {
+              ...previous,
+              status: !previous.status,
+            };
           });
         }}
       >
-        {user?.ambulance?.trackable ? (
+        {myAmbulance?.status ? (
           <TglBtnOn style={styles.tglBtn} />
         ) : (
           <TglBtnOff style={styles.tglBtn} />
@@ -48,12 +46,12 @@ const AmbulanceCard = ({ data }) => {
 
         {/* another column of data */}
         <View style={styles.textCont}>
-          <Text style={styles.name}>{data?.name}</Text>
+          <Text style={styles.name}>{myAmbulance?.name}</Text>
           <Text style={[styles.vehicleNumber, styles.secondaryText]}>
-            {data?.vNumber}
+            {myAmbulance?.vNumber}
           </Text>
           <Text style={[styles.phoneNumber, styles.secondaryText]}>
-            {data?.pNumber}
+            {myAmbulance?.pNumber}
           </Text>
         </View>
       </View>
@@ -62,14 +60,14 @@ const AmbulanceCard = ({ data }) => {
 
       <Pressable
         onPress={() => {
-          if (!user?.ambulance?.trackable) return;
+          if (!myAmbulance.status) return;
           setAmbPopup("edit");
         }}
       >
         <Text
           style={[
             styles.editBtn,
-            user?.ambulance?.trackable
+            myAmbulance.status
               ? null
               : {
                   backgroundColor: "#98B9FF",

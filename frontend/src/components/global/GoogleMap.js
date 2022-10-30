@@ -58,22 +58,25 @@ const GoogleMap = ({ customStyles }) => {
       }}
     >
       {/* mapping out the ambulances */}
-      {ambulances?.map((ambulance, index) => {
-        return (
-          <Callout onPress={() => {}} key={index}>
-            <Marker
-              title={ambulance?.name}
-              identifier={"first marker"}
-              coordinate={{
-                latitude: ambulance?.location?.latitude,
-                longitude: ambulance?.location?.longitude,
-              }}
-            >
-              <CustomMarker type={"ambulance"} selected={false} />
-            </Marker>
-          </Callout>
-        );
-      })}
+      {ambulances?.length > 0 &&
+        ambulances?.map((ambulance, index) => {
+          return (
+            <Callout onPress={() => {}} key={index}>
+              <Marker
+                title={ambulance?.name}
+                identifier={"first marker"}
+                coordinate={
+                  ambulance?.location || {
+                    latitude: 27.631432412341326,
+                    longitude: 83.45943214132444,
+                  }
+                }
+              >
+                <CustomMarker type={"ambulance"} selected={false} />
+              </Marker>
+            </Callout>
+          );
+        })}
 
       {/* making the custom user marker */}
       {currentLocation.latitude && currentLocation.longitude && (
@@ -96,7 +99,6 @@ const GoogleMap = ({ customStyles }) => {
             destination={ambulances[0]?.location}
             strokeWidth={3}
             strokeColor={"#333"}
-            
           />
         )}
     </MapView>

@@ -7,6 +7,7 @@ const ambulanceSchema = mongoose.Schema(
     name: String,
     dName: String,
     pNumber: Number,
+    vNumber: String,
     location: {
       latitude: Number,
       longitude: Number,

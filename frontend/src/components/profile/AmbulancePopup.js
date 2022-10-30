@@ -9,6 +9,7 @@ import Inputer from "./Inputer";
 
 // styles
 import styles from "../../styles/profile/AmbulancePopup.js";
+import axios from "axios";
 
 const AmbulancePopup = () => {
   const {
@@ -16,7 +17,12 @@ const AmbulancePopup = () => {
     profile: {
       popup: [ambPopup, setAmbPopup],
       ambul: [ambulData, SetAmbData],
+      ambulance: [myAmbulance, setMyAmbulnace],
     },
+    map: {
+      userLoc: [currentLocation],
+    },
+    config: { api },
   } = useContext(contextProvider);
 
   // for the save btn
@@ -25,16 +31,70 @@ const AmbulancePopup = () => {
   const saveAmbulance = () => {
     if (!canSave) return;
     // updating the profile
-    setUser(() => {
-      return {
-        ...user,
-        ambulance: {
-          ...user?.ambulance,
-          ...ambulData,
-          trackable: true,
-        },
-      };
-    });
+    // setUser(() => {
+    //   return {
+    //     ...user,
+    //     ambulance: {
+    //       ...user?.ambulance,
+    //       ...ambulData,
+    //       trackable: true,
+    //     },
+    //   };
+    // });
+
+    const updatedAmbulance = {
+      ...myAmbulance,
+      ...ambulData,
+      location: { ...currentLocation },
+      status: true,
+      selected: false,
+      owner: user?.name,
+    };
+
+    if (myAmbulance && myAmbulance.userId) {
+      // sending a request to update the ambulance to the api
+      axios
+        .patch(`${api}/api/v1/ambulance/`, {
+          id: user?.id,
+          data: updatedAmbulance,
+        })
+        .then((res) => {
+          const responseAmbulance = res.data?.ambulance;
+          setMyAmbulnace({ ...responseAmbulance });
+          console.log({
+            response: res.data,
+          });
+        })
+        .catch((e) => {
+          console.log({
+            response: e.response.data,
+          });
+          if (e.response?.status === 404) {
+            console.log(e.response?.message);
+          }
+        });
+    } else {
+      // creating the ambulance
+
+      axios
+        .post(`${api}/api/v1/ambulance/create`, {
+          id: user?.id,
+          data: updatedAmbulance,
+        })
+        .then((res) => {
+          const responseAmbulance = res.data?.ambulance;
+          console.log({
+            response: res.data,
+          });
+          setMyAmbulnace({ ...responseAmbulance });
+        })
+        .catch((e) => {
+          if (e.response?.status === 403) {
+            setMyAmbulnace(e.response?.data?.ambulance);
+          }
+        });
+    }
+
     // closing the popup
     setAmbPopup(false);
 

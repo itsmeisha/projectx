@@ -58,7 +58,7 @@ export const createAmbulance = async (req, res) => {
     if (existance && existance?.length != 0)
       return res.status(403).json({
         msg: "Ambulance was already created in past",
-        ambulnaces: await ambulanceModel.find(),
+        ambulnace: await ambulanceModel.findOne({ userId }),
       });
     await new ambulanceModel({
       userId,
@@ -66,7 +66,7 @@ export const createAmbulance = async (req, res) => {
     }).save(); // creates a new ambulance
     res.status(200).json({
       msg: "Ambulance created",
-      ambulances: await ambulanceModel.find(),
+      ambulance: await ambulanceModel.findOne({ userId }),
     });
   } catch (e) {
     res.status(500).json({

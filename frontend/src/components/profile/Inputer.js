@@ -9,9 +9,9 @@ import styles from "../../styles/profile/Inputer.js";
 
 const Inputer = ({ name, placeholder, title }) => {
   const {
-    usr: [user],
     profile: {
       ambul: [ambulData, SetAmbData],
+      ambulance: [myAmbulance],
     },
   } = useContext(contextProvider);
 
@@ -22,6 +22,14 @@ const Inputer = ({ name, placeholder, title }) => {
     });
   };
 
+  console.log({
+    [name]: {
+      api: myAmbulance[name],
+      changes: ambulData[name],
+      query: ambulData && Object.keys(ambulData).includes(name),
+    },
+  });
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
@@ -31,7 +39,7 @@ const Inputer = ({ name, placeholder, title }) => {
         value={
           ambulData && Object.keys(ambulData).includes(name)
             ? ambulData[name]
-            : user?.ambulance[name]
+            : myAmbulance[name]
         }
         style={styles.input}
       />

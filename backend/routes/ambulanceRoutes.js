@@ -8,6 +8,7 @@ import {
   createAmbulance,
   deleteAmbulance,
   getAllAmbulances,
+  getMyAmbulance,
   trackAmbulance,
   updateAmbulance,
   updateAmbulanceLocation,
@@ -15,6 +16,7 @@ import {
 
 // routes
 ambulanceRouter.get("/", getAllAmbulances);
+ambulanceRouter.post("/", getMyAmbulance);
 ambulanceRouter.post("/create", createAmbulance);
 ambulanceRouter.delete("/", deleteAmbulance);
 ambulanceRouter.patch("/", updateAmbulance);

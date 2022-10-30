@@ -12,6 +12,7 @@ import Constants from "expo-constants";
 
 // for getting the correct server uri in production
 import { SERVER_URI } from "@env";
+import axios from "axios";
 
 const { manifest } = Constants;
 const serverUri =
@@ -157,8 +158,40 @@ const Context = ({ children }) => {
     },
   ]);
 
+  // My ambulance to show in the profile
+  const [myAmbulance, setMyAmbulnace] = useState({});
+
   // current location
   const [currentLocation, setCurrentLocation] = useState({});
+
+  // api data fetcher
+
+  const getApiData = () => {
+    // fetching all the ambulances and setting them
+    axios.get(`${serverUri}/api/v1/ambulance/`).then((res) => {
+      const ambulances = res.data?.ambulances;
+
+      if (ambulances?.length > 0) setAmbulances(ambulances);
+    });
+
+    // fetching my ambulance to put in the profile
+    if (user && Object.keys(user).length !== 0) {
+      // checking if the ambulances exists or not
+      axios
+        .post(`${serverUri}/api/v1/ambulance/`, {
+          id: user?.id,
+        })
+        .then((res) => {
+          const ambulance = res?.data?.ambulance;
+          if (!ambulance) return;
+          setMyAmbulnace(ambulance);
+        })
+        .catch((e) => {
+          if (e?.res?.status === 404) setMyAmbulnace({});
+        });
+    }
+    // console.log("not logged in");
+  };
 
   // component did mount function
   useEffect(() => {
@@ -175,6 +208,9 @@ const Context = ({ children }) => {
         longitude: location?.coords?.longitude,
       });
     })();
+
+    // fetches data form the api and sets to the state
+    getApiData();
   }, []);
 
   return (
@@ -186,6 +222,7 @@ const Context = ({ children }) => {
         profile: {
           popup: [ambPopup, setAmbPopup],
           ambul: [ambulData, SetAmbData],
+          ambulance: [myAmbulance, setMyAmbulnace],
         },
         history: [logs, setLogs],
         contact: [conPopup, setConPopup],

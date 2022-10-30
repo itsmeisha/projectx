@@ -50,7 +50,7 @@ PATCH http://localhost:3000/api/v1/ambulance/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": "197714639376036",
+    "id": "100919117945071530690",
     "data": {
         "name": "Hamro ambulance",
         "dName": "Isha pun",

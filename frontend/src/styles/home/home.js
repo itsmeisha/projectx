@@ -42,9 +42,15 @@ export default StyleSheet.create({
     marginLeft: 15,
     height: 60,
     width: 60,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   profileItem: {
     position: "absolute",
+    left: 0,
+    top: 0,
+    height: 60,
+    width: 60,
   },
 });
