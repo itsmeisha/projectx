@@ -25,7 +25,6 @@ const GoogleMap = ({ customStyles }) => {
     },
     ambulances: [ambulances],
   } = useContext(contextProvider);
-
   useEffect(() => {
     if (!currentLocation.latitude || currentLocation.longitude) return;
     setMapLoadLoc({
@@ -34,6 +33,10 @@ const GoogleMap = ({ customStyles }) => {
       longitudeDelta: 0.0021,
     });
   }, [currentLocation]);
+
+  useEffect(() => {
+    console.log({ currentLocation, ambulances: ambulances[0].location });
+  }, []);
 
   return (
     <MapView

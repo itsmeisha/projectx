@@ -168,11 +168,16 @@ const Context = ({ children }) => {
 
   const getApiData = () => {
     // fetching all the ambulances and setting them
-    axios.get(`${serverUri}/api/v1/ambulance/`).then((res) => {
-      const ambulances = res.data?.ambulances;
+    axios
+      .get(`${serverUri}/api/v1/ambulance/`)
+      .then((res) => {
+        const ambulances = res.data?.ambulances;
 
-      if (ambulances?.length > 0) setAmbulances(ambulances);
-    });
+        if (ambulances?.length > 0) setAmbulances(ambulances);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     // fetching my ambulance to put in the profile
     if (user && Object.keys(user).length !== 0) {
@@ -190,7 +195,6 @@ const Context = ({ children }) => {
           if (e?.res?.status === 404) setMyAmbulnace({});
         });
     }
-    // console.log("not logged in");
   };
 
   // component did mount function
@@ -212,6 +216,10 @@ const Context = ({ children }) => {
     // fetches data form the api and sets to the state
     getApiData();
   }, []);
+
+  useEffect(() => {
+    getApiData();
+  }, [user]);
 
   return (
     <contextProvider.Provider

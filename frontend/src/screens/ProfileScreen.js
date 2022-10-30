@@ -33,6 +33,7 @@ const ProfileScreen = ({ navigation }) => {
   if (!user || Object.keys(user).length === 0) {
     navigation.navigate("AuthScreen");
   }
+  console.log(myAmbulance);
 
   return (
     <>
