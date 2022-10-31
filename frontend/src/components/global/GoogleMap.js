@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 
 // styles
 import styles from "../../styles/tracking/GoogleMap.js";
@@ -16,6 +16,7 @@ import MapViewDirections from "react-native-maps-directions";
 
 // api key
 import { GOOGLE_MAP_API_KEY } from "@env";
+import { Pressable } from "react-native";
 
 const GoogleMap = ({ customStyles }) => {
   const {
@@ -28,6 +29,10 @@ const GoogleMap = ({ customStyles }) => {
     ambulances: [ambulances],
   } = useContext(contextProvider);
 
+  // creating a map reference
+
+  const map = useRef(null);
+
   useEffect(() => {
     if (!currentLocation.latitude || currentLocation.longitude) return;
     setMapLoadLoc({
@@ -37,9 +42,16 @@ const GoogleMap = ({ customStyles }) => {
     });
   }, [currentLocation]);
 
+  // for testing purposes
+
+  useEffect(() => {
+    if (!selectedAmbul?.userId) return;
+    console.log({ googleMap: selectedAmbul });
+    //  console.log({ mine: ambulance?.userId === user?.id });
+  }, [selectedAmbul]);
+  // console.log("running");
   return (
     <MapView
-      initialRegion={mapLoadLoc}
       style={[
         styles.map,
         customStyles && {
@@ -58,38 +70,38 @@ const GoogleMap = ({ customStyles }) => {
       onRegionChangeComplete={(region) => {
         setMapLoadLoc({ ...region });
       }}
+      ref={map}
     >
       {/* mapping out the ambulances */}
       {ambulances?.length > 0 &&
         ambulances?.map((ambulance, index) => {
-          if (ambulance?.userId === user?.id) {
-            console.log("found my ambulance about to be mapped", index);
-            return;
-          }
+          //  if (ambulance?.userId === user?.id) {
+          //   console.log("found my ambulance about to be mapped", index);
+          //   return;
 
           return (
-            <Callout
+            <Marker
+              title={ambulance?.name}
+              identifier={ambulance?.userId}
+              coordinate={ambulance?.location}
+              key={index}
               onPress={() => {
                 setSelectedAmbul({ ...ambulance });
               }}
-              key={index}
             >
-              <Marker
-                title={ambulance?.name}
-                identifier={ambulance?.userId}
-                coordinate={ambulance?.location}
-              >
-                <CustomMarker type={"ambulance"} selected={false} />
-              </Marker>
-            </Callout>
+              <CustomMarker
+                type={"ambulance"}
+                selected={selectedAmbul?.userId === ambulance?.userId}
+              />
+            </Marker>
           );
         })}
 
       {/* making the custom user marker */}
-      {currentLocation.latitude && currentLocation.longitude && (
+      {currentLocation?.latitude && currentLocation?.longitude && (
         <Marker
-          title={"My marker"}
-          identifier={"secondMarker"}
+          title={user?.name || "User"}
+          identifier={"userMarker"}
           coordinate={currentLocation}
         >
           <CustomMarker type={"user"} selected={false} />
@@ -97,13 +109,13 @@ const GoogleMap = ({ customStyles }) => {
       )}
 
       {/* route from a active ambulance to the user */}
-      {currentLocation.latitude &&
-        currentLocation.longitude &&
-        ambulances[0] && (
+      {currentLocation?.latitude &&
+        currentLocation?.longitude &&
+        selectedAmbul?.location && (
           <MapViewDirections
             apikey={GOOGLE_MAP_API_KEY}
             origin={currentLocation}
-            destination={ambulances[0]?.location}
+            destination={selectedAmbul?.location}
             strokeWidth={3}
             strokeColor={"#333"}
           />

@@ -141,18 +141,18 @@ const Context = ({ children }) => {
     //   status: "",
     //   selected: true,
     // },
-    {
-      name: "Hamro ambulance",
-      dName: "Isha pun",
-      pNumber: "9860712345",
-      location: {
-        latitude: 27.685344030241538,
-        longitude: 83.45944723114371,
-      },
-      owner: "Mutu hospital",
-      status: true,
-      selected: false,
-    },
+    // {
+    //   name: "Hamro ambulance",
+    //   dName: "Isha pun",
+    //   pNumber: "9860712345",
+    //   location: {
+    //     latitude: 27.685344030241538,
+    //     longitude: 83.45944723114371,
+    //   },
+    //   owner: "Mutu hospital",
+    //   status: true,
+    //   selected: false,
+    // },
   ]);
 
   // My ambulance to show in the profile
@@ -169,7 +169,9 @@ const Context = ({ children }) => {
       .get(`${serverUri}/api/v1/ambulance/`)
       .then((res) => {
         const ambulances = res.data?.ambulances;
-
+        console.log({
+          context: ambulances,
+        });
         if (ambulances?.length > 0) setAmbulances(ambulances);
       })
       .catch((e) => {

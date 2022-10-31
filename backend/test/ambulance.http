@@ -50,18 +50,19 @@ PATCH http://localhost:3000/api/v1/ambulance/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": "100919117945071530690",
-    "data": {
-        "name": "Hamro ambulance",
-        "dName": "Isha pun",
-        "pNumber": 9860712345,
-        "location": {
-            "latitude": 27.685344030241538,
-            "longitude": 83.45944723114371
-        },
-        "owner": "Saroj regmi",
-        "status": true,
-        "selected": true
+    "id": "106838908887260",
+    "data":  {
+      "location": {
+        "latitude": 27.6820234,
+        "longitude": 82.4584023
+      }, 
+      "name": "Kzhsbsjeb",
+      "dName": "Skheieebwj",
+      "pNumber": 9189281118732,
+      "vNumber": "Ksksbsjsb",
+      "owner": "sajana regmi",
+      "status": true,
+      "selected": false
     }
 }
 
