@@ -43,12 +43,8 @@ const CustomMarker = ({ type, selected }) => {
           </View>
         )}
       </View>
-      <View
-        style={[styles.rippleCircle, type === "user" ? styles.userRipple : {}]}
-      ></View>
-      <View
-        style={[styles.rippleCircle, type === "user" ? styles.userRipple : {}]}
-      ></View>
+
+      {}
     </View>
   );
 };
