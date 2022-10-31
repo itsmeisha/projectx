@@ -19,12 +19,15 @@ import { GOOGLE_MAP_API_KEY } from "@env";
 
 const GoogleMap = ({ customStyles }) => {
   const {
+    usr: [user],
     map: {
       location: [mapLoadLoc, setMapLoadLoc],
       userLoc: [currentLocation],
+      ambulance: [selectedAmbul, setSelectedAmbul],
     },
     ambulances: [ambulances],
   } = useContext(contextProvider);
+
   useEffect(() => {
     if (!currentLocation.latitude || currentLocation.longitude) return;
     setMapLoadLoc({
@@ -33,10 +36,6 @@ const GoogleMap = ({ customStyles }) => {
       longitudeDelta: 0.0021,
     });
   }, [currentLocation]);
-
-  useEffect(() => {
-    console.log({ currentLocation, ambulances: ambulances[0].location });
-  }, []);
 
   return (
     <MapView
@@ -63,17 +62,22 @@ const GoogleMap = ({ customStyles }) => {
       {/* mapping out the ambulances */}
       {ambulances?.length > 0 &&
         ambulances?.map((ambulance, index) => {
+          if (ambulance?.userId === user?.id) {
+            console.log("found my ambulance about to be mapped", index);
+            return;
+          }
+
           return (
-            <Callout onPress={() => {}} key={index}>
+            <Callout
+              onPress={() => {
+                setSelectedAmbul({ ...ambulance });
+              }}
+              key={index}
+            >
               <Marker
                 title={ambulance?.name}
-                identifier={"first marker"}
-                coordinate={
-                  ambulance?.location || {
-                    latitude: 27.631432412341326,
-                    longitude: 83.45943214132444,
-                  }
-                }
+                identifier={ambulance?.userId}
+                coordinate={ambulance?.location}
               >
                 <CustomMarker type={"ambulance"} selected={false} />
               </Marker>

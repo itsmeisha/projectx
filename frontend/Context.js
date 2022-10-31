@@ -95,10 +95,7 @@ const Context = ({ children }) => {
   //
   //
 
-  const [selectedAmbul, setSelectedAmbul] = useState({
-    name: "Lumbini Ambulance",
-    number: "+977 9867100588",
-  });
+  const [selectedAmbul, setSelectedAmbul] = useState({});
 
   // Map data
 
