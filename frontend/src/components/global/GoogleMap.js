@@ -174,7 +174,9 @@ const GoogleMap = ({ customStyles }) => {
             origin={currentLocation}
             destination={selectedAmbul?.location}
             strokeWidth={3}
-            strokeColor={"#333"}
+            strokeColor={"#616161"}
+            lineDashPattern={[50, 20]}
+            lineCap={"butt"}
           />
         )}
     </MapView>
