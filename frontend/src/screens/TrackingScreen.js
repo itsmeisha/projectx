@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Pressable } from "react-native";
+import { View, Pressable, Dimensions } from "react-native";
 import React, { useContext, useState } from "react";
 import Header from "../components/global/Header";
 
@@ -24,6 +24,7 @@ const TrackingScreen = ({ route, navigation }) => {
     map: {
       userLoc: [currentLocation],
       location: [, setMapLoadLoc],
+      ambulance: [selectedAmbul],
     },
   } = useContext(contextProvider);
 
@@ -50,7 +51,14 @@ const TrackingScreen = ({ route, navigation }) => {
         </Pressable>
       </View>
 
-      {mode === "finding" ? <MapFinder /> : <MapTracker />}
+      <View
+        style={[
+          styles.bottomPopup,
+          selectedAmbul?.userId ? { bottom: 0 } : { bottom: -200 },
+        ]}
+      >
+        {mode === "finding" ? <MapFinder /> : <MapTracker />}
+      </View>
 
       <ContactPopup />
     </View>

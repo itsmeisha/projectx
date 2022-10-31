@@ -16,7 +16,7 @@ import MapViewDirections from "react-native-maps-directions";
 
 // api key
 import { GOOGLE_MAP_API_KEY } from "@env";
-import { Pressable } from "react-native";
+import axios from "axios";
 
 const GoogleMap = ({ customStyles }) => {
   const {
@@ -25,6 +25,7 @@ const GoogleMap = ({ customStyles }) => {
       location: [mapLoadLoc, setMapLoadLoc],
       userLoc: [currentLocation],
       ambulance: [selectedAmbul, setSelectedAmbul],
+      tracking: [data, setData],
     },
     ambulances: [ambulances],
   } = useContext(contextProvider);
@@ -45,9 +46,64 @@ const GoogleMap = ({ customStyles }) => {
   // for testing purposes
 
   useEffect(() => {
-    if (!selectedAmbul?.userId) return;
-    console.log({ googleMap: selectedAmbul });
-    //  console.log({ mine: ambulance?.userId === user?.id });
+    if (!selectedAmbul?.userId || !currentLocation) return;
+
+    console.log("Fitting to screen");
+    // showing the entire route in the screen
+    // map.current?.fitToSuppliedMarkers([selectedAmbul?.userId, "userMarker"], {
+    //   edgePadding: {
+    //     top: 800,
+    //     bottom: 400,
+    //     left: 100,
+    //     right: 100,
+    //   },
+    // });
+
+    const center = {
+      latitude: selectedAmbul?.location?.latitude + currentLocation?.latitude,
+      longitude:
+        selectedAmbul?.location?.longitude + currentLocation?.longitude,
+    };
+
+    map.current.animateCamera(
+      {
+        center,
+      },
+      2000
+    );
+
+    const timeOut = setTimeout(() => {
+      map.current?.animateToRegion(
+        {
+          ...selectedAmbul.location,
+          latitudeDelta: 0.00081,
+          longitudeDelta: 0.00081,
+        },
+        800
+      );
+    }, 5000);
+    // zoom in to the ambulance marker
+
+    // getting the actual distance of the user from the selected ambulance
+    const reqUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${selectedAmbul?.location?.latitude},${selectedAmbul?.location?.longitude}&destinations=${currentLocation?.latitude},${currentLocation?.longitude}&key=${GOOGLE_MAP_API_KEY}`;
+    axios
+      .get(reqUrl)
+      .then((res) => {
+        setData((prev) => {
+          return {
+            ...prev,
+            distance: res.data.rows[0]?.elements[0]?.distance?.text,
+          };
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    // clearing the timeout to prevent the memory leaks
+    return () => {
+      clearTimeout(timeOut);
+    };
   }, [selectedAmbul]);
   // console.log("running");
   return (
@@ -68,9 +124,10 @@ const GoogleMap = ({ customStyles }) => {
       showsMyLocationButton={true}
       region={mapLoadLoc}
       onRegionChangeComplete={(region) => {
-        setMapLoadLoc({ ...region });
+        // setMapLoadLoc({ ...region });
       }}
       ref={map}
+      toolbarEnabled={false}
     >
       {/* mapping out the ambulances */}
       {ambulances?.length > 0 &&

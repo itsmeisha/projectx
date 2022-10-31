@@ -10,8 +10,11 @@ import { contextProvider } from "../../../Context";
 const MapFinder = () => {
   const {
     contact: [, setConPopup],
+    map: {
+      tracking: [data],
+    },
   } = useContext(contextProvider);
-  const distance = "20 km";
+
   return (
     <View
       style={[
@@ -23,7 +26,7 @@ const MapFinder = () => {
         },
       ]}
     >
-      <Text style={styles.distance}>Distance : {distance}</Text>
+      <Text style={styles.distance}>Distance : {data?.distance}</Text>
       <View style={styles.btns}>
         <Pressable>
           <Text style={[styles.track, styles.btn]}>Track</Text>

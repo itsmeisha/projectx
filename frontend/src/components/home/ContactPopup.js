@@ -17,7 +17,6 @@ const ContactPopup = () => {
       ambulance: [selectedAmbul],
     },
   } = useContext(contextProvider);
-  if (!selectedAmbul) return;
 
   return (
     <>
@@ -29,13 +28,13 @@ const ContactPopup = () => {
             }}
             style={styles.closer}
           ></Pressable>
-          <View style={styles.container}>
-            <Text style={styles.number}>{selectedAmbul.number}</Text>
-            <Text style={styles.name}>{selectedAmbul.name}</Text>
+          <View style={[styles.container]}>
+            <Text style={styles.number}>{selectedAmbul?.pNumber}</Text>
+            <Text style={styles.name}>{selectedAmbul?.name}</Text>
             {/* for closing the popup */}
             <Pressable
               onPress={() => {
-                Linking.openURL(`tel:${selectedAmbul.number}`);
+                Linking.openURL(`tel:${selectedAmbul?.number}`);
               }}
             >
               <View style={styles.callNow}>

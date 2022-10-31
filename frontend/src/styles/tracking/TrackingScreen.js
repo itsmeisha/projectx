@@ -23,4 +23,12 @@ export default StyleSheet.create({
   currentLocation: {
     marginLeft: 10,
   },
+
+  bottomPopup: {
+    width: Dimensions.get("screen").width,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    bottom: 0,
+  },
 });
