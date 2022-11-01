@@ -17,6 +17,7 @@ import MapViewDirections from "react-native-maps-directions";
 // api key
 import { GOOGLE_MAP_API_KEY } from "@env";
 import axios from "axios";
+import AmbulanceRipple from "./AmbulanceRipple.js";
 
 const GoogleMap = ({ customStyles }) => {
   const {
@@ -146,6 +147,9 @@ const GoogleMap = ({ customStyles }) => {
                 setSelectedAmbul({ ...ambulance });
               }}
             >
+              {/* custom react native elements should be called inside the callout
+               */}
+
               <CustomMarker
                 type={"ambulance"}
                 selected={selectedAmbul?.userId === ambulance?.userId}

@@ -10,9 +10,13 @@ export default StyleSheet.create({
     opacity: 0.5,
   },
   container: {
+    position: "absolute",
+    top: 30,
+    left: 0,
     height: "100%",
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    // backgroundColor: "white",
   },
 });

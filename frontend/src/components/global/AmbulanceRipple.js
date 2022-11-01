@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { View, Animated } from "react-native";
 // import {  } from "react-native";
 
@@ -8,18 +9,18 @@ const AmbulanceRipple = () => {
   const [rippleAnimation] = useState({
     circleOne: {
       size: new Animated.Value(0),
-      opacity: new Animated.Value(0.75),
+      opacity: new Animated.Value(1),
     },
     circleTwo: {
       size: new Animated.Value(0),
-      opacity: new Animated.Value(0.3),
+      opacity: new Animated.Value(1),
     },
   });
 
   const animationDuration = 1500;
 
-  const maxSize = 200;
-  const delay = 600;
+  const maxSize = 40;
+  const delay = 1500;
 
   const CircleOne = {
     sizeAnimation: Animated.timing(rippleAnimation.circleOne.size, {
@@ -28,7 +29,7 @@ const AmbulanceRipple = () => {
       useNativeDriver: false,
     }),
     opacityAnimation: Animated.timing(rippleAnimation.circleOne.opacity, {
-      toValue: 0,
+      toValue: 0.5,
       duration: animationDuration,
       useNativeDriver: false,
     }),
@@ -41,7 +42,7 @@ const AmbulanceRipple = () => {
       delay: delay,
     }),
     opacityAnimation: Animated.timing(rippleAnimation.circleTwo.opacity, {
-      toValue: 0,
+      toValue: 0.5,
       duration: animationDuration,
       useNativeDriver: false,
       delay: delay,
@@ -62,7 +63,6 @@ const AmbulanceRipple = () => {
       <Animated.View
         style={[
           styles.rippleCircle,
-          type === "user" ? styles.userRipple : {},
           {
             height: rippleAnimation.circleOne.size,
             width: rippleAnimation.circleOne.size,
@@ -70,20 +70,19 @@ const AmbulanceRipple = () => {
             opacity: rippleAnimation.circleOne.opacity,
           },
         ]}
-      ></Animated.View>
-      <Animated.View
+      />
+      {/* <Animated.View
         style={[
           styles.rippleCircle,
-          type === "user" ? styles.userRipple : {},
           {
             height: rippleAnimation.circleTwo.size,
             borderRadius: Animated.divide(rippleAnimation.circleTwo.size, 2),
-
             width: rippleAnimation.circleTwo.size,
             opacity: rippleAnimation.circleTwo.opacity,
+            backgroundColor: "red",
           },
         ]}
-      ></Animated.View>
+      ></Animated.View> */}
     </View>
   );
 };

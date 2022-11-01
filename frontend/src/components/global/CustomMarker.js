@@ -24,32 +24,33 @@ const CustomMarker = ({ type, selected }) => {
   } = useContext(contextProvider);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.marker}>
-        {type === "ambulance" ? (
-          // <AmbulanceMarker />
-
-          <Image
-            source={require("../../../assets/imgs/maps/ambulanceMarker.png")}
-            style={styles.icon}
-          />
-        ) : (
-          <View style={styles.userMarker}>
-            <EmptyMarker />
-            {(user?.photo && (
-              <Image source={{ uri: user?.photo }} style={styles.userProfile} />
-            )) || (
-              <Image
-                source={require("../../../assets/imgs/maps/defaultProfile.png")}
-                style={styles.userProfile}
-              />
-            )}
-          </View>
-        )}
-      </View>
-
+    <View style={styles.mainContainer}>
       {type === "ambulance" ? selected && <AmbulanceRipple /> : <UserRipple />}
-      {}
+      <View style={styles.container}>
+        <View style={styles.marker}>
+          {type === "ambulance" ? (
+            <Image
+              source={require("../../../assets/imgs/maps/ambulanceMarker.png")}
+              style={styles.icon}
+            />
+          ) : (
+            <View style={styles.userMarker}>
+              <EmptyMarker />
+              {(user?.photo && (
+                <Image
+                  source={{ uri: user?.photo }}
+                  style={styles.userProfile}
+                />
+              )) || (
+                <Image
+                  source={require("../../../assets/imgs/maps/defaultProfile.png")}
+                  style={styles.userProfile}
+                />
+              )}
+            </View>
+          )}
+        </View>
+      </View>
     </View>
   );
 };

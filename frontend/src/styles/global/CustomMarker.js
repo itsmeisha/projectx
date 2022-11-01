@@ -1,17 +1,24 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  mainContainer: {
+    height: 100,
+    width: 100,
+    // overflow: "visible",
+    // display: "flex",
+    borderRadius: 50,
+  },
   marker: {
-    height: 67.5,
-    width: 60,
+    height: "100%",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    // position: "absolute",
+    position: "relative",
     // backgroundColor: "red",
   },
   icon: {
-    height: "100%",
-    width: "100%",
+    height: 67.5,
+    width: 60,
   },
   userProfile: {
     height: 54,
