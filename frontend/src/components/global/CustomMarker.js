@@ -7,6 +7,10 @@ import styles from "../../styles/global/CustomMarker.js";
 // icons
 import EmptyMarker from "../../../assets/svg/maps/marker.svg";
 
+// ripples
+import AmbulanceRipple from "./AmbulanceRipple.js";
+import UserRipple from "./UserRipple.js";
+
 // context
 import { contextProvider } from "../../../Context.js";
 
@@ -44,6 +48,7 @@ const CustomMarker = ({ type, selected }) => {
         )}
       </View>
 
+      {type === "ambulance" ? selected && <AmbulanceRipple /> : <UserRipple />}
       {}
     </View>
   );
