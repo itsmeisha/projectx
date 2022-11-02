@@ -146,6 +146,11 @@ const GoogleMap = ({ customStyles }) => {
               onPress={() => {
                 setSelectedAmbul({ ...ambulance });
               }}
+              style={{
+                height: 200,
+                width: 200,
+                // backgroundColor: "red",
+              }}
             >
               {/* custom react native elements should be called inside the callout
                */}

@@ -2,11 +2,14 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   mainContainer: {
-    height: 100,
-    width: 100,
+    height: 200,
+    width: 200,
     // overflow: "visible",
     // display: "flex",
+    // backgroundColor: "#333",
     borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   marker: {
     height: "100%",

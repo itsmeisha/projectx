@@ -19,8 +19,8 @@ const AmbulanceRipple = () => {
 
   const animationDuration = 1500;
 
-  const maxSize = 40;
-  const delay = 1500;
+  const maxSize = 170;
+  const delay = 500;
 
   const CircleOne = {
     sizeAnimation: Animated.timing(rippleAnimation.circleOne.size, {
@@ -29,7 +29,7 @@ const AmbulanceRipple = () => {
       useNativeDriver: false,
     }),
     opacityAnimation: Animated.timing(rippleAnimation.circleOne.opacity, {
-      toValue: 0.5,
+      toValue: 0,
       duration: animationDuration,
       useNativeDriver: false,
     }),
@@ -42,7 +42,7 @@ const AmbulanceRipple = () => {
       delay: delay,
     }),
     opacityAnimation: Animated.timing(rippleAnimation.circleTwo.opacity, {
-      toValue: 0.5,
+      toValue: 0,
       duration: animationDuration,
       useNativeDriver: false,
       delay: delay,
@@ -71,7 +71,7 @@ const AmbulanceRipple = () => {
           },
         ]}
       />
-      {/* <Animated.View
+      <Animated.View
         style={[
           styles.rippleCircle,
           {
@@ -79,10 +79,9 @@ const AmbulanceRipple = () => {
             borderRadius: Animated.divide(rippleAnimation.circleTwo.size, 2),
             width: rippleAnimation.circleTwo.size,
             opacity: rippleAnimation.circleTwo.opacity,
-            backgroundColor: "red",
           },
         ]}
-      ></Animated.View> */}
+      ></Animated.View>
     </View>
   );
 };
