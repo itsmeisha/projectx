@@ -17,7 +17,6 @@ import MapViewDirections from "react-native-maps-directions";
 // api key
 import { GOOGLE_MAP_API_KEY } from "@env";
 import axios from "axios";
-import AmbulanceRipple from "./AmbulanceRipple.js";
 
 const GoogleMap = ({ customStyles }) => {
   const {
@@ -151,6 +150,7 @@ const GoogleMap = ({ customStyles }) => {
                 width: 200,
                 // backgroundColor: "red",
               }}
+              tracksViewChanges={false}
             >
               <CustomMarker
                 type={"ambulance"}
