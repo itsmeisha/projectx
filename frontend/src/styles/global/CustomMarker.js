@@ -2,22 +2,15 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   mainContainer: {
-    height: 200,
-    width: 200,
-    // overflow: "visible",
-    // display: "flex",
-    // backgroundColor: "#333",
+    height: 100,
+    width: 100,
     borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    // backgroundColor: "red",
   },
   marker: {
-    height: "100%",
-    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
-    // backgroundColor: "red",
   },
   icon: {
     height: 67.5,
@@ -33,8 +26,6 @@ export default StyleSheet.create({
   },
 
   userMarker: {
-    height: "100%",
-    width: "100%",
     position: "relative",
   },
 });

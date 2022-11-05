@@ -152,9 +152,6 @@ const GoogleMap = ({ customStyles }) => {
                 // backgroundColor: "red",
               }}
             >
-              {/* custom react native elements should be called inside the callout
-               */}
-
               <CustomMarker
                 type={"ambulance"}
                 selected={selectedAmbul?.userId === ambulance?.userId}
