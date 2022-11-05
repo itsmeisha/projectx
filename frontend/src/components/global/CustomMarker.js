@@ -8,8 +8,7 @@ import styles from "../../styles/global/CustomMarker.js";
 import EmptyMarker from "../../../assets/svg/maps/marker.svg";
 
 // ripples
-import AmbulanceRipple from "./AmbulanceRipple.js";
-import UserRipple from "./UserRipple.js";
+import Ripple from "./Ripple.js";
 
 // context
 import { contextProvider } from "../../../Context.js";
@@ -25,7 +24,11 @@ const CustomMarker = ({ type, selected }) => {
 
   return (
     <View style={styles.mainContainer}>
-      {type === "ambulance" ? selected && <AmbulanceRipple /> : <UserRipple />}
+      {type === "ambulance" ? (
+        selected && <Ripple type={type} />
+      ) : (
+        <Ripple type={type} />
+      )}
       <View style={styles.container}>
         <View style={styles.marker}>
           {type === "ambulance" ? (

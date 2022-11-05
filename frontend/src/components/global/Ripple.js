@@ -1,28 +1,94 @@
-import { View, Text } from "react-native";
-import React, { useContext } from "react";
+import { useState } from "react";
+import { View, Animated } from "react-native";
 
 // styles
-import styles from "../../styles/global/Ripple.js";
+import styles from "../../styles/global/AmbulanceRipple.js";
 
-// context
-import { contextProvider } from "../../../Context.js";
-
-const Ripple = (type) => {
-  const {
-    map: {
-      animation: [rippleAnimation],
+const Ripple = ({ type }) => {
+  const [rippleAnimation] = useState({
+    circleOne: {
+      size: new Animated.Value(0),
+      opacity: new Animated.Value(1),
     },
-  } = useContext("contextProvider");
+    circleTwo: {
+      size: new Animated.Value(0),
+      opacity: new Animated.Value(1),
+    },
+  });
+
+  const animationDuration = 1500;
+
+  let maxSize = 118 / 5;
+
+  // changing the max size of the ripple for the ambulance
+  if (type === "ambulance") maxSize = 170;
+
+  const delay = 500;
+
+  const CircleOne = {
+    sizeAnimation: Animated.timing(rippleAnimation.circleOne.size, {
+      toValue: maxSize,
+      duration: animationDuration,
+      useNativeDriver: false,
+    }),
+    opacityAnimation: Animated.timing(rippleAnimation.circleOne.opacity, {
+      toValue: 0,
+      duration: animationDuration,
+      useNativeDriver: false,
+    }),
+  };
+  const circleTwo = {
+    sizeAnimation: Animated.timing(rippleAnimation.circleTwo.size, {
+      toValue: maxSize,
+      duration: animationDuration,
+      useNativeDriver: false,
+      delay: delay,
+    }),
+    opacityAnimation: Animated.timing(rippleAnimation.circleTwo.opacity, {
+      toValue: 0,
+      duration: animationDuration,
+      useNativeDriver: false,
+      delay: delay,
+    }),
+  };
+
+  Animated.loop(
+    Animated.parallel([
+      CircleOne.sizeAnimation,
+      CircleOne.opacityAnimation,
+      circleTwo.sizeAnimation,
+      circleTwo.opacityAnimation,
+    ])
+  ).start();
+
   return (
-    <View style={styles.rippleContainer}>
-      <View
-        style={[styles.rippleCircle, type === "user" ? styles.userRipple : {}]}
-      ></View>
-      <View
-        style={[styles.rippleCircle, type === "user" ? styles.userRipple : {}]}
-      ></View>
+    <View style={styles.container}>
+      <Animated.View
+        style={[
+          styles.rippleCircle,
+          {
+            height: rippleAnimation.circleOne.size,
+            width: rippleAnimation.circleOne.size,
+            borderRadius: Animated.divide(rippleAnimation.circleOne.size, 2),
+            opacity: rippleAnimation.circleOne.opacity,
+          },
+
+          type === "ambulance" ? {} : { transform: [{ scaleX: 5 }] },
+        ]}
+      />
+      <Animated.View
+        style={[
+          styles.rippleCircle,
+          {
+            height: rippleAnimation.circleTwo.size,
+            borderRadius: Animated.divide(rippleAnimation.circleTwo.size, 2),
+            width: rippleAnimation.circleTwo.size,
+            opacity: rippleAnimation.circleTwo.opacity,
+          },
+          type === "ambulance" ? {} : { transform: [{ scaleX: 5 }] },
+        ]}
+      ></Animated.View>
     </View>
   );
 };
-
 export default Ripple;
