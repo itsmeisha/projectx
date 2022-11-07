@@ -49,15 +49,10 @@ const GoogleMap = ({ customStyles }) => {
     if (!selectedAmbul?.userId || !currentLocation) return;
 
     console.log("Fitting to screen");
-    // showing the entire route in the screen
-    // map.current?.fitToSuppliedMarkers([selectedAmbul?.userId, "userMarker"], {
-    //   edgePadding: {
-    //     top: 800,
-    //     bottom: 400,
-    //     left: 100,
-    //     right: 100,
-    //   },
-    // });
+
+    map.current.fitToSuppliedMarkers(["userMarker", selectedAmbul?.userId],{
+      edgePadding
+    });
 
     const center = {
       latitude: selectedAmbul?.location?.latitude + currentLocation?.latitude,
@@ -145,17 +140,16 @@ const GoogleMap = ({ customStyles }) => {
               onPress={() => {
                 setSelectedAmbul({ ...ambulance });
               }}
-              style={{
-                height: 200,
-                width: 200,
-                // backgroundColor: "red",
-              }}
-              tracksViewChanges={false}
+              // style={{
+              //   height: 200,
+              //   width: 200,
+              //   // backgroundColor: "red",
+              // }}
             >
-              <CustomMarker
+              {/* <CustomMarker
                 type={"ambulance"}
                 selected={selectedAmbul?.userId === ambulance?.userId}
-              />
+              /> */}
             </Marker>
           );
         })}
@@ -167,7 +161,7 @@ const GoogleMap = ({ customStyles }) => {
           identifier={"userMarker"}
           coordinate={currentLocation}
         >
-          <CustomMarker type={"user"} selected={false} />
+          {/* <CustomMarker type={"user"} selected={false} /> */}
         </Marker>
       )}
 

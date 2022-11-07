@@ -30,7 +30,7 @@ const ProfileScreen = ({ navigation }) => {
     },
   } = useContext(contextProvider);
 
-  if (!user || Object.keys(user).length === 0) {
+  if (!user || Object.keys(user).length === 0 || !user?.id) {
     navigation.navigate("AuthScreen");
   }
   console.log(myAmbulance);

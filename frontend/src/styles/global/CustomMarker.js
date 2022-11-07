@@ -23,7 +23,6 @@ export default StyleSheet.create({
     marginLeft: 3,
     borderRadius: 27,
   },
-
   userMarker: {
     position: "relative",
   },

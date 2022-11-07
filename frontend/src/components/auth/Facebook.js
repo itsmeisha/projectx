@@ -126,7 +126,7 @@ const Facebook = ({ navigator }) => {
   useEffect(() => {
     if (user && Object.keys(user).length === 0) return;
 
-    navigator.goBack();
+    navigator.navigate("HomeScreen");
   }, [user]);
 
   return (
