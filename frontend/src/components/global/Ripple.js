@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Animated } from "react-native";
 
 // styles
-import styles from "../../styles/global/AmbulanceRipple.js";
+import styles from "../../styles/global/Ripple.js";
 
 const Ripple = ({ type }) => {
   const [rippleAnimation] = useState({
