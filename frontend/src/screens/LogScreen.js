@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 import Nav from "../components/global/Nav";
 import Header from "../components/global/Header";
 import IndivLog from "../components/log/IndivLog";
+import NoData from "../components/global/NoData";
 
 // styles
 import styles from "../styles/Log/LogScreen.js";
@@ -23,9 +24,13 @@ const LogScreen = ({ navigation }) => {
       <Header navigator={navigation} heading={"Tracking logs"} />
 
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        {logs.map((data, index) => {
-          return <IndivLog data={data} key={index} />;
-        })}
+        {logs.length > 1 && logs ? (
+          logs.map((data, index) => {
+            return <IndivLog data={data} key={index} />;
+          })
+        ) : (
+          <NoData type={"log"} navigator={navigation} />
+        )}
         <View
           style={{
             height: 110,

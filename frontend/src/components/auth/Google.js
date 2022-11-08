@@ -107,13 +107,9 @@ const Google = ({ navigator }) => {
           id,
         });
         handleApiRequests(id, data);
-
-        // setUser({
-        //
-        // });
       })
       .catch((e) => {
-        console.error(e);
+        console.error("Google login error", e?.response?.message);
       });
   }, [response]);
 

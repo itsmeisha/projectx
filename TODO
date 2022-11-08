@@ -2,7 +2,7 @@ TODO:
   add the ripple animation in the both user and the ambulance
   ☐ to make the notification empty and add new notification in some events
   ☐ to make a demo trackable ambulance
-  ☐ to add relatable data to the ambulances collection
+  ☐ to add relatable data to the ambulances collection @isha
   ☐ to fix the marker animations and fit to screen
   ☐ to make the logs clear and dynamic
   ☐ to make a no log and no notification section
@@ -11,4 +11,5 @@ TODO:
   ☐ to make reports
   ☐ to fix and improve entire app
   ☐ to implement tracking features
-  
+  ☐ to change the loading logo
+  ☐ to add some kind of progress for the long network requests

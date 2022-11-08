@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 // components
 import Header from "../components/global/Header.js";
 import IndividualNotif from "../components/notifications/IndividualNotif.js";
+import NoData from "../components/global/NoData.js";
 
 // styles
 import styles from "../styles/notification/NotificationScreen.js";
@@ -24,9 +25,14 @@ const NotificationScreen = ({ navigation }) => {
     >
       <Header navigator={navigation} heading={"Notifications"} />
       <View style={[styles.container]}>
-        {notification.map((element, index) => {
-          return <IndividualNotif data={element} key={index} />;
-        })}
+        {/* printing notification if they exists and no data if not */}
+        {notification.length > 0 && notification ? (
+          notification.map((element, index) => {
+            return <IndividualNotif data={element} key={index} />;
+          })
+        ) : (
+          <NoData type="notification" navigator={navigation} />
+        )}
       </View>
     </SafeAreaView>
   );
