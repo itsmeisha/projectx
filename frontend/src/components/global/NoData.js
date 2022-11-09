@@ -13,7 +13,7 @@ const NoData = ({ type, navigator }) => {
     <View style={styles.container}>
       <View style={styles.textCon}>
         <Text style={styles.title}>
-          {type === "notification" ? " No notification found" : "No logs found"}
+          {type === "notification" ? "No notification found" : "No logs found"}
         </Text>
         <Text style={styles.description}>
           {type === "notification"
