@@ -5,8 +5,9 @@ import {
   Platform,
   ScrollView,
   Dimensions,
+  RefreshControl,
 } from "react-native";
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // components
 import UpperNav from "../components/home/UpperNav";
@@ -18,9 +19,9 @@ import Nav from "../components/global/Nav";
 import ContactPopup from "../components/home/ContactPopup.js";
 // importing the toast
 
-import Toast from "react-native-toast-message";
-
 const HomeScreen = ({ navigation }) => {
+  const [refreshing, setRefreshsing] = useState(false);
+
   const tracker = useRef(null);
 
   const handleScrollChange = (e) => {
@@ -62,6 +63,18 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         onScroll={handleScrollChange}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            colors={["#979dac", "#5c677d", "#0353a4", "#001233"]}
+            onRefresh={() => {
+              setRefreshsing(true);
+              setTimeout(() => {
+                setRefreshsing(false);
+              }, 4000);
+            }}
+          />
+        }
       >
         <View style={home.container}>
           {/* the upper navigation that contains the notification and the user and the menu */}

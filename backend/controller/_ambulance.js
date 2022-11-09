@@ -179,22 +179,58 @@ export const trackAmbulance = async (req, res) => {
   }
 };
 
+const demoLocationUpdate = async (newLocation) => {
+  return await ambulanceModel.findOneAndUpdate(
+    {
+      userId: "demoAmbulance",
+    },
+    {
+      $set: {
+        location: newLocation,
+      },
+    }
+  );
+};
 
 // this is the demo ambulance for the purpose of presentation only
 
-const demoAmbulance = async (req, res) =>{
-  const demoAmbulance = await ambulanceModel.findOne({userId:"demoAmbulance"});
+export const demoAmbulance = async (req, res) => {
+  const userLocation = req?.data?.location;
+  // { latitute: 123214, longitude:2341343, }
 
-  if(!demoAmbulance) return res.status(404).json({
-    msg:"No demo ambulance found"
-  });
-  
-try{
+  try {
+    const demoAmbulance = await ambulanceModel.findOne({
+      userId: "demoAmbulance",
+    });
 
-}catch(e){
-res.status(500).json({
-  error:"Unknow error occured while showing the demo ambulnace",
-  msg: e
-})
-}
-}
+    if (!demoAmbulance)
+      return res.status(404).json({
+        msg: "No demo ambulance found",
+      });
+
+    // if the demo ambulance is found
+
+    let coordinatesDifference = {
+      latitude:
+        userLocation?.latitude > demoAmbulance.latitude
+          ? userLocation.latitude - demoAmbulance.latitude
+          : demoAmbulance.latitude - userLocation.latitude,
+      longitude:
+        userLocation?.longitude > demoAmbulance.longitude
+          ? userLocation.longitude - demoAmbulance.longitude
+          : demoAmbulance.longitude - userLocation.longitude,
+    };
+
+    const onePart = {
+      latitude: coordinatesDifference.latitude / 60,
+      longitude: coordinatesDifference.longitude / 60,
+    };
+
+    setInterval(() => {}, 1000);
+  } catch (e) {
+    res.status(500).json({
+      error: "Unknow error occured while showing the demo ambulnace",
+      msg: e,
+    });
+  }
+};
