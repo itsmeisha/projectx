@@ -12,6 +12,7 @@ import {
   trackAmbulance,
   updateAmbulance,
   updateAmbulanceLocation,
+  demoAmbulance
 } from "../controller/_ambulance.js";
 
 // routes

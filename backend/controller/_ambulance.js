@@ -178,3 +178,23 @@ export const trackAmbulance = async (req, res) => {
     });
   }
 };
+
+
+// this is the demo ambulance for the purpose of presentation only
+
+const demoAmbulance = async (req, res) =>{
+  const demoAmbulance = await ambulanceModel.findOne({userId:"demoAmbulance"});
+
+  if(!demoAmbulance) return res.status(404).json({
+    msg:"No demo ambulance found"
+  });
+  
+try{
+
+}catch(e){
+res.status(500).json({
+  error:"Unknow error occured while showing the demo ambulnace",
+  msg: e
+})
+}
+}
