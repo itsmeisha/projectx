@@ -169,9 +169,9 @@ const Context = ({ children }) => {
       .get(`${serverUri}/api/v1/ambulance/`)
       .then((res) => {
         const ambulances = res.data?.ambulances;
-        console.log({
-          context: ambulances,
-        });
+        // console.log({
+        //   context: ambulances,
+        // });
         if (ambulances?.length > 0) setAmbulances(ambulances);
       })
       .catch((e) => {

@@ -3,7 +3,6 @@ import { notificationModel } from "../config/models.js";
 
 export const getAllNotification = async (req, res) => {
   const userId = req?.body?.userId;
-  console.log(userId);
   try {
     const notifications = await notificationModel.findOne({
       user: userId,

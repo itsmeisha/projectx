@@ -61,14 +61,8 @@ const AmbulancePopup = () => {
         .then((res) => {
           const responseAmbulance = res.data?.ambulance;
           setMyAmbulnace({ ...responseAmbulance });
-          console.log({
-            response: res.data,
-          });
         })
         .catch((e) => {
-          console.log({
-            response: e.response.data,
-          });
           if (e.response?.status === 404) {
             console.log(e.response?.message);
           }
@@ -83,9 +77,7 @@ const AmbulancePopup = () => {
         })
         .then((res) => {
           const responseAmbulance = res.data?.ambulance;
-          console.log({
-            response: res.data,
-          });
+
           setMyAmbulnace({ ...responseAmbulance });
         })
         .catch((e) => {

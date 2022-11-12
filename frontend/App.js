@@ -89,39 +89,6 @@ export default function App() {
   // removing the warning msgs
   LogBox.ignoreAllLogs();
 
-  // testing the google maps directions api
-
-  const getdirections = () => {
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/directions/json?origin=27.6314324123413240,83.4594321&destination=29.6314324123413240,88.4594321&key=${GOOGLE_MAP_API_KEY}&mode=driving`
-      )
-      .then((res) => {
-        const data = res.data.routes[0].legs[0].steps;
-        // console.log(data);
-
-        const allLocationArray = [];
-        const arrayJumpGap = data.length / 60;
-        const shortedArray = [];
-
-        for (var i = 0; i < data.length; i++) {
-          allLocationArray.push(data[i].end_location);
-        }
-        for (var i = 0; i < data.length; i + arrayJumpGap) {
-          shortedArray.push(allLocationArray[i]);
-        }
-        console.log({
-          dataGap: arrayJumpGap,
-          lengthTotal: data.length,
-          shortedArray,
-        });
-      });
-
-    // routes > legs > steps > end_location;
-  };
-
-  getdirections();
-
   return (
     <>
       <Context>

@@ -180,7 +180,7 @@ export const trackAmbulance = async (req, res) => {
 };
 
 const demoLocationUpdate = async (newLocation) => {
-  return await ambulanceModel.findOneAndUpdate(
+  await ambulanceModel.findOneAndUpdate(
     {
       userId: "demoAmbulance",
     },
@@ -210,23 +210,37 @@ export const demoAmbulance = async (req, res) => {
 
     // if the demo ambulance is found
 
-    let coordinatesDifference = {
-      latitude:
-        userLocation?.latitude > demoAmbulance.latitude
-          ? userLocation.latitude - demoAmbulance.latitude
-          : demoAmbulance.latitude - userLocation.latitude,
-      longitude:
-        userLocation?.longitude > demoAmbulance.longitude
-          ? userLocation.longitude - demoAmbulance.longitude
-          : demoAmbulance.longitude - userLocation.longitude,
-    };
+    const locationArray = [];
 
-    const onePart = {
-      latitude: coordinatesDifference.latitude / 60,
-      longitude: coordinatesDifference.longitude / 60,
-    };
+    // sending a get request to the direction api to get the points of the location.
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/directions/json?origin=${demoAmbulance.location.latitude},${demoAmbulance?.location?.longitude}&destination=${userLocation.latitude},${userLocation.longitude}&key=${GOOGLE_MAP_API_KEY}&mode=driving`
+      )
+      .then((res) => {
+        const data = res.data.routes[0].legs[0].steps;
+        const arrayJumpGap = parseInt(data.length / 60);
 
-    setInterval(() => {}, 1000);
+        for (var i = 0; i < data.length; i++) {
+          if (i % arrayJumpGap === 0) locationArray.push(data[i].end_location);
+        }
+      });
+
+    // changing the location of the demo ambulance to the actual one
+
+    let i = 0;
+
+    const interval = setInterval(async () => {
+      if (i >= locationArray.length) {
+        clearInterval(interval);
+        return res.status(200).json({
+          msg: "The ambulance has successfully reached the place.",
+        });
+      }
+
+      i++;
+      await demoLocationUpdate(locationArray[i]);
+    }, 1000);
   } catch (e) {
     res.status(500).json({
       error: "Unknow error occured while showing the demo ambulnace",
