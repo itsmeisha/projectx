@@ -1,4 +1,4 @@
-import { View, Animated } from "react-native";
+import { View, Animated, Image } from "react-native";
 import React, { useContext, useEffect } from "react";
 
 // stylings
@@ -25,9 +25,12 @@ const AuthScreen = ({ navigation }) => {
   }, []);
   return (
     <View style={styles.container}>
-      <Animated.View
-        style={[styles.logo, { marginLeft: logoAnim }]}
-      ></Animated.View>
+      <Animated.View style={[styles.logo, { marginLeft: logoAnim }]}>
+        <Image
+          source={require("../../../assets/imgs/logo.png")}
+          style={styles.logoImage}
+        />
+      </Animated.View>
       <Greeting />
       <Actions />
       <Popup navigator={navigation} />
