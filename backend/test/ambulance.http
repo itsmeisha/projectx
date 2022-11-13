@@ -5,17 +5,17 @@ POST http://localhost:3000/api/v1/ambulance/create/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": "demoAmbulance",
+    "id": "124352343515245345",
     "data":  {
        "location":{
-        "latitude":27.678342599659278,
-        "longitude": 83.46468724836136
+        "latitude":27.697043591757282,
+        "longitude": 83.46942889228764
       },
-      "name": "demoAmbulance",
-      "dName": "demoAmbulance",
-      "pNumber": 9867100342,
-      "vNumber": "BOXYZ24",
-      "owner": "Harry Parker",
+      "name": "Hill Park Ambulance",
+      "dName": "Indu Pathak",
+      "pNumber":12446234523,
+      "vNumber": "JFW23",
+      "owner": "Maitri Samaj",
       "status": true,
       "selected": false
     }

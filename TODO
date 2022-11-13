@@ -5,12 +5,12 @@ TODO:
   ✔ to make a demo trackable ambulance @done(22-11-12 21:09)
   ☐ to add relatable data to the ambulances collection @isha
   ☐ to fix the marker animations and fit to screen
-  ☐ to make the logs clear 
+  ✔ to make the logs clear @done(22-11-13 22:42)
   ☐ to make logs dynamic
   ✔ to make a no log and no notification section @done(22-11-09 00:27)
   ✔ to make logo @started(22-11-09 00:40) @done(22-11-13 03:55) @lasted(4d3h15m16s)
-  ☐ to make presentation
-  ☐ to make reports
+  ✘ to make presentation @cancelled(22-11-13 22:43)
+  ✘ to make reports @cancelled(22-11-13 22:43)
   ☐ to fix and improve entire app
   ☐ to implement tracking features
   ☐ to change replace the loading logo of expo

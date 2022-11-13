@@ -227,7 +227,7 @@ const Context = ({ children }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchAmbulanceData();
+      fetchAmbulanceData(); // gets the ambulance data and sets a state
     }, fetchDelay * 1000);
 
     // clearing the interval to avoid the memory leaks
