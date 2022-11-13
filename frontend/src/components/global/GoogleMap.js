@@ -38,46 +38,35 @@ const GoogleMap = ({ customStyles }) => {
     if (!currentLocation.latitude || currentLocation.longitude) return;
     setMapLoadLoc({
       ...currentLocation,
-      latitudeDelta: 0.0021,
-      longitudeDelta: 0.0021,
+      latitudeDelta: 0.00081,
+      longitudeDelta: 0.00081,
     });
   }, [currentLocation]);
-
-  // for testing purposes
 
   useEffect(() => {
     if (!selectedAmbul?.userId || !currentLocation) return;
 
-    console.log("Fitting to screen");
-
-    map.current.fitToSuppliedMarkers(["userMarker", selectedAmbul?.userId],{
-      edgePadding
-    });
-
-    const center = {
-      latitude: selectedAmbul?.location?.latitude + currentLocation?.latitude,
-      longitude:
-        selectedAmbul?.location?.longitude + currentLocation?.longitude,
-    };
-
-    map.current.animateCamera(
+    // zooming into the user marker and then zooming in the ambulance
+    map.current?.animateToRegion(
       {
-        center,
+        ...currentLocation,
+        latitudeDelta: 0.00081,
+        longitudeDelta: 0.00081,
       },
       2000
     );
 
     const timeOut = setTimeout(() => {
+      // zoom in to the ambulance marker
       map.current?.animateToRegion(
         {
           ...selectedAmbul.location,
           latitudeDelta: 0.00081,
           longitudeDelta: 0.00081,
         },
-        800
+        2000
       );
     }, 5000);
-    // zoom in to the ambulance marker
 
     // getting the actual distance of the user from the selected ambulance
     const reqUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${selectedAmbul?.location?.latitude},${selectedAmbul?.location?.longitude}&destinations=${currentLocation?.latitude},${currentLocation?.longitude}&key=${GOOGLE_MAP_API_KEY}`;
@@ -100,7 +89,6 @@ const GoogleMap = ({ customStyles }) => {
       clearTimeout(timeOut);
     };
   }, [selectedAmbul]);
-  // console.log("running");
   return (
     <MapView
       style={[
@@ -119,7 +107,7 @@ const GoogleMap = ({ customStyles }) => {
       showsMyLocationButton={true}
       region={mapLoadLoc}
       onRegionChangeComplete={(region) => {
-        // setMapLoadLoc({ ...region });
+        setMapLoadLoc({ ...region });
       }}
       ref={map}
       toolbarEnabled={false}
@@ -127,10 +115,6 @@ const GoogleMap = ({ customStyles }) => {
       {/* mapping out the ambulances */}
       {ambulances?.length > 0 &&
         ambulances?.map((ambulance, index) => {
-          //  if (ambulance?.userId === user?.id) {
-          //   console.log("found my ambulance about to be mapped", index);
-          //   return;
-
           return (
             <Marker
               title={ambulance?.name}

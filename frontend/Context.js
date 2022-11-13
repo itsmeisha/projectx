@@ -223,18 +223,18 @@ const Context = ({ children }) => {
   }, [user]);
 
   // refetching the ambulance data every 5 seconds
-  const fetchDelay = 5; // delay in seconds
+  // const fetchDelay = 5; // delay in seconds
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchAmbulanceData(); // gets the ambulance data and sets a state
-    }, fetchDelay * 1000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     fetchAmbulanceData(); // gets the ambulance data and sets a state
+  //   }, fetchDelay * 1000);
 
-    // clearing the interval to avoid the memory leaks
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  //   // clearing the interval to avoid the memory leaks
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
 
   return (
     <contextProvider.Provider
