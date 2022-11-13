@@ -12,7 +12,8 @@ import {
   trackAmbulance,
   updateAmbulance,
   updateAmbulanceLocation,
-  demoAmbulance
+  demoAmbulance,
+  resetDemoAmbulance,
 } from "../controller/_ambulance.js";
 
 // routes
@@ -23,5 +24,7 @@ ambulanceRouter.delete("/", deleteAmbulance);
 ambulanceRouter.patch("/", updateAmbulance);
 ambulanceRouter.patch("/location", updateAmbulanceLocation);
 ambulanceRouter.post("/watch", trackAmbulance);
+ambulanceRouter.post("/demoAmbulance", demoAmbulance);
+ambulanceRouter.patch("/demoAmbulance/reset", resetDemoAmbulance);
 
 export default ambulanceRouter;

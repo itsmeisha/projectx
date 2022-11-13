@@ -1,5 +1,6 @@
 // importing the ambulance model
 import { ambulanceModel } from "../config/models.js";
+import axios from "axios";
 
 export const getAllAmbulances = async (req, res) => {
   try {
@@ -190,13 +191,16 @@ const demoLocationUpdate = async (newLocation) => {
       },
     }
   );
+
+  console.log("Update done");
 };
 
 // this is the demo ambulance for the purpose of presentation only
 
 export const demoAmbulance = async (req, res) => {
-  const userLocation = req?.data?.location;
+  const userLocation = req?.body?.location;
   // { latitute: 123214, longitude:2341343, }
+  console.log(userLocation);
 
   try {
     const demoAmbulance = await ambulanceModel.findOne({
@@ -210,19 +214,21 @@ export const demoAmbulance = async (req, res) => {
 
     // if the demo ambulance is found
 
-    const locationArray = [];
+    let locationArray = [];
 
     // sending a get request to the direction api to get the points of the location.
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/directions/json?origin=${demoAmbulance.location.latitude},${demoAmbulance?.location?.longitude}&destination=${userLocation.latitude},${userLocation.longitude}&key=${GOOGLE_MAP_API_KEY}&mode=driving`
+        `https://maps.googleapis.com/maps/api/directions/json?origin=${demoAmbulance.location.latitude},${demoAmbulance?.location?.longitude}&destination=${userLocation.latitude},${userLocation.longitude}&key=${process.env.GOOGLE_MAP_API_KEY}&mode=driving`
       )
       .then((res) => {
+        console.log(res.data);
         const data = res.data.routes[0].legs[0].steps;
         const arrayJumpGap = parseInt(data.length / 60);
 
         for (var i = 0; i < data.length; i++) {
-          if (i % arrayJumpGap === 0) locationArray.push(data[i].end_location);
+          if (i % arrayJumpGap === 0 || arrayJumpGap === 0)
+            locationArray.push(data[i].end_location);
         }
       });
 
@@ -231,19 +237,55 @@ export const demoAmbulance = async (req, res) => {
     let i = 0;
 
     const interval = setInterval(async () => {
+      console.log("demo track ambulance", i);
+      console.log(locationArray.length);
       if (i >= locationArray.length) {
         clearInterval(interval);
         return res.status(200).json({
           msg: "The ambulance has successfully reached the place.",
+          route: locationArray,
         });
       }
-
+      await demoLocationUpdate({
+        latitude: locationArray[i].lat,
+        longitude: locationArray[i].lng,
+      });
       i++;
-      await demoLocationUpdate(locationArray[i]);
     }, 1000);
   } catch (e) {
+    console.log(e);
     res.status(500).json({
       error: "Unknow error occured while showing the demo ambulnace",
+      msg: e,
+    });
+  }
+};
+
+// this will reset the demo ambulance location to the orginal one
+export const resetDemoAmbulance = async (req, res) => {
+  try {
+    // resetting the location to default location.
+    const resetedAmbulance = await ambulanceModel.findOneAndUpdate(
+      {
+        userId: "demoAmbulance",
+      },
+      {
+        $set: {
+          location: {
+            latitude: 27.681640503137803,
+            longitude: 83.46510704651308,
+          },
+        },
+      }
+    );
+    res.status(200).json({
+      msg: "Successfully reseted the ambulance",
+      ambulance: resetedAmbulance,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      error: "unknow error occured while resetting the demo ambulance",
       msg: e,
     });
   }
