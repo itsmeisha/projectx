@@ -81,9 +81,6 @@ Content-Type: application/json
   }
 }
 
-
- 
-
 ###
 # tracking the demo ambulance
 POST http://localhost:3000/api/v1/ambulance/demoAmbulance HTTP/1.1
@@ -95,7 +92,6 @@ Content-Type: application/json
     "longitude": 83.46363045801017
   }
 }
-
 
 ### reseting the demo ambulance
 PATCH http://localhost:3000/api/v1/ambulance/demoAmbulance/reset HTTP/1.1

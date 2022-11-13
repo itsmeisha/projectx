@@ -163,20 +163,22 @@ const Context = ({ children }) => {
 
   // api data fetcher
 
-  const getApiData = () => {
+  const fetchAmbulanceData = () => {
     // fetching all the ambulances and setting them
     axios
       .get(`${serverUri}/api/v1/ambulance/`)
       .then((res) => {
         const ambulances = res.data?.ambulances;
-        // console.log({
-        //   context: ambulances,
-        // });
+
         if (ambulances?.length > 0) setAmbulances(ambulances);
       })
       .catch((e) => {
         console.log(e);
       });
+  };
+  const getApiData = () => {
+    // gets the ambulance info from the server
+    fetchAmbulanceData();
 
     // fetching my ambulance to put in the profile
     if (user && Object.keys(user).length !== 0) {
@@ -219,6 +221,20 @@ const Context = ({ children }) => {
   useEffect(() => {
     getApiData();
   }, [user]);
+
+  // refetching the ambulance data every 5 seconds
+  const fetchDelay = 5; // delay in seconds
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchAmbulanceData();
+    }, fetchDelay * 1000);
+
+    // clearing the interval to avoid the memory leaks
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <contextProvider.Provider
