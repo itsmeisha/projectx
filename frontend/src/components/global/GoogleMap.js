@@ -106,9 +106,9 @@ const GoogleMap = ({ customStyles }) => {
       }}
       showsMyLocationButton={true}
       region={mapLoadLoc}
-      onRegionChangeComplete={(region) => {
-        setMapLoadLoc({ ...region });
-      }}
+      // onRegionChangeComplete={(region) => {
+      //   setMapLoadLoc({ ...region });
+      // }}
       ref={map}
       toolbarEnabled={false}
     >
@@ -124,16 +124,17 @@ const GoogleMap = ({ customStyles }) => {
               onPress={() => {
                 setSelectedAmbul({ ...ambulance });
               }}
-              // style={{
-              //   height: 200,
-              //   width: 200,
-              //   // backgroundColor: "red",
-              // }}
+              style={{
+                height: 200,
+                width: 200,
+                justifyContent: "flex-end",
+                // backgroundColor: "red",
+              }}
             >
-              {/* <CustomMarker
+              <CustomMarker
                 type={"ambulance"}
                 selected={selectedAmbul?.userId === ambulance?.userId}
-              /> */}
+              />
             </Marker>
           );
         })}
@@ -145,7 +146,7 @@ const GoogleMap = ({ customStyles }) => {
           identifier={"userMarker"}
           coordinate={currentLocation}
         >
-          {/* <CustomMarker type={"user"} selected={false} /> */}
+          <CustomMarker type={"user"} selected={false} />
         </Marker>
       )}
 
