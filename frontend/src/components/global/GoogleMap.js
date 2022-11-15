@@ -44,6 +44,7 @@ const GoogleMap = ({ customStyles }) => {
             ...prev,
             distance: res.data.rows[0]?.elements[0]?.distance?.text,
             time: res.data.rows[0]?.elements[0]?.duration?.text,
+            distanceValue: res.data.rows[0]?.elements[0]?.distance?.value,
           };
         });
       })
@@ -51,14 +52,6 @@ const GoogleMap = ({ customStyles }) => {
         console.log(e);
       });
   };
-  useEffect(() => {
-    if (!currentLocation.latitude || currentLocation.longitude) return;
-    setMapLoadLoc({
-      ...currentLocation,
-      latitudeDelta: 0.00081,
-      longitudeDelta: 0.00081,
-    });
-  }, [currentLocation]);
 
   useEffect(() => {
     if (!selectedAmbul?.userId || !currentLocation) return;
@@ -93,6 +86,34 @@ const GoogleMap = ({ customStyles }) => {
       clearTimeout(timeOut);
     };
   }, [selectedAmbul]);
+
+  // points to current location
+  const pointToCurrentLocation = () => {
+    console.log("pointing to current location");
+    if (currentLocation.latitude && currentLocation.longitude)
+      setMapLoadLoc({
+        ...currentLocation,
+        latitudeDelta: 0.00081,
+        longitudeDelta: 0.00081,
+      });
+  };
+
+  // for running the amubalce distance matrix api in every 5 seconds
+  useEffect(() => {
+    // points the map to the current user location to begin with
+    pointToCurrentLocation();
+    const interval = setInterval(() => {
+      // calling the distance matrix api function to update the distance realted data
+      distanceMatrixApi();
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  console.log("google maps is rerendering");
+  console.log(currentLocation);
+
   return (
     <MapView
       style={[
@@ -126,11 +147,10 @@ const GoogleMap = ({ customStyles }) => {
                 setSelectedAmbul({ ...ambulance });
               }}
               style={{
-                height: 200,
-                width: 200,
+                // height: 200,
+                // width: 200,
                 justifyContent: "flex-end",
-                borderColor: "red",
-                borderWidth: 3,
+                backgroundColor: "red",
               }}
             >
               <CustomMarker

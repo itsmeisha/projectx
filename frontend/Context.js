@@ -134,13 +134,7 @@ const Context = ({ children }) => {
   });
 
   // selected location || current location
-  const [mapLoadLoc, setMapLoadLoc] = useState({
-    latitude: 27.685344030241538,
-    longitude: 83.45944723114371,
-
-    latitudeDelta: 0.0021,
-    longitudeDelta: 0.0021,
-  });
+  const [mapLoadLoc, setMapLoadLoc] = useState({});
 
   // map marker animation
   const [rippleAnimation] = useState({
@@ -235,6 +229,8 @@ const Context = ({ children }) => {
 
       // getting and setting  the current location
       let location = await Location.getCurrentPositionAsync({});
+
+      console.log("got the current location", location);
       setCurrentLocation({
         latitude: location?.coords?.latitude,
         longitude: location?.coords?.longitude,

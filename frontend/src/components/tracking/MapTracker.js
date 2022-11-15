@@ -12,11 +12,11 @@ const MapTracker = () => {
   const {
     map: {
       ambulance: [selectedAmbul],
-      tracking: [data, setData],
+      tracking: [data],
     },
   } = useContext(contextProvider);
 
-  console.log(data);
+  console.log("Rerendering.................. Map Tracker");
   return (
     <View
       style={[
