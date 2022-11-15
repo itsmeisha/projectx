@@ -40,7 +40,34 @@ const Context = ({ children }) => {
   // *****************testing data*****************
   //
   //
-  const [notification, setNotification] = useState([]);
+  const [notification, setNotification] = useState([
+    {
+      title: "New! Achievement",
+      type: "achievement",
+      message: "Congrats now you got a helper batch for adding a ambulance",
+    },
+    {
+      title: "Alert",
+      type: "locationAlert",
+      message:
+        "Your ambulance is in active mode, and your location can be now tracked.",
+    },
+    {
+      title: "Tracking",
+      type: "trackingAlert",
+      message: "Lumbini ambulance is currently being tracked.",
+    },
+    {
+      title: "Arrival",
+      type: "arrival",
+      message: "Ambulance is about to arrive be ready.",
+    },
+    {
+      title: "Sos Signal",
+      type: "emmergency",
+      message: "SoS signal reveived click to open the live tracker.",
+    },
+  ]);
 
   const [user, setUser] = useState({
     // name: "kapil Tripathi",
@@ -51,24 +78,24 @@ const Context = ({ children }) => {
   });
 
   const [logs, setLogs] = useState([
-    // {
-    //   name: "Lumbini Ambulance",
-    //   duration: "5 min",
-    //   distance: "20 km",
-    //   date: "8 jun",
-    // },
-    // {
-    //   name: "Mutu Ambulance",
-    //   duration: "2 min",
-    //   distance: "2 km",
-    //   date: "5 jun",
-    // },
-    // {
-    //   name: "GBC Ambulance",
-    //   duration: "50 min",
-    //   distance: "200 km",
-    //   date: "18 jun",
-    // },
+    {
+      name: "Lumbini Ambulance",
+      duration: "5 min",
+      distance: "20 km",
+      date: "8 jun",
+    },
+    {
+      name: "Mutu Ambulance",
+      duration: "2 min",
+      distance: "2 km",
+      date: "5 jun",
+    },
+    {
+      name: "GBC Ambulance",
+      duration: "50 min",
+      distance: "200 km",
+      date: "18 jun",
+    },
   ]);
 
   //

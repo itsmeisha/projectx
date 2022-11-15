@@ -11,35 +11,48 @@ const MapFinder = () => {
   const {
     contact: [, setConPopup],
     map: {
-      tracking: [data],
+      tracking: [data, setData],
+      ambulance: [selectedAmbul, setSelectedAmbul],
     },
   } = useContext(contextProvider);
 
+  const handleTracking = () => {
+    console.log("selected ambulance", selectedAmbul);
+
+    setData({ ...selectedAmbul });
+  };
+
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          width: "90%",
-          position: "absolute",
-          bottom: 30,
-        },
-      ]}
-    >
-      <Text style={styles.distance}>Distance : {data?.distance}</Text>
-      <View style={styles.btns}>
-        <Pressable>
-          <Text style={[styles.track, styles.btn]}>Track</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            setConPopup(true);
-          }}
+    <>
+      {!data?.userId ? (
+        <View
+          style={[
+            styles.container,
+            {
+              width: "90%",
+              position: "absolute",
+              bottom: 30,
+            },
+          ]}
         >
-          <Text style={[styles.btn, styles.contact]}>Contact</Text>
-        </Pressable>
-      </View>
-    </View>
+          <Text style={styles.distance}>Distance : {data?.distance}</Text>
+          <View style={styles.btns}>
+            <Pressable onPress={handleTracking}>
+              <Text style={[styles.track, styles.btn]}>Track</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => {
+                setConPopup(true);
+              }}
+            >
+              <Text style={[styles.btn, styles.contact]}>Contact</Text>
+            </Pressable>
+          </View>
+        </View>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 

@@ -77,6 +77,7 @@ const GoogleMap = ({ customStyles }) => {
           return {
             ...prev,
             distance: res.data.rows[0]?.elements[0]?.distance?.text,
+            time: res.data.rows[0]?.elements[0]?.duration?.text,
           };
         });
       })
@@ -106,9 +107,6 @@ const GoogleMap = ({ customStyles }) => {
       }}
       showsMyLocationButton={true}
       region={mapLoadLoc}
-      // onRegionChangeComplete={(region) => {
-      //   setMapLoadLoc({ ...region });
-      // }}
       ref={map}
       toolbarEnabled={false}
     >
@@ -128,7 +126,8 @@ const GoogleMap = ({ customStyles }) => {
                 height: 200,
                 width: 200,
                 justifyContent: "flex-end",
-                // backgroundColor: "red",
+                borderColor: "red",
+                borderWidth: 3,
               }}
             >
               <CustomMarker

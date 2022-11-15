@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   mainContainer: {
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    // borderRadius: 50,
+    // width: 115,
+    // backgroundColor: "black",
   },
   marker: {
     justifyContent: "center",

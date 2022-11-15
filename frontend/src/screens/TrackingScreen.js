@@ -25,6 +25,7 @@ const TrackingScreen = ({ route, navigation }) => {
       userLoc: [currentLocation],
       location: [, setMapLoadLoc],
       ambulance: [selectedAmbul],
+      tracking: [data],
     },
   } = useContext(contextProvider);
 
@@ -57,7 +58,7 @@ const TrackingScreen = ({ route, navigation }) => {
           selectedAmbul?.userId ? { bottom: 0 } : { bottom: -200 },
         ]}
       >
-        {mode === "finding" ? <MapFinder /> : <MapTracker />}
+        {!data?.userId ? <MapFinder /> : <MapTracker />}
       </View>
 
       <ContactPopup />

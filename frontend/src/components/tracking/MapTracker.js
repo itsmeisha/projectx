@@ -15,6 +15,8 @@ const MapTracker = () => {
       tracking: [data, setData],
     },
   } = useContext(contextProvider);
+
+  console.log(data);
   return (
     <View
       style={[
@@ -31,10 +33,16 @@ const MapTracker = () => {
         {/* left side that shows the latitude and the longitued of the tracked ambulance */}
         <View style={tracker.left}>
           <Text style={tracker.key}>
-            lat: <Text style={tracker.value}>{data.lat}</Text>
+            lat:
+            <Text style={tracker.value}>
+              {data?.location.latitude?.toFixed(5)}
+            </Text>
           </Text>
           <Text style={tracker.key}>
-            lon: <Text style={tracker.value}>{data.lon}</Text>
+            lon:
+            <Text style={tracker.value}>
+              {(data?.location.longitude).toFixed(5)}
+            </Text>
           </Text>
         </View>
 
