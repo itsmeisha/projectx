@@ -180,21 +180,6 @@ export const trackAmbulance = async (req, res) => {
   }
 };
 
-const demoLocationUpdate = async (newLocation) => {
-  await ambulanceModel.findOneAndUpdate(
-    {
-      userId: "demoAmbulance",
-    },
-    {
-      $set: {
-        location: newLocation,
-      },
-    }
-  );
-
-  console.log("Update done");
-};
-
 // this is the demo ambulance for the purpose of presentation only
 
 export const demoAmbulance = async (req, res) => {
@@ -230,62 +215,16 @@ export const demoAmbulance = async (req, res) => {
           if (i % arrayJumpGap === 0 || arrayJumpGap === 0)
             locationArray.push(data[i].end_location);
         }
-      });
 
-    // changing the location of the demo ambulance to the actual one
-
-    let i = 0;
-
-    const interval = setInterval(async () => {
-      console.log("demo track ambulance", i);
-      console.log(locationArray.length);
-      if (i >= locationArray.length) {
-        clearInterval(interval);
-        return res.status(200).json({
-          msg: "The ambulance has successfully reached the place.",
-          route: locationArray,
+        res.status(200).json({
+          msg: "Demo ambulance coordinates found",
+          coordinates: locationArray,
         });
-      }
-      await demoLocationUpdate({
-        latitude: locationArray[i].lat,
-        longitude: locationArray[i].lng,
       });
-      i++;
-    }, 1000);
   } catch (e) {
     console.log(e);
     res.status(500).json({
       error: "Unknow error occured while showing the demo ambulnace",
-      msg: e,
-    });
-  }
-};
-
-// this will reset the demo ambulance location to the orginal one
-export const resetDemoAmbulance = async (req, res) => {
-  try {
-    // resetting the location to default location.
-    const resetedAmbulance = await ambulanceModel.findOneAndUpdate(
-      {
-        userId: "demoAmbulance",
-      },
-      {
-        $set: {
-          location: {
-            latitude: 27.681640503137803,
-            longitude: 83.46510704651308,
-          },
-        },
-      }
-    );
-    res.status(200).json({
-      msg: "Successfully reseted the ambulance",
-      ambulance: resetedAmbulance,
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      error: "unknow error occured while resetting the demo ambulance",
       msg: e,
     });
   }

@@ -31,9 +31,26 @@ const GoogleMap = ({ customStyles }) => {
   } = useContext(contextProvider);
 
   // creating a map reference
-
   const map = useRef(null);
 
+  // this will calculate the distance between two points and when details regarding it
+  const distanceMatrixApi = () => {
+    const reqUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${selectedAmbul?.location?.latitude},${selectedAmbul?.location?.longitude}&destinations=${currentLocation?.latitude},${currentLocation?.longitude}&key=${GOOGLE_MAP_API_KEY}`;
+    axios
+      .get(reqUrl)
+      .then((res) => {
+        setData((prev) => {
+          return {
+            ...prev,
+            distance: res.data.rows[0]?.elements[0]?.distance?.text,
+            time: res.data.rows[0]?.elements[0]?.duration?.text,
+          };
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   useEffect(() => {
     if (!currentLocation.latitude || currentLocation.longitude) return;
     setMapLoadLoc({
@@ -69,21 +86,7 @@ const GoogleMap = ({ customStyles }) => {
     }, 5000);
 
     // getting the actual distance of the user from the selected ambulance
-    const reqUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${selectedAmbul?.location?.latitude},${selectedAmbul?.location?.longitude}&destinations=${currentLocation?.latitude},${currentLocation?.longitude}&key=${GOOGLE_MAP_API_KEY}`;
-    axios
-      .get(reqUrl)
-      .then((res) => {
-        setData((prev) => {
-          return {
-            ...prev,
-            distance: res.data.rows[0]?.elements[0]?.distance?.text,
-            time: res.data.rows[0]?.elements[0]?.duration?.text,
-          };
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    distanceMatrixApi();
 
     // clearing the timeout to prevent the memory leaks
     return () => {
