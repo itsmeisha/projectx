@@ -136,18 +136,6 @@ const Context = ({ children }) => {
   // selected location || current location
   const [mapLoadLoc, setMapLoadLoc] = useState({});
 
-  // map marker animation
-  const [rippleAnimation] = useState({
-    circleOne: {
-      size: new Animated.Value(80),
-      opacity: new Animated.Value(0.75),
-    },
-    circleTwo: {
-      size: new Animated.Value(115),
-      opacity: new Animated.Value(0.3),
-    },
-  });
-
   // loading all the ambulances
   const [ambulances, setAmbulances] = useState([
     // {
@@ -276,7 +264,6 @@ const Context = ({ children }) => {
           ambulance: [selectedAmbul, setSelectedAmbul],
           tracking: [data, setData],
           location: [mapLoadLoc, setMapLoadLoc],
-          animation: [rippleAnimation],
           userLoc: [currentLocation, setCurrentLocation],
         },
         ambulances: [ambulances, setAmbulances],

@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Image } from "react-native";
 import React, { useContext } from "react";
 
 // styles
@@ -6,9 +6,6 @@ import styles from "../../styles/global/CustomMarker.js";
 
 // icons
 import EmptyMarker from "../../../assets/svg/maps/marker.svg";
-
-// ripples
-import Ripple from "./Ripple.js";
 
 // context
 import { contextProvider } from "../../../Context.js";
@@ -24,18 +21,20 @@ const CustomMarker = ({ type, selected }) => {
 
   return (
     <View style={styles.mainContainer}>
-      {type === "ambulance" ? (
-        selected && <Ripple type={type} />
-      ) : (
-        <Ripple type={type} />
-      )}
       <View style={styles.container}>
         <View style={styles.marker}>
           {type === "ambulance" ? (
-            <Image
-              source={require("../../../assets/imgs/maps/ambulanceMarker.png")}
-              style={styles.icon}
-            />
+            selected ? (
+              <Image
+                source={require("../../../assets/imgs/maps/selectedAmbulanceMarker.png")}
+                style={styles.icon}
+              />
+            ) : (
+              <Image
+                source={require("../../../assets/imgs/maps/ambulanceMarker.png")}
+                style={styles.icon}
+              />
+            )
           ) : (
             <View style={styles.userMarker}>
               <EmptyMarker />
